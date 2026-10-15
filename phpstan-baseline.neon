@@ -1,0 +1,1861 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$avatar_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/CommunityCommentCreated.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/CommunityCommentCreated.php
+
+		-
+			message: '#^Property App\\Events\\CommunityCommentCreated\:\:\$comment type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Events/CommunityCommentCreated.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$avatar_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/CommunityPostCreated.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/CommunityPostCreated.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/CommunityPostCreated.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$role\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/CommunityPostCreated.php
+
+		-
+			message: '#^Property App\\Events\\CommunityPostCreated\:\:\$post type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Events/CommunityPostCreated.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Forms\\Components\\Section\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/CommunityPostLikes/Schemas/CommunityPostLikeForm.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$category_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/Courses/Pages/CreateCourse.php
+
+		-
+			message: '#^Cannot access property \$category_id on Illuminate\\Database\\Eloquent\\Model\|int\|string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Filament/Resources/Courses/Pages/EditCourse.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$category_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/Resources/Courses/RelationManagers/LessonsRelationManager.php
+
+		-
+			message: '#^Cannot access property \$category_id on array\<string, mixed\>\|Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Filament/Resources/Courses/Schemas/CourseForm.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Filament\\Forms\\Components\\Repeater\:\:reorderable\(\) expects bool\|Closure, ''order'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Resources/Courses/Schemas/CourseForm.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Filament\\Forms\\Components\\Section\.$#'
+			identifier: class.notFound
+			count: 2
+			path: app/Filament/Resources/JobApplications/Schemas/JobApplicationForm.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Module\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Module\>\:\:\$category_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/Lessons/Schemas/LessonsForm.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\Lessons\\Schemas\\LessonsForm\:\:getRepeaterComponents\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Filament/Resources/Lessons/Schemas/LessonsForm.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Filament\\Forms\\Components\\Repeater\:\:reorderable\(\) expects bool\|Closure, ''sort_order'' given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Filament/Resources/Lessons/Schemas/LessonsForm.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/Teachers/Pages/EditTeacher.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/Teachers/Pages/EditTeacher.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/Teachers/Pages/EditTeacher.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:teacherProfile\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Resources/Teachers/Pages/EditTeacher.php
+
+		-
+			message: '#^Cannot access property \$teacherProfile on Illuminate\\Database\\Eloquent\\Model\|int\|string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Filament/Resources/Teachers/Pages/EditTeacher.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\CourseController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Api/CourseController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\CourseController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Api/CourseController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$banner_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplicantController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$logo_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplicantController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyApplicantController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplicantController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyApplicantController\:\:updateStatus\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplicantController.php
+
+		-
+			message: '#^Relation ''job'' is not found in App\\Models\\JobApplication model\.$#'
+			identifier: larastan.relationExistence
+			count: 2
+			path: app/Http/Controllers/Company/CompanyApplicantController.php
+
+		-
+			message: '#^Relation ''user'' is not found in App\\Models\\JobApplication model\.$#'
+			identifier: larastan.relationExistence
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplicantController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>avatar" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplicantController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>title" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplicantController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyApplyController\:\:create\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplyController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyApplyController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplyController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyApplyController\:\:waiting\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyApplyController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$likes_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$media_path\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$banner_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$logo_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$avatar\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$companyProfile\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$content\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Anonymous function should return array\{id\: int, user\: array\{id\: mixed, name\: mixed, avatar_url\: mixed, university\: mixed, role\: ''company''\|''student''\}, tag\: mixed, content\: string, media_url\: string\|null, media_type\: string\|null, is_pinned\: bool, likes_count\: int\<0, max\>, \.\.\.\} but returns array\{id\: int, user\: array\{id\: mixed, name\: mixed, avatar_url\: mixed, university\: mixed, role\: ''company''\|''student''\}, tag\: mixed, content\: string, media_url\: string\|null, media_type\: string\|null, is_pinned\: bool, likes_count\: int\<0, max\>, \.\.\.\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:decrement\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:delete\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:increment\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:reports\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:destroy\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:report\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:report\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:storeComment\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:storeComment\(\) has parameter \$postId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:toggleLike\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyCommunityController\:\:toggleLike\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Pagination\\AbstractPaginator\<int,App\\Models\\CommunityPost\>\:\:through\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Parameter \#3 \$userId of class App\\Events\\CommunityPostLiked constructor expects int, int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Pagination\\AbstractPaginator\<int,App\\Models\\CommunityPost\>\:\:through\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Company/CompanyCommunityController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$banner_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyJobController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$logo_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/CompanyJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyJobController\:\:authorizeCompany\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyJobController\:\:create\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyJobController\:\:edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyJobController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyJobController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\CompanyJobController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/CompanyJobController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$banner_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$business_registration_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CompanyProfile\:\:\$logo_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Company/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Company\\DashboardController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Company/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Profile\\AccountSettingsController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Profile/AccountSettingsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Profile/ProfilePageController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Profile\\ProfilePageController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Profile/ProfilePageController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Profile\\ProfilePageController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Profile/ProfilePageController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Controllers/Profile/ProfilePageController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$likes_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$media_path\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$companyProfile\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$content\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_avatar\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_subtitle\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Anonymous function should return array\{id\: int, user\: array\{id\: mixed, name\: mixed, avatar_url\: mixed, university\: mixed, role\: ''company''\|''student''\}, tag\: mixed, content\: string, media_url\: string\|null, media_type\: string\|null, is_pinned\: bool, likes_count\: int\<0, max\>, \.\.\.\} but returns array\{id\: int, user\: array\{id\: mixed, name\: mixed, avatar_url\: mixed, university\: mixed, role\: ''company''\|''student''\}, tag\: mixed, content\: string, media_url\: string\|null, media_type\: string\|null, is_pinned\: bool, likes_count\: int\<0, max\>, \.\.\.\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:decrement\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:delete\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:increment\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:reports\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:create\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:destroy\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:report\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:report\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:storeComment\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:storeComment\(\) has parameter \$postId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:toggleLike\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CommunityPostController\:\:toggleLike\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Pagination\\AbstractPaginator\<int,App\\Models\\CommunityPost\>\:\:through\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Parameter \#3 \$userId of class App\\Events\\CommunityPostLiked constructor expects int, int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Pagination\\AbstractPaginator\<int,App\\Models\\CommunityPost\>\:\:through\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Student/CommunityPostController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$audios\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$content\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$pdf_path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$pivot\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$sentence_hanzi\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$sentences\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$video_path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$video_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$vocabularies\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Relations\\Pivot\:\:\$completed_lessons_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Relations\\Pivot\:\:\$is_completed\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CourseController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CourseController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CourseController\:\:show\(\) has parameter \$categorySlug with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CourseController\:\:showByCategory\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\CourseController\:\:showByCategory\(\) has parameter \$categorySlug with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>completed_lessons_count" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Student/CourseController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DashboardController\:\:create\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DashboardController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DashboardController\:\:edit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DashboardController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DashboardController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DashboardController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DashboardController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$certificate_path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/DownloadCertificateController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$lessons_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/DownloadCertificateController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$progress\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/DownloadCertificateController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Student/DownloadCertificateController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DownloadCertificateController\:\:downloadCertificate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DownloadCertificateController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\DownloadCertificateController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/DownloadCertificateController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\EnrollmentController\:\:enroll\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/EnrollmentController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\LessonProgressController\:\:completeLesson\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/LessonProgressController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\StudentJobController\:\:apply\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/StudentJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\StudentJobController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/StudentJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Student\\StudentJobController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Student/StudentJobController.php
+
+		-
+			message: '#^Relation ''companyProfile'' is not found in App\\Models\\CompanyJob model\.$#'
+			identifier: larastan.relationExistence
+			count: 1
+			path: app/Http/Controllers/Student/StudentJobController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherApplyController\:\:create\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherApplyController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherApplyController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherApplyController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherApplyController\:\:waiting\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherApplyController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:\$likes_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$content\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Anonymous function should return array\{id\: int, user\: array\{id\: mixed, name\: mixed, avatar_url\: mixed, subtitle\: mixed, role\: mixed\}, tag\: mixed, content\: string, media_url\: string\|null, media_type\: string\|null, is_pinned\: bool, likes_count\: int\<0, max\>, \.\.\.\} but returns array\{id\: int, user\: array\{id\: mixed, name\: mixed, avatar_url\: mixed, subtitle\: mixed, role\: mixed\}, tag\: mixed, content\: string, media_url\: string\|null, media_type\: string\|null, is_pinned\: bool, likes_count\: int\<0, max\>, \.\.\.\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:decrement\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\CommunityPost\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\CommunityPost\>\:\:increment\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherCommunityController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherCommunityController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherCommunityController\:\:storeComment\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherCommunityController\:\:storeComment\(\) has parameter \$postId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherCommunityController\:\:toggleLike\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherCommunityController\:\:toggleLike\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Pagination\\AbstractPaginator\<int,App\\Models\\CommunityPost\>\:\:through\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Parameter \#3 \$userId of class App\\Events\\CommunityPostLiked constructor expects int, int\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Pagination\\AbstractPaginator\<int,App\\Models\\CommunityPost\>\:\:through\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCommunityController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherCourseController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherCourseController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$category_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:audios\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:sentences\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:vocabularies\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherLessonController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherLessonController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherLessonController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Property App\\Models\\Lesson\:\:\$pdf_path \(string\|null\) does not accept string\|false\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Property App\\Models\\Lesson\:\:\$video_path \(string\|null\) does not accept string\|false\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherLessonController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherModuleController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherModuleController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherModuleController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherModuleController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Teacher\\TeacherModuleController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Teacher/TeacherModuleController.php
+
+		-
+			message: '#^Method App\\Http\\Middleware\\CheckCompanyStatus\:\:handle\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Middleware/CheckCompanyStatus.php
+
+		-
+			message: '#^Method App\\Http\\Middleware\\HandleInertiaRequests\:\:getProfileData\(\) has parameter \$user with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Middleware/HandleInertiaRequests.php
+
+		-
+			message: '#^Method App\\Http\\Middleware\\HandleInertiaRequests\:\:getProfileData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Middleware/HandleInertiaRequests.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$banner_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$bio\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$business_registration_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$company_display_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$company_legal_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$company_size\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$founded_year\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$hq_address\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$industry\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$logo_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$official_email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$pic_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$pic_phone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$pic_position\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$rejection_reason\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$tax_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CompanyProfileResource\:\:\$website_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Method App\\Http\\Resources\\CompanyProfileResource\:\:toArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Resources/CompanyProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$category\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$is_published\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$level\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$teacher\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CourseResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CourseResource.php
+
+		-
+			message: '#^Property App\\Jobs\\GenerateCertificateJob\:\:\$module has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: app/Jobs/GenerateCertificateJob.php
+
+		-
+			message: '#^Property App\\Jobs\\GenerateCertificateJob\:\:\$timeout has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: app/Jobs/GenerateCertificateJob.php
+
+		-
+			message: '#^Property App\\Jobs\\GenerateCertificateJob\:\:\$user has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: app/Jobs/GenerateCertificateJob.php
+
+		-
+			message: '#^Method App\\Models\\AdminProfile\:\:user\(\) has invalid return type App\\Models\\BelongsTo\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/AdminProfile.php
+
+		-
+			message: '#^Method App\\Models\\AdminProfile\:\:user\(\) should return App\\Models\\BelongsTo but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\User, \$this\(App\\Models\\AdminProfile\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/AdminProfile.php
+
+		-
+			message: '#^Method App\\Models\\Certificate\:\:module\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/Certificate.php
+
+		-
+			message: '#^Method App\\Models\\Certificate\:\:user\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/Certificate.php
+
+		-
+			message: '#^Method App\\Models\\CommunityComment\:\:post\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityComment.php
+
+		-
+			message: '#^Method App\\Models\\CommunityComment\:\:replies\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityComment.php
+
+		-
+			message: '#^Method App\\Models\\CommunityComment\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityComment.php
+
+		-
+			message: '#^Method App\\Models\\CommunityPost\:\:comments\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityPost.php
+
+		-
+			message: '#^Method App\\Models\\CommunityPost\:\:likes\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityPost.php
+
+		-
+			message: '#^Method App\\Models\\CommunityPost\:\:reports\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityPost.php
+
+		-
+			message: '#^Method App\\Models\\CommunityPost\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityPost.php
+
+		-
+			message: '#^Method App\\Models\\CommunityPostLike\:\:post\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityPostLike.php
+
+		-
+			message: '#^Method App\\Models\\CommunityPostLike\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityPostLike.php
+
+		-
+			message: '#^Method App\\Models\\CommunityPostReport\:\:post\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityPostReport.php
+
+		-
+			message: '#^Method App\\Models\\CommunityPostReport\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CommunityPostReport.php
+
+		-
+			message: '#^Class App\\Models\\CompanyJob uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CompanyJob.php
+
+		-
+			message: '#^Method App\\Models\\CompanyJob\:\:applications\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/CompanyJob.php
+
+		-
+			message: '#^Method App\\Models\\CompanyJob\:\:companyProfile\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/CompanyJob.php
+
+		-
+			message: '#^Method App\\Models\\CompanyProfile\:\:jobs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/CompanyProfile.php
+
+		-
+			message: '#^Method App\\Models\\CompanyProfile\:\:user\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/CompanyProfile.php
+
+		-
+			message: '#^Class App\\Models\\CourseEnrollment not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/CourseCategory.php
+
+		-
+			message: '#^Method App\\Models\\CourseCategory\:\:enrollments\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/CourseCategory.php
+
+		-
+			message: '#^Method App\\Models\\CourseCategory\:\:modules\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/CourseCategory.php
+
+		-
+			message: '#^Method App\\Models\\CourseCategory\:\:scopeFilter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/CourseCategory.php
+
+		-
+			message: '#^Method App\\Models\\CourseCategory\:\:scopeFilter\(\) has parameter \$filters with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Models/CourseCategory.php
+
+		-
+			message: '#^Method App\\Models\\CourseCategory\:\:scopeFilter\(\) has parameter \$query with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Models/CourseCategory.php
+
+		-
+			message: '#^Parameter \#1 \$related of method Illuminate\\Database\\Eloquent\\Model\:\:hasMany\(\) expects class\-string\<Illuminate\\Database\\Eloquent\\Model\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/CourseCategory.php
+
+		-
+			message: '#^Unable to resolve the template type TRelatedModel in call to method Illuminate\\Database\\Eloquent\\Model\:\:hasMany\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Models/CourseCategory.php
+
+		-
+			message: '#^Class App\\Models\\Enrollment uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Enrollment.php
+
+		-
+			message: '#^Method App\\Models\\Enrollment\:\:module\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Enrollment.php
+
+		-
+			message: '#^Method App\\Models\\Enrollment\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Enrollment.php
+
+		-
+			message: '#^Class App\\Models\\JobApplication uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/JobApplication.php
+
+		-
+			message: '#^Method App\\Models\\JobApplication\:\:getResumeUrlAttribute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/JobApplication.php
+
+		-
+			message: '#^Method App\\Models\\JobApplication\:\:job\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/JobApplication.php
+
+		-
+			message: '#^Method App\\Models\\JobApplication\:\:user\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/JobApplication.php
+
+		-
+			message: '#^Class App\\Models\\Lesson uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Lesson.php
+
+		-
+			message: '#^Method App\\Models\\Lesson\:\:audios\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Lesson.php
+
+		-
+			message: '#^Method App\\Models\\Lesson\:\:module\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Lesson.php
+
+		-
+			message: '#^Method App\\Models\\Lesson\:\:sentences\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Lesson.php
+
+		-
+			message: '#^Method App\\Models\\Lesson\:\:vocabularies\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany does not specify its types\: TRelatedModel, TDeclaringModel, TPivotModel, TAccessor \(2\-4 required\)$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Lesson.php
+
+		-
+			message: '#^Method App\\Models\\LessonAudio\:\:lesson\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/LessonAudio.php
+
+		-
+			message: '#^Class App\\Models\\Module uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Method App\\Models\\Module\:\:category\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Method App\\Models\\Module\:\:courseCategory\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Method App\\Models\\Module\:\:enrollments\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Method App\\Models\\Module\:\:isCompletedByUser\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Method App\\Models\\Module\:\:isCompletedByUser\(\) has parameter \$userId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Method App\\Models\\Module\:\:lessons\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Method App\\Models\\Module\:\:teacher\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Method App\\Models\\Module\:\:users\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany does not specify its types\: TRelatedModel, TDeclaringModel, TPivotModel, TAccessor \(2\-4 required\)$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Module.php
+
+		-
+			message: '#^Class App\\Models\\Progress uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Progress.php
+
+		-
+			message: '#^Method App\\Models\\Progress\:\:lesson\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/Progress.php
+
+		-
+			message: '#^Method App\\Models\\Progress\:\:user\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/Progress.php
+
+		-
+			message: '#^Method App\\Models\\Role\:\:users\(\) has invalid return type App\\Models\\HasMany\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/Role.php
+
+		-
+			message: '#^Method App\\Models\\Role\:\:users\(\) should return App\\Models\\HasMany but returns Illuminate\\Database\\Eloquent\\Relations\\HasMany\<App\\Models\\User, \$this\(App\\Models\\Role\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Role.php
+
+		-
+			message: '#^Method App\\Models\\Sentence\:\:lesson\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Sentence.php
+
+		-
+			message: '#^Method App\\Models\\StudentProfile\:\:user\(\) has invalid return type App\\Models\\BelongsTo\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Models/StudentProfile.php
+
+		-
+			message: '#^Method App\\Models\\StudentProfile\:\:user\(\) should return App\\Models\\BelongsTo but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\User, \$this\(App\\Models\\StudentProfile\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/StudentProfile.php
+
+		-
+			message: '#^Method App\\Models\\TeacherProfile\:\:user\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/TeacherProfile.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\User\:\:\$avatar_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Models/User.php
+
+		-
+			message: '#^Class App\\Models\\User uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:enrollments\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:getProfile\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:module\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:progress\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:role\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\Vocabulary\:\:getPronunciationAttribute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/Vocabulary.php
+
+		-
+			message: '#^Method App\\Models\\Vocabulary\:\:lessons\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany does not specify its types\: TRelatedModel, TDeclaringModel, TPivotModel, TAccessor \(2\-4 required\)$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Vocabulary.php
+
+		-
+			message: '#^Parameter \#2 \$contents of method Illuminate\\Http\\Client\\PendingRequest\<false\>\:\:attach\(\) expects resource\|string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/CommunityModerationService.php
+
+		-
+			message: '#^Property App\\Services\\CommunityModerationService\:\:\$bannedKeywords type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/CommunityModerationService.php
+
+		-
+			message: '#^Parameter \#2 \$string of function explode expects string, bool\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/sanctum.php

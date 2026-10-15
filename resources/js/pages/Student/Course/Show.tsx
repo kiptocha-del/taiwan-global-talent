@@ -1,0 +1,137 @@
+import { Link, router } from '@inertiajs/react';
+import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { useState } from 'react';
+import LessonContentBlock from '@/components/Course/LessonContentBlock';
+import LessonSyllabus from '@/components/Course/LessonSyllabus';
+import MandarinAddOnPanel from '@/components/Course/MandarinAddOnPanel';
+import MediaContentManager from '@/components/Course/MediaContentManager';
+import Button from '@/components/UI/Button';
+import { getYouTubeEmbedUrl, playAudio } from '@/utils/media.helper';
+import Layout from '../Layout';
+
+export default function Show({ module, currentCategory }: any) {
+    const [activeLesson, setActiveLesson] = useState<any>(
+        module?.lessons?.[0] || null,
+    );
+    const [loading, setLoading] = useState(false);
+    const isMandarin = currentCategory?.id === 1;
+
+    const handleCompleteLesson = () => {
+        if (!activeLesson || loading) {
+            return;
+        }
+
+        setLoading(true);
+
+        router.post(
+            `/student/courses/${module.id}/lessons/${activeLesson.id}/complete`,
+            {},
+            {
+                onSuccess: (page: any) => {
+                    const flashData = page.props.flash || {};
+                    alert(
+                        flashData.success ||
+                            'Progres materi Anda berhasil disimpan.',
+                    );
+
+                    const currentIdx = module.lessons.findIndex(
+                        (l: any) => l.id === activeLesson.id,
+                    );
+
+                    if (
+                        currentIdx !== -1 &&
+                        currentIdx + 1 < module.lessons.length
+                    ) {
+                        setActiveLesson(module.lessons[currentIdx + 1]);
+                    } else {
+                        alert(
+                            'Selamat! Anda telah menyelesaikan kelas ini. Silakan unduh sertifikat Anda di halaman Sertifikat.',
+                        );
+                        router.get('/student/courses/certificate');
+                    }
+                },
+                onError: (errors) => {
+                    console.error(errors);
+                    alert('Gagal memperbarui data progres materi.');
+                },
+                onFinish: () => setLoading(false),
+                preserveScroll: true,
+            },
+        );
+    };
+
+    return (
+        <Layout>
+            <div className="space-y-6">
+                {/* Top Header */}
+                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                    <Link
+                        href={`/student/courses/${currentCategory?.slug}`}
+                        className="rounded-xl border border-gray-200 p-2 text-gray-600 transition-colors hover:bg-gray-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                    >
+                        <ArrowLeft size={16} />
+                    </Link>
+                    <div>
+                        <h2 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
+                            {module?.title}
+                        </h2>
+                        <p className="text-xs text-gray-400 dark:text-slate-400">
+                            {currentCategory?.name} Program
+                        </p>
+                    </div>
+                </div>
+
+                {/* Grid Split Panel */}
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+                    {/* Left Panel (Syllabus) */}
+                    <div className="relative lg:col-span-4">
+                        <LessonSyllabus
+                            lessons={module?.lessons || []}
+                            activeLessonId={activeLesson?.id || null}
+                            onSelectLesson={(lesson) => setActiveLesson(lesson)}
+                        />
+                    </div>
+
+                    {/* Right Panel */}
+                    <div className="space-y-6 lg:col-span-8">
+                        {activeLesson && (
+                            <>
+                                {/* 1. Main Text */}
+                                <LessonContentBlock
+                                    lesson={activeLesson}
+                                    isMandarin={isMandarin}
+                                />
+
+                                {/* 2. Multimedia Player (Video/Audios/PDF) */}
+                                <MediaContentManager
+                                    lesson={activeLesson}
+                                    getYouTubeEmbedUrl={getYouTubeEmbedUrl}
+                                />
+
+                                {/* 3. Chinese Program (Vocab & Kalimat) */}
+                                <MandarinAddOnPanel
+                                    lesson={activeLesson}
+                                    playAudio={playAudio}
+                                />
+
+                                {/* 4. Complete Module Button */}
+                                <div className="flex justify-end rounded-2xl border border-gray-100 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                                    <Button
+                                        type="button"
+                                        variant="primary"
+                                        size="lg"
+                                        icon={CheckCircle2}
+                                        isLoading={loading}
+                                        onClick={handleCompleteLesson}
+                                    >
+                                        Mark as Completed & Next
+                                    </Button>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    );
+}
