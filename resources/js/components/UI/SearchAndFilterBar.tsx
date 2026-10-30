@@ -34,12 +34,14 @@ export default function SearchAndFilterBar({
                     value={search}
                     onChange={(e) => onSearchChange(e.target.value)}
                     placeholder={searchPlaceholder}
-                    className="w-full rounded-xl border border-gray-200 bg-white py-2.5 pr-10 pl-10 text-sm transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+                    className="w-full rounded-control border border-border bg-surface py-2.5 pr-10 pl-10 text-sm text-ink transition-all placeholder:text-muted focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
                 />
                 {search && (
                     <button
+                        type="button"
                         onClick={() => onSearchChange('')}
-                        className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        aria-label="Clear search"
+                        className="absolute top-1/2 right-3 -translate-y-1/2 text-muted hover:text-ink"
                     >
                         <X className="h-4 w-4" />
                     </button>
@@ -53,7 +55,7 @@ export default function SearchAndFilterBar({
                     <select
                         value={filterValue || ''}
                         onChange={(e) => onFilterChange(e.target.value)}
-                        className="w-full cursor-pointer appearance-none rounded-xl border border-gray-200 bg-white py-2.5 pr-8 pl-10 text-sm text-gray-700 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+                        className="w-full cursor-pointer appearance-none rounded-control border border-border bg-surface py-2.5 pr-8 pl-10 text-sm text-ink transition-all focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
                     >
                         <option value="">{filterPlaceholder}</option>
                         {filterOptions.map((opt) => (

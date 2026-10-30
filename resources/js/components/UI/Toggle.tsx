@@ -1,23 +1,32 @@
 interface ToggleProps {
     label: string;
     checked: boolean;
-    onChange: (val: boolean) => void;
+    onChange: (value: boolean) => void;
+    disabled?: boolean;
 }
 
-export default function Toggle({ label, checked, onChange }: ToggleProps) {
+export default function Toggle({
+    label,
+    checked,
+    onChange,
+    disabled = false,
+}: ToggleProps) {
     return (
-        <label className="flex items-center gap-3 cursor-pointer select-none">
-            <span className="text-sm font-medium text-gray-700">{label}</span>
-            <div className="relative">
+        <label className="inline-flex cursor-pointer items-center gap-3 select-none">
+            <span className="text-sm font-medium text-ink">{label}</span>
+            <span className="relative inline-flex">
                 <input
                     type="checkbox"
-                    className="sr-only"
+                    role="switch"
+                    className="peer sr-only"
                     checked={checked}
-                    onChange={(e) => onChange(e.target.checked)} //  Panggil hanya saat ada interaksi asli
+                    disabled={disabled}
+                    aria-checked={checked}
+                    onChange={(event) => onChange(event.target.checked)}
                 />
-                <div className={`block h-6 w-11 rounded-full transition ${checked ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
-                <div className={`absolute top-1 left-1 h-4 w-4 rounded-full bg-white transition-transform ${checked ? 'translate-x-5' : ''}`}></div>
-            </div>
+                <span className="h-6 w-11 rounded-full bg-border transition-colors peer-checked:bg-brand peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent peer-disabled:cursor-not-allowed peer-disabled:opacity-50" />
+                <span className="pointer-events-none absolute top-1 left-1 size-4 rounded-full bg-surface shadow-sm transition-transform peer-checked:translate-x-5" />
+            </span>
         </label>
     );
 }

@@ -6,28 +6,28 @@ const steps = [
         title: 'Tell us about yourself',
         description:
             'Choose whether you are preparing for study, relocation, TOCFL, or a role with a Taiwan employer.',
-        color: '#FFE0C2',
+        backgroundClass: 'bg-accent-soft',
     },
     {
         icon: Compass,
         title: 'Learn at your own pace',
         description:
             'Work through Mandarin and preparation modules around school, work, and daily life.',
-        color: '#CFE8FF',
+        backgroundClass: 'bg-status-info-soft',
     },
     {
         icon: HeartHandshake,
         title: 'Meet your community',
         description:
             'Ask about applications, housing, campus life, and interviews with people on a similar path.',
-        color: '#DDD4FF',
+        backgroundClass: 'bg-status-warning-soft',
     },
     {
         icon: Rocket,
         title: 'Discover what comes next',
         description:
             'Use your progress to pursue scholarships, internships, and work opportunities across Taiwan.',
-        color: '#CDEEDB',
+        backgroundClass: 'bg-status-positive-soft',
     },
 ];
 
@@ -42,7 +42,7 @@ export default function HowItWorks() {
             <div className="mx-auto max-w-7xl">
                 <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
                     <div>
-                        <span className="inline-flex rounded-full bg-[#CDEEDB] px-4 py-2 text-sm font-extrabold text-[#27705E]">
+                        <span className="inline-flex rounded-sm bg-status-positive-soft px-4 py-2 text-sm font-extrabold text-[#27705E]">
                             Your journey, your pace
                         </span>
                         <h2 className="mt-5 font-display text-4xl leading-tight font-black tracking-[-0.03em] text-[#24458F] md:text-6xl">
@@ -60,11 +60,10 @@ export default function HowItWorks() {
                     {steps.map((step, index) => (
                         <article
                             key={step.title}
-                            className={`relative border-t border-[#24458F]/12 pt-7 ${index % 2 === 1 ? 'lg:mt-10' : ''}`}
+                            className={`relative border-t-2 border-[#24458F]/20 pt-7 ${index % 2 === 1 ? 'lg:mt-10' : ''} dark:border-[#f0d49b]/30`}
                         >
                             <div
-                                className="relative flex h-16 w-16 items-center justify-center rounded-full text-[#24458F]"
-                                style={{ backgroundColor: step.color }}
+                                className={`relative flex h-16 w-16 items-center justify-center rounded-sm text-[#24458F] dark:text-[#f4efe6] ${step.backgroundClass}`}
                             >
                                 <step.icon className="h-7 w-7" />
                                 <span className="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#24458F] text-xs font-black text-white">

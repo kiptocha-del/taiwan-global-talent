@@ -2,7 +2,8 @@ import type { LucideIcon } from 'lucide-react';
 import { Loader2 } from 'lucide-react';
 import React from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'danger' | 'ghost';
+export type ButtonVariant =
+    'primary' | 'secondary' | 'outline' | 'danger' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -32,15 +33,12 @@ export default function Button({
     // Variant Styles
     const variantStyles: Record<ButtonVariant, string> = {
         primary:
-            'bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs focus:ring-indigo-500 shadow-indigo-500/20 dark:bg-indigo-600 dark:hover:bg-indigo-700',
-        secondary:
-            'bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 focus:ring-slate-400',
+            'bg-brand-strong text-white shadow-card hover:bg-brand focus:ring-accent dark:text-ink',
+        secondary: 'bg-surface-muted text-ink hover:bg-border focus:ring-brand',
         outline:
-            'border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 focus:ring-indigo-500',
-        danger:
-            'bg-rose-600 hover:bg-rose-700 text-white shadow-xs focus:ring-rose-500 shadow-rose-500/20',
-        ghost:
-            'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:ring-slate-400',
+            'border border-border text-ink hover:bg-surface-muted focus:ring-brand',
+        danger: 'bg-status-danger text-white shadow-card hover:brightness-95 focus:ring-status-danger',
+        ghost: 'text-muted hover:bg-surface-muted focus:ring-brand',
     };
 
     // Size Styles
@@ -68,7 +66,8 @@ export default function Button({
             {isLoading ? (
                 <Loader2 className={`${iconSizeClass} animate-spin`} />
             ) : (
-                Icon && iconPosition === 'left' && <Icon className={iconSizeClass} />
+                Icon &&
+                iconPosition === 'left' && <Icon className={iconSizeClass} />
             )}
 
             {children && <span>{children}</span>}

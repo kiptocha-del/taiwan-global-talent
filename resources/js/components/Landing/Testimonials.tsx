@@ -4,6 +4,7 @@ import {
     FileText,
     MessageCircleQuestion,
 } from 'lucide-react';
+import { courses } from '@/routes';
 
 const questions = [
     {
@@ -65,7 +66,7 @@ export default function Testimonials() {
                                 {question.description}
                             </p>
                             <a
-                                href="#programs"
+                                href={courses.url()}
                                 className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-[#24458F]"
                             >
                                 {question.link}{' '}

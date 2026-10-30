@@ -5,6 +5,7 @@ import {
     BriefcaseBusiness,
     MessagesSquare,
 } from 'lucide-react';
+import { courses } from '@/routes';
 
 const pathways = [
     {
@@ -14,9 +15,11 @@ const pathways = [
         description:
             'Practice introductions, transport, campus life, and workplace conversations while preparing for TOCFL.',
         action: 'Find your level',
-        background: '#CFE8FF',
-        accent: '#3B78C8',
+        backgroundClass: 'bg-status-info-soft',
+        accentClass: 'text-status-info',
+        borderClass: 'border-t-status-info',
         decoration: '你好',
+        image: '/images/landing/diverse-collaboration-card.jpg',
     },
     {
         icon: BookOpenText,
@@ -25,9 +28,11 @@ const pathways = [
         description:
             'Compare MOE, TaiwanICDF, and university funding routes, then organize documents and deadlines.',
         action: 'Explore funding',
-        background: '#DDD4FF',
-        accent: '#7059C7',
+        backgroundClass: 'bg-accent-soft',
+        accentClass: 'text-accent',
+        borderClass: 'border-t-accent',
         decoration: '✦',
+        image: null,
     },
     {
         icon: BriefcaseBusiness,
@@ -36,9 +41,11 @@ const pathways = [
         description:
             'Present your skills clearly and prepare for internships and roles across Taiwan’s industries.',
         action: 'See opportunities',
-        background: '#CDEEDB',
-        accent: '#27836C',
+        backgroundClass: 'bg-status-positive-soft',
+        accentClass: 'text-status-positive',
+        borderClass: 'border-t-status-positive',
         decoration: '↗',
+        image: '/images/landing/opportunity-track-card.jpg',
     },
     {
         icon: Award,
@@ -47,17 +54,19 @@ const pathways = [
         description:
             'Keep verified course progress beside your language level, portfolio, and application profile.',
         action: 'Start collecting',
-        background: '#FFE0C2',
-        accent: '#D85E3D',
+        backgroundClass: 'bg-status-warning-soft',
+        accentClass: 'text-accent',
+        borderClass: 'border-t-status-warning',
         decoration: '★',
+        image: null,
     },
 ];
 
 export default function CorePillars() {
     return (
         <section
-            id="programs"
-            className="relative overflow-hidden bg-white px-5 py-24"
+            id="learning-paths"
+            className="relative overflow-hidden bg-white px-5 py-24 dark:bg-[#1b2630]"
         >
             <div className="absolute top-20 -right-12 h-40 w-40 rounded-full border-[28px] border-[#FFD86B]/35" />
             <div className="relative mx-auto max-w-7xl">
@@ -78,33 +87,43 @@ export default function CorePillars() {
                     {pathways.map((pathway, index) => (
                         <article
                             key={pathway.title}
-                            className={`group relative min-h-[360px] overflow-hidden rounded-[2rem] p-7 shadow-[0_18px_50px_rgba(36,69,143,0.09)] transition duration-300 hover:-translate-y-2 ${index % 2 === 1 ? 'lg:translate-y-6 lg:hover:translate-y-4' : ''}`}
-                            style={{ backgroundColor: pathway.background }}
+                            className={`group relative min-h-[360px] overflow-hidden rounded-md border border-t-4 border-[#31556a]/20 p-6 shadow-[0_12px_30px_rgba(40,45,51,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(40,45,51,0.15)] dark:border-[#f0d49b]/20 dark:shadow-[0_16px_32px_rgba(0,0,0,0.24)] ${pathway.backgroundClass} ${pathway.borderClass} ${index % 2 === 1 ? 'lg:mt-8' : ''}`}
                         >
                             <span
-                                className="absolute -right-3 -bottom-8 font-display text-[8rem] font-black opacity-[0.08]"
-                                style={{ color: pathway.accent }}
+                                className={`absolute -right-3 -bottom-8 font-display text-[8rem] font-black opacity-[0.08] ${pathway.accentClass}`}
                             >
                                 {pathway.decoration}
                             </span>
                             <div className="relative flex h-full flex-col">
                                 <div className="flex items-start justify-between gap-4">
                                     <div
-                                        className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/80 shadow-sm"
-                                        style={{ color: pathway.accent }}
+                                        className={`flex h-14 w-14 items-center justify-center rounded-sm bg-white/85 shadow-sm dark:bg-[#111820] ${pathway.accentClass}`}
                                     >
                                         <pathway.icon className="h-8 w-8" />
                                     </div>
-                                    <span
-                                        className="rounded-full bg-white/60 px-3 py-1 text-xs font-black"
-                                        style={{ color: pathway.accent }}
-                                    >
-                                        0{index + 1}
-                                    </span>
+                                    {pathway.image ? (
+                                        <div className="relative -rotate-2 border-4 border-white shadow-md transition duration-300 group-hover:rotate-1 dark:border-[#111820]">
+                                            <img
+                                                src={pathway.image}
+                                                alt=""
+                                                aria-hidden="true"
+                                                loading="lazy"
+                                                className="h-16 w-24 object-cover"
+                                            />
+                                            <span className="absolute -top-3 -right-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#24458F] text-xs font-black text-white dark:bg-[#f0c975] dark:text-[#262018]">
+                                                0{index + 1}
+                                            </span>
+                                        </div>
+                                    ) : (
+                                        <span
+                                            className={`rounded-sm bg-white/75 px-3 py-1 text-xs font-black dark:bg-[#111820] ${pathway.accentClass}`}
+                                        >
+                                            0{index + 1}
+                                        </span>
+                                    )}
                                 </div>
                                 <p
-                                    className="mt-8 text-sm font-extrabold"
-                                    style={{ color: pathway.accent }}
+                                    className={`mt-8 text-sm font-extrabold ${pathway.accentClass}`}
                                 >
                                     {pathway.eyebrow}
                                 </p>
@@ -115,11 +134,11 @@ export default function CorePillars() {
                                     {pathway.description}
                                 </p>
                                 <a
-                                    href="#courses"
+                                    href={`${courses.url()}#course-list`}
                                     className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-extrabold text-[#24458F]"
                                 >
                                     {pathway.action}
-                                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/75 transition group-hover:rotate-12">
+                                    <span className="flex h-9 w-9 items-center justify-center rounded-sm bg-white/85 transition group-hover:-translate-y-1 dark:bg-[#111820]">
                                         <ArrowUpRight className="h-4 w-4" />
                                     </span>
                                 </a>

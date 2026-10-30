@@ -1,32 +1,84 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme {
-    --font-sans:
-        'Nunito Sans', ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
-    --font-display:
-        'Nunito', 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
-    --color-clubhouse-cream: #fff8ed;
-    --color-clubhouse-peach: #ffe0c2;
-    --color-clubhouse-yellow: #ffd86b;
-    --color-clubhouse-mint: #cdeedb;
-    --color-clubhouse-sky: #cfe8ff;
-    --color-clubhouse-lavender: #ddd4ff;
-    --color-clubhouse-coral: #ff8a65;
-    --color-clubhouse-blue: #24458f;
+    --font-sans: Arial, ui-sans-serif, system-ui, sans-serif;
+    --font-display: Georgia, 'Times New Roman', serif;
+
+    --color-canvas: #faf7f2;
+    --color-surface: #fffefa;
+    --color-surface-muted: #f1ece4;
+    --color-border: #e4dbcf;
+    --color-ink: #292d33;
+    --color-muted: #646a70;
+    --color-brand: #31556a;
+    --color-brand-ink: #31556a;
+    --color-brand-strong: #234458;
+    --color-brand-action: #234458;
+    --color-accent: #a95c42;
+    --color-accent-soft: #f3e3d7;
+    --color-highlight: #d3b470;
+    --color-positive: #39735f;
+    --color-status-positive: #39735f;
+    --color-status-positive-soft: #e7ebdf;
+    --color-status-warning: #8d6930;
+    --color-status-warning-soft: #f4ead7;
+    --color-status-danger: #a24940;
+    --color-status-danger-soft: #f5e3df;
+    --color-status-info: #476c83;
+    --color-status-info-soft: #eee7dc;
+    --color-status-neutral: #636970;
+    --color-status-neutral-soft: #edeae5;
+
+    --text-display-xl: clamp(2.75rem, 6vw, 5rem);
+    --text-display-xl--line-height: 1.04;
+    --text-display-lg: clamp(2.25rem, 4.5vw, 3.75rem);
+    --text-display-lg--line-height: 1.08;
+    --text-display-md: clamp(1.75rem, 3vw, 2.5rem);
+    --text-display-md--line-height: 1.15;
+
+    --radius-control: 0.75rem;
+    --radius-card: 0.625rem;
+    --radius-panel: 0.875rem;
+    --shadow-card: 0 12px 32px rgb(40 45 51 / 7%);
+    --shadow-panel: 0 24px 60px rgb(40 45 51 / 11%);
+    --spacing-page-x: 1.25rem;
+    --spacing-page-y: 2rem;
+    --spacing-section: 5rem;
 }
 
-html {
-    scroll-behavior: smooth;
+body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
 }
 
 .font-display {
     font-family: var(--font-display);
 }
+
+.landing-page .max-w-7xl {
+    max-width: var(--container-6xl);
+}
+
+.type-display-xl {
+    font-size: var(--text-display-xl);
+    line-height: var(--text-display-xl--line-height);
+}
+
+.type-display-lg {
+    font-size: var(--text-display-lg);
+    line-height: var(--text-display-lg--line-height);
+}
+
+.type-display-md {
+    font-size: var(--text-display-md);
+    line-height: var(--text-display-md--line-height);
+}
+
 @keyframes infinite-loading {
     0% {
         left: -50%;
@@ -35,6 +87,7 @@ html {
         left: 100%;
     }
 }
+
 .animate-infinite-loading {
     animation: infinite-loading 1.5s infinite linear;
 }

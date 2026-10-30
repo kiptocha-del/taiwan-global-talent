@@ -1,12 +1,11 @@
 import { Link } from '@inertiajs/react';
 import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
-import { about, home, login } from '@/routes';
+import { about, courses, home, login } from '@/routes';
 
 const siteLinks = [
-    { label: 'About the hub', href: about.url() },
-    { label: 'Learning paths', href: `${home.url()}#programs` },
-    { label: 'Featured courses', href: `${home.url()}#courses` },
-    { label: 'Community stories', href: `${home.url()}#stories` },
+    { label: 'Home', href: home.url() },
+    { label: 'Courses', href: courses.url() },
+    { label: 'About', href: about.url() },
 ];
 
 export default function Footer() {

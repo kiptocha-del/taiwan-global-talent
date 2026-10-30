@@ -13,18 +13,18 @@ export default function Card({
     value,
     footerText,
     badge,
-    badgeColor = 'bg-slate-100 text-slate-700',
+    badgeColor = 'bg-surface-muted text-muted',
 }: CardProps) {
     return (
-        <div className="flex min-h-36 flex-col justify-between rounded-md border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+        <article className="flex min-h-36 flex-col justify-between rounded-card border border-border bg-surface p-5 shadow-card transition hover:-translate-y-0.5 hover:shadow-panel">
             <div>
                 <div className="flex items-start justify-between gap-3">
                     <div>
-                        <p className="text-xs font-black tracking-wider text-slate-500 uppercase">
+                        <p className="text-xs font-bold tracking-wide text-muted uppercase">
                             {title}
                         </p>
                         {subTitle && (
-                            <p className="mt-1 text-xs font-semibold text-slate-500">
+                            <p className="mt-1 text-xs font-medium text-muted">
                                 {subTitle}
                             </p>
                         )}
@@ -37,15 +37,15 @@ export default function Card({
                         </span>
                     )}
                 </div>
-                <p className="mt-5 text-3xl font-black tracking-tight text-[#173b8f]">
+                <p className="mt-5 font-display text-3xl font-bold tracking-tight text-brand-strong">
                     {value}
                 </p>
             </div>
             {footerText && (
-                <p className="mt-3 text-xs font-semibold text-slate-500">
+                <p className="mt-3 text-xs font-medium text-muted">
                     {footerText}
                 </p>
             )}
-        </div>
+        </article>
     );
 }

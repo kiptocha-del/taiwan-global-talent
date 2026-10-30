@@ -5,7 +5,9 @@ import {
     ShieldCheck,
     UserCog,
 } from 'lucide-react';
+import { usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import ThemeToggle from '@/components/UI/ThemeToggle';
 
 interface RoleOption {
     id: 'student' | 'teacher' | 'company' | 'admin';
@@ -47,6 +49,14 @@ const roles: RoleOption[] = [
 ];
 
 const LoginPage = () => {
+    const { props } = usePage();
+    const flashError = (
+        props as typeof props & {
+            flash?: {
+                error?: string | null;
+            };
+        }
+    ).flash?.error;
     const [selectedRole, setSelectedRole] =
         useState<RoleOption['id']>('student');
     const [email, setEmail] = useState('');
@@ -104,8 +114,11 @@ const LoginPage = () => {
     };
 
     return (
-        <main className="min-h-screen bg-[#f7f3ea] px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
-            <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl overflow-hidden rounded-md bg-white shadow-[0_28px_90px_rgba(23,59,143,0.16)] lg:max-h-[calc(100vh)] lg:grid-cols-[0.95fr_1.05fr]">
+        <main className="relative min-h-screen bg-canvas px-4 py-8 text-ink sm:px-6 lg:px-8">
+            <div className="absolute top-4 right-4 z-20">
+                <ThemeToggle />
+            </div>
+            <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl overflow-hidden rounded-panel border border-border bg-surface shadow-panel lg:max-h-[calc(100vh)] lg:grid-cols-[0.95fr_1.05fr]">
                 <section className="relative hidden overflow-hidden bg-[#102a43] p-10 text-white lg:block">
                     <img
                         src="/images/landing/cozy-taiwan-clubhouse.webp"
@@ -138,7 +151,7 @@ const LoginPage = () => {
                 <section className="flex items-center p-6 sm:p-10">
                     <div className="mx-auto w-full max-w-xl">
                         <div className="mb-8">
-                            <h2 className="mt-5 text-3xl font-black tracking-tight text-[#173b8f] sm:text-4xl">
+                            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-brand-ink sm:text-4xl">
                                 Continue with the role that fits your goal.
                             </h2>
                             <p className="mt-3 text-sm leading-7 font-semibold text-slate-600">
@@ -146,6 +159,15 @@ const LoginPage = () => {
                                 relevant pathways, dashboards, and next steps.
                             </p>
                         </div>
+
+                        {flashError && (
+                            <div
+                                role="alert"
+                                className="mb-6 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-800"
+                            >
+                                {flashError}
+                            </div>
+                        )}
 
                         <fieldset>
                             <legend className="sr-only">

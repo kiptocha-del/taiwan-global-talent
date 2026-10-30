@@ -1,9 +1,4 @@
-import {
-    createContext,
-    useContext,
-    useEffect,
-    useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 
 export type Lang = 'en' | 'id' | 'zh';
@@ -29,6 +24,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : lang;
         }
     }, [lang]);
 

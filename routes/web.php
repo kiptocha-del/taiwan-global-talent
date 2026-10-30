@@ -27,14 +27,12 @@ use App\Http\Controllers\Teacher\TeacherCourseController;
 use App\Http\Controllers\Teacher\TeacherLessonController;
 use App\Http\Controllers\Teacher\TeacherModuleController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::inertia('/', 'Landing')->name('home');
+Route::inertia('/courses', 'Courses')->name('courses');
 Route::inertia('/about', 'About')->name('about');
 
-Route::get('/login', function () {
-    return Inertia::render('Auth/LoginPage');
-})->name('login');
+Route::get('/login', [GoogleAuthController::class, 'index'])->name('login');
 
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');

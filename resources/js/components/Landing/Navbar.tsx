@@ -1,20 +1,27 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Menu, Sparkles, X } from 'lucide-react';
 import { useState } from 'react';
-import { about, home, login } from '@/routes';
-import LoginGoogle from '../UI/LoginGoogle';
+import { about, courses, home, login } from '@/routes';
+import ThemeToggle from '../UI/ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const navLinkClasses =
-        'rounded-full px-4 py-2 transition hover:bg-[#FFE0C2] hover:text-[#24458F]';
+    const currentPath = usePage().url.split(/[?#]/, 1)[0];
+    const normalizePath = (path: string) =>
+        path.length > 1 ? path.replace(/\/+$/, '') : path;
+    const isActive = (href: string) =>
+        normalizePath(currentPath) === normalizePath(href);
+    const navLinkClasses = (href: string) =>
+        `relative rounded-sm px-4 py-2 transition after:absolute after:right-4 after:bottom-0 after:left-4 after:h-0.5 after:rounded-full after:bg-accent after:transition-transform ${
+            isActive(href)
+                ? 'text-accent after:scale-x-100'
+                : 'after:scale-x-0 hover:bg-[#FFE0C2] hover:text-[#24458F]'
+        }`;
     const mobileLinks = [
-        { label: 'Explore pathways', href: `${home.url()}#programs` },
-        { label: 'Featured courses', href: `${home.url()}#courses` },
-        { label: 'Your Taiwan journey', href: `${home.url()}#journey` },
-        { label: 'Community stories', href: `${home.url()}#stories` },
-        { label: 'About the hub', href: about.url() },
-        { label: 'Partners', href: `${home.url()}#companies` },
+        { label: 'Home', href: home.url() },
+        { label: 'Courses', href: courses.url() },
+        { label: 'About', href: about.url() },
     ];
 
     return (
@@ -38,51 +45,44 @@ const Navbar = () => {
 
                 <div className="hidden items-center gap-1 text-sm font-bold text-[#24458F] lg:flex">
                     <Link
-                        className={navLinkClasses}
-                        href={`${home.url()}#programs`}
+                        className={navLinkClasses(home.url())}
+                        href={home.url()}
+                        aria-current={isActive(home.url()) ? 'page' : undefined}
                     >
-                        Explore
+                        Home
                     </Link>
                     <Link
-                        className={navLinkClasses}
-                        href={`${home.url()}#courses`}
+                        className={navLinkClasses(courses.url())}
+                        href={courses.url()}
+                        aria-current={isActive(courses.url()) ? 'page' : undefined}
                     >
                         Courses
                     </Link>
                     <Link
-                        className={navLinkClasses}
-                        href={`${home.url()}#journey`}
+                        className={navLinkClasses(about.url())}
+                        href={about.url()}
+                        aria-current={isActive(about.url()) ? 'page' : undefined}
                     >
-                        Your journey
-                    </Link>
-                    <Link
-                        className={navLinkClasses}
-                        href={`${home.url()}#stories`}
-                    >
-                        Stories
-                    </Link>
-                    <Link className={navLinkClasses} href={about.url()}>
                         About
-                    </Link>
-                    <Link
-                        className={navLinkClasses}
-                        href={`${home.url()}#companies`}
-                    >
-                        Partners
                     </Link>
                 </div>
 
                 <div className="flex items-center gap-2">
                     <Link
-                        href={`${home.url()}#programs`}
-                        aria-label="Explore learning pathways"
+                        href={home.url()}
+                        aria-label="Sparkles"
                         className="hidden h-11 w-11 items-center justify-center rounded-full bg-[#FFD86B] text-[#24458F] transition hover:scale-105 hover:-rotate-6 sm:flex"
                     >
                         <Sparkles className="h-5 w-5" />
                     </Link>
-                    <div className="hidden sm:block">
-                        <LoginGoogle />
-                    </div>
+                    <LanguageSwitcher />
+                    <ThemeToggle />
+                    <Link
+                        href={login.url()}
+                        className="hidden items-center justify-center rounded-sm bg-[#24458F] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#FF7958] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24458F] sm:inline-flex dark:hover:bg-[#f0c975] dark:hover:text-[#262018]"
+                    >
+                        Login
+                    </Link>
                     <button
                         type="button"
                         onClick={() => setIsOpen((open) => !open)}
@@ -115,7 +115,8 @@ const Navbar = () => {
                                 key={link.label}
                                 href={link.href}
                                 onClick={() => setIsOpen(false)}
-                                className="rounded-xl px-4 py-3 text-base font-extrabold text-[#24458F] transition hover:bg-white"
+                                aria-current={isActive(link.href) ? 'page' : undefined}
+                                className={`relative block rounded-sm px-4 py-3 text-base font-extrabold text-[#24458F] transition after:absolute after:right-4 after:bottom-0 after:left-4 after:h-0.5 after:rounded-full after:bg-accent after:transition-transform ${isActive(link.href) ? 'text-accent after:scale-x-100' : 'after:scale-x-0 hover:bg-white'}`}
                             >
                                 {link.label}
                             </Link>
@@ -125,7 +126,7 @@ const Navbar = () => {
                             onClick={() => setIsOpen(false)}
                             className="mt-3 inline-flex items-center justify-center rounded-full bg-[#24458F] px-6 py-3.5 text-sm font-extrabold text-white"
                         >
-                            Sign in or join
+                            Login
                         </Link>
                     </div>
                 </div>

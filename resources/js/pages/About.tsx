@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import Footer from '@/components/Landing/Footer';
 import Navbar from '@/components/Landing/Navbar';
-import { home, login } from '@/routes';
+import { courses, login } from '@/routes';
 
 const values = [
     {
@@ -18,21 +18,21 @@ const values = [
         title: 'Belong before you arrive',
         description:
             'Moving toward a new country can feel uncertain. We create a friendly place to ask questions, meet people, and feel less alone.',
-        color: '#FFE0C2',
+        surfaceClass: 'bg-accent-soft',
     },
     {
         icon: BookOpen,
         title: 'Learn what helps in real life',
         description:
             'From Mandarin to applications and interviews, every pathway is designed around practical next steps—not busywork.',
-        color: '#CFE8FF',
+        surfaceClass: 'bg-surface-muted',
     },
     {
         icon: Sparkles,
         title: 'Celebrate every small win',
         description:
             'Confidence grows one lesson, conversation, and application at a time. Progress deserves to feel visible and joyful.',
-        color: '#DDD4FF',
+        surfaceClass: 'bg-accent-soft',
     },
 ];
 
@@ -45,7 +45,7 @@ const community = [
 
 export default function About() {
     return (
-        <div className="bg-[#FFF8ED] font-sans text-[#24458F] antialiased selection:bg-[#FFD86B] selection:text-[#24458F]">
+        <div className="landing-page bg-[#FFF8ED] font-sans text-[#24458F] antialiased selection:bg-[#FFD86B] selection:text-[#24458F]">
             <Head title="About Taiwan Global Talent Hub" />
             <Navbar />
 
@@ -70,7 +70,7 @@ export default function About() {
                             </p>
                             <div className="mt-9 flex flex-wrap gap-3">
                                 <Link
-                                    href={`${home.url()}#programs`}
+                                    href={courses.url()}
                                     className="inline-flex items-center gap-2 rounded-full bg-[#24458F] px-7 py-4 text-sm font-extrabold text-white shadow-[0_12px_28px_rgba(36,69,143,0.2)] transition hover:-translate-y-1 hover:bg-[#FF7958]"
                                 >
                                     Explore the hub{' '}
@@ -144,8 +144,7 @@ export default function About() {
                             {values.map((value, index) => (
                                 <article
                                     key={value.title}
-                                    className={`rounded-[2rem] border-4 border-white p-7 shadow-[0_16px_45px_rgba(36,69,143,0.08)] ${index === 1 ? 'lg:-translate-y-5' : ''}`}
-                                    style={{ backgroundColor: value.color }}
+                                    className={`rounded-[2rem] border border-border p-7 shadow-card ${value.surfaceClass} ${index === 1 ? 'lg:-translate-y-5' : ''}`}
                                 >
                                     <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/80 text-[#24458F] shadow-sm">
                                         <value.icon className="h-6 w-6" />

@@ -23,45 +23,45 @@ export default function StatusBadge({ status, customLabel }: StatusBadgeProps) {
     const config: Record<string, { label: string; style: string }> = {
         pending: {
             label: 'Pending',
-            style: 'bg-amber-50 text-amber-700 border-amber-200',
+            style: 'bg-status-warning-soft text-status-warning border-status-warning/20',
         },
         reviewed: {
             label: 'Reviewed',
-            style: 'bg-blue-50 text-blue-700 border-blue-200',
+            style: 'bg-status-info-soft text-status-info border-status-info/20',
         },
         interviewed: {
             label: 'Interviewed',
-            style: 'bg-purple-50 text-purple-700 border-purple-200',
+            style: 'bg-accent-soft text-accent border-accent/20',
         },
         hired: {
             label: 'Hired',
-            style: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            style: 'bg-status-positive-soft text-status-positive border-status-positive/20',
         },
         rejected: {
             label: 'Rejected',
-            style: 'bg-rose-50 text-rose-700 border-rose-200',
+            style: 'bg-status-danger-soft text-status-danger border-status-danger/20',
         },
         published: {
             label: 'Published',
-            style: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            style: 'bg-status-positive-soft text-status-positive border-status-positive/20',
         },
         draft: {
             label: 'Draft',
-            style: 'bg-gray-100 text-gray-600 border-gray-200',
+            style: 'bg-status-neutral-soft text-status-neutral border-border',
         },
         closed: {
             label: 'Closed',
-            style: 'bg-rose-50 text-rose-700 border-rose-200',
+            style: 'bg-status-danger-soft text-status-danger border-status-danger/20',
         },
         approved: {
             label: 'Approved',
-            style: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            style: 'bg-status-positive-soft text-status-positive border-status-positive/20',
         },
     };
 
     const current = config[normalized] || {
         label: customLabel || status,
-        style: 'bg-gray-100 text-gray-700 border-gray-200',
+        style: 'bg-status-neutral-soft text-status-neutral border-border',
     };
 
     return (

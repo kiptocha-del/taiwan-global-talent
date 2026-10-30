@@ -52,7 +52,7 @@ export default function CTA() {
                                 key={item}
                                 className="flex gap-4 text-base leading-7 font-semibold text-[#24458F]/68"
                             >
-                                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#CDEEDB] text-[#27705E]">
+                                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-sm bg-[#E7EBDD] text-[#27705E]">
                                     <Check className="h-4 w-4" />
                                 </span>
                                 {item}

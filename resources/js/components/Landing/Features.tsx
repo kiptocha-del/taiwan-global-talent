@@ -39,7 +39,7 @@ const Features = () => {
                         <img
                             src="/images/landing/diverse-collaboration.png"
                             alt="Diverse group collaborating around a laptop"
-                            className="aspect-[16/10] w-full object-cover"
+                            className="aspect-16/10 w-full object-cover"
                         />
                     </div>
                 </div>
@@ -48,7 +48,7 @@ const Features = () => {
                     {features.map((feature, index) => (
                         <article
                             key={feature.title}
-                            className="group grid gap-5 rounded-md border border-white/12 bg-white/[0.055] p-6 transition hover:border-white/28 md:grid-cols-[64px_1fr]"
+                            className="group grid gap-5 rounded-md border border-white/12 bg-white/5.5 p-6 transition hover:border-white/28 md:grid-cols-[64px_1fr]"
                         >
                             <div className="flex h-16 w-16 items-center justify-center rounded-md bg-white text-[#173b8f]">
                                 <feature.icon className="h-7 w-7" />

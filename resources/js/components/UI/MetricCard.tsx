@@ -1,31 +1,40 @@
-// components/MetricCard.tsx
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
 interface MetricCardProps {
-  title: string;
-  value: string | number;
-  icon?: ReactNode;
-  graph?: ReactNode;
-  className?: string;
+    title: string;
+    value: string | number;
+    icon?: ReactNode;
+    graph?: ReactNode;
+    className?: string;
 }
 
-export default function MetricCard({ title, value, icon, graph, className = "" }: MetricCardProps) {
-  return (
-    <div className={`p-6 bg-white rounded-3xl shadow-xl border border-gray-100 flex items-center justify-between transition-transform hover:scale-105 ${className}`}>
-      <div>
-        <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">{title}</p>
-        <p className="text-5xl font-extrabold text-gray-900 mt-2">{value}</p>
-      </div>
-      {graph && (
-        <div className="w-24 h-24">
-          {graph}
-        </div>
-      )}
-      {!graph && icon && (
-        <div className="p-4 bg-gray-100 rounded-full text-blue-600">
-          {icon}
-        </div>
-      )}
-    </div>
-  );
+export default function MetricCard({
+    title,
+    value,
+    icon,
+    graph,
+    className = '',
+}: MetricCardProps) {
+    return (
+        <article
+            className={`flex items-center justify-between rounded-card border border-border bg-surface p-5 shadow-card transition hover:-translate-y-0.5 hover:shadow-panel sm:p-6 ${className}`}
+        >
+            <div>
+                <p className="text-sm font-semibold tracking-wide text-muted uppercase">
+                    {title}
+                </p>
+                <p className="mt-2 font-display text-4xl font-bold text-ink">
+                    {value}
+                </p>
+            </div>
+            {graph && (
+                <div className="size-20 shrink-0 sm:size-24">{graph}</div>
+            )}
+            {!graph && icon && (
+                <div className="rounded-full bg-accent-soft p-3 text-accent sm:p-4">
+                    {icon}
+                </div>
+            )}
+        </article>
+    );
 }
