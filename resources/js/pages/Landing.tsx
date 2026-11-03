@@ -6,7 +6,6 @@ import Hero from '@/components/Landing/Hero';
 import HowItWorks from '@/components/Landing/HowItWorks';
 import Navbar from '@/components/Landing/Navbar';
 import Testimonials from '@/components/Landing/Testimonials';
-import CorePillars from '@/components/UI/CorePillars';
 
 export default function Landing() {
     useLayoutEffect(() => {
@@ -36,7 +35,6 @@ export default function Landing() {
         <div className="landing-page min-h-screen bg-canvas font-sans text-ink antialiased selection:bg-highlight selection:text-ink">
             <Navbar />
             <Hero />
-            <CorePillars />
             <HowItWorks />
             <Testimonials />
             <Companies />
