@@ -1,11 +1,12 @@
 import { Link } from '@inertiajs/react';
 import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
-import { about, courses, home, login } from '@/routes';
+import { about, courses, getInvolved, home, login } from '@/routes';
 
 const siteLinks = [
     { label: 'Home', href: home.url() },
     { label: 'Courses', href: courses.url() },
     { label: 'About', href: about.url() },
+    { label: 'Get Involved', href: getInvolved.url() },
 ];
 
 export default function Footer() {

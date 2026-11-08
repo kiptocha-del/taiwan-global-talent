@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import { Menu, Sparkles, X } from 'lucide-react';
 import { useState } from 'react';
-import { about, courses, home, login } from '@/routes';
+import { about, courses, getInvolved, home, login } from '@/routes';
 import ThemeToggle from '../UI/ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -22,6 +22,7 @@ const Navbar = () => {
         { label: 'Home', href: home.url() },
         { label: 'Courses', href: courses.url() },
         { label: 'About', href: about.url() },
+        { label: 'Get Involved', href: getInvolved.url() },
     ];
 
     return (
@@ -54,16 +55,29 @@ const Navbar = () => {
                     <Link
                         className={navLinkClasses(courses.url())}
                         href={courses.url()}
-                        aria-current={isActive(courses.url()) ? 'page' : undefined}
+                        aria-current={
+                            isActive(courses.url()) ? 'page' : undefined
+                        }
                     >
                         Courses
                     </Link>
                     <Link
                         className={navLinkClasses(about.url())}
                         href={about.url()}
-                        aria-current={isActive(about.url()) ? 'page' : undefined}
+                        aria-current={
+                            isActive(about.url()) ? 'page' : undefined
+                        }
                     >
                         About
+                    </Link>
+                    <Link
+                        className={navLinkClasses(getInvolved.url())}
+                        href={getInvolved.url()}
+                        aria-current={
+                            isActive(getInvolved.url()) ? 'page' : undefined
+                        }
+                    >
+                        Get Involved
                     </Link>
                 </div>
 
@@ -115,7 +129,9 @@ const Navbar = () => {
                                 key={link.label}
                                 href={link.href}
                                 onClick={() => setIsOpen(false)}
-                                aria-current={isActive(link.href) ? 'page' : undefined}
+                                aria-current={
+                                    isActive(link.href) ? 'page' : undefined
+                                }
                                 className={`relative block rounded-sm px-4 py-3 text-base font-extrabold text-[#24458F] transition after:absolute after:right-4 after:bottom-0 after:left-4 after:h-0.5 after:rounded-full after:bg-accent after:transition-transform ${isActive(link.href) ? 'text-accent after:scale-x-100' : 'after:scale-x-0 hover:bg-white'}`}
                             >
                                 {link.label}

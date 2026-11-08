@@ -9,6 +9,9 @@ use App\Http\Controllers\Company\CompanyApplyController;
 use App\Http\Controllers\Company\CompanyCommunityController;
 use App\Http\Controllers\Company\CompanyJobController;
 use App\Http\Controllers\Company\DashboardController as CompanyDashboardController;
+// Landing & Partners
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\Partner\PartnerInquiryController;
 // Profile
 use App\Http\Controllers\Profile\ProfilePageController;
 // Student
@@ -28,9 +31,14 @@ use App\Http\Controllers\Teacher\TeacherLessonController;
 use App\Http\Controllers\Teacher\TeacherModuleController;
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'Landing')->name('home');
+Route::get('/', LandingController::class)->name('home');
 Route::inertia('/courses', 'Courses')->name('courses');
 Route::inertia('/about', 'About')->name('about');
+
+Route::get('/get-involved', [PartnerInquiryController::class, 'index'])->name('get-involved');
+Route::post('/get-involved', [PartnerInquiryController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('get-involved.store');
 
 Route::get('/login', [GoogleAuthController::class, 'index'])->name('login');
 
