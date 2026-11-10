@@ -9,12 +9,13 @@ import Button from '@/components/UI/Button';
 import { getYouTubeEmbedUrl, playAudio } from '@/utils/media.helper';
 import Layout from '../Layout';
 
-export default function Show({ module, currentCategory }: any) {
+export default function Show({ module, currentCategory, enrollment }: any) {
     const [activeLesson, setActiveLesson] = useState<any>(
         module?.lessons?.[0] || null,
     );
     const [loading, setLoading] = useState(false);
     const isMandarin = currentCategory?.id === 1;
+    const completedLessonIds: number[] = enrollment?.completed_lesson_ids ?? [];
 
     const handleCompleteLesson = () => {
         if (!activeLesson || loading) {
@@ -29,10 +30,7 @@ export default function Show({ module, currentCategory }: any) {
             {
                 onSuccess: (page: any) => {
                     const flashData = page.props.flash || {};
-                    alert(
-                        flashData.success ||
-                            'Progres materi Anda berhasil disimpan.',
-                    );
+                    alert(flashData.success || 'Progress saved.');
 
                     const currentIdx = module.lessons.findIndex(
                         (l: any) => l.id === activeLesson.id,
@@ -44,15 +42,12 @@ export default function Show({ module, currentCategory }: any) {
                     ) {
                         setActiveLesson(module.lessons[currentIdx + 1]);
                     } else {
-                        alert(
-                            'Selamat! Anda telah menyelesaikan kelas ini. Silakan unduh sertifikat Anda di halaman Sertifikat.',
-                        );
                         router.get('/student/courses/certificate');
                     }
                 },
                 onError: (errors) => {
                     console.error(errors);
-                    alert('Gagal memperbarui data progres materi.');
+                    alert('We could not save your progress. Please try again.');
                 },
                 onFinish: () => setLoading(false),
                 preserveScroll: true,
@@ -88,6 +83,7 @@ export default function Show({ module, currentCategory }: any) {
                         <LessonSyllabus
                             lessons={module?.lessons || []}
                             activeLessonId={activeLesson?.id || null}
+                            completedLessonIds={completedLessonIds}
                             onSelectLesson={(lesson) => setActiveLesson(lesson)}
                         />
                     </div>

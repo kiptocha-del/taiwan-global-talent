@@ -49,4 +49,12 @@ class Lesson extends Model
     {
         return $this->hasMany(LessonAudio::class, 'lesson_id')->orderBy('sort_order', 'asc');
     }
+
+    /**
+     * Per-student completion rows for this lesson.
+     */
+    public function progress(): HasMany
+    {
+        return $this->hasMany(Progress::class);
+    }
 }

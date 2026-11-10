@@ -3,71 +3,85 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Enrollment;
+use App\Models\Progress;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use Inertia\Response;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request): Response
     {
         return Inertia::render('Student/Index', [
-            'stats' => [
-                'courses' => 3,
-                'certificates' => 2,
-                'progress' => 70,
-            ]
+            'courses' => $this->coursesInProgress($request->user()->id),
         ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Enrolled courses the student has not finished, highest progress first.
+     *
+     * Progress is derived from the per-lesson progress rows so each course is
+     * reported independently. Finished courses are left out.
+     *
+     * @return array<int, array<string, mixed>>
      */
-    public function create()
+    private function coursesInProgress(int $userId): array
     {
-        //
-    }
+        $enrollments = Enrollment::query()
+            ->where('user_id', $userId)
+            ->where('is_completed', false)
+            ->with(['module' => fn ($query) => $query->withCount('lessons')->with('category:id,name,slug')])
+            ->get();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($enrollments->isEmpty()) {
+            return [];
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $completedByModule = Progress::query()
+            ->join('lessons', 'lessons.id', '=', 'progress.lesson_id')
+            ->where('progress.user_id', $userId)
+            ->where('progress.is_completed', true)
+            ->whereIn('lessons.module_id', $enrollments->pluck('module_id'))
+            ->groupBy('lessons.module_id')
+            ->selectRaw('lessons.module_id, count(*) as completed')
+            ->pluck('completed', 'module_id');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        return $enrollments
+            ->map(function (Enrollment $enrollment) use ($completedByModule) {
+                $module = $enrollment->module;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+                if (! $module) {
+                    return null;
+                }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+                $total = (int) $module->lessons_count;
+                $completed = min((int) ($completedByModule[$module->id] ?? 0), $total);
+
+                if ($total > 0 && $completed >= $total) {
+                    return null;
+                }
+
+                return [
+                    'id' => $module->id,
+                    'title' => $module->title,
+                    'level' => $module->level,
+                    'category' => $module->category ? [
+                        'name' => $module->category->name,
+                        'slug' => $module->category->slug,
+                    ] : null,
+                    'total_lessons' => $total,
+                    'completed_lessons' => $completed,
+                    'progress' => $total > 0 ? (int) floor(($completed / $total) * 100) : 0,
+                    'url' => $module->category
+                        ? route('student.courses.show', [$module->category->slug, $module->id])
+                        : route('student.courses.index'),
+                ];
+            })
+            ->filter()
+            ->sortBy('title', SORT_NATURAL | SORT_FLAG_CASE)
+            ->sortByDesc('progress')
+            ->values()
+            ->all();
     }
 }

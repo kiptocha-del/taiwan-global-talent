@@ -21,11 +21,13 @@ class CourseController extends Controller
      */
     public function show(Module $module, Request $request)
     {
+        abort_unless($module->is_published, 404);
+
         $user = $request->user();
-        
+
         return [
             'module' => $module->load('lessons'),
             'is_certified' => $user ? $module->isCompletedByUser($user->id) : false,
         ];
-    }   
+    }
 }

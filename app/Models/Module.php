@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Module extends Model
 {
@@ -57,14 +57,21 @@ class Module extends Model
         return $this->hasMany(Enrollment::class, 'module_id');
     }
 
-    public function isCompletedByUser($userId)
+    /**
+     * Number of this module's lessons the user has completed.
+     */
+    public function completedLessonCountFor(int $userId): int
     {
-        $totalLessons = $this->lessons()->count();
-        $completedLessons = $this->lessons()
+        return $this->lessons()
             ->whereHas('progress', function ($query) use ($userId) {
                 $query->where('user_id', $userId)->where('is_completed', true);
             })->count();
+    }
 
-        return $totalLessons > 0 && $completedLessons === $totalLessons;
+    public function isCompletedByUser(int $userId): bool
+    {
+        $totalLessons = $this->lessons()->count();
+
+        return $totalLessons > 0 && $this->completedLessonCountFor($userId) === $totalLessons;
     }
 }

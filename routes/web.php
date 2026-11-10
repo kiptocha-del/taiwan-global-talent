@@ -3,10 +3,11 @@
 // Auth
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\GoogleAuthController;
+// Community (shared by student, teacher and company portals)
+use App\Http\Controllers\Community\CommunityController;
 // Company
 use App\Http\Controllers\Company\CompanyApplicantController;
 use App\Http\Controllers\Company\CompanyApplyController;
-use App\Http\Controllers\Company\CompanyCommunityController;
 use App\Http\Controllers\Company\CompanyJobController;
 use App\Http\Controllers\Company\DashboardController as CompanyDashboardController;
 // Landing & Partners
@@ -15,7 +16,6 @@ use App\Http\Controllers\Partner\PartnerInquiryController;
 // Profile
 use App\Http\Controllers\Profile\ProfilePageController;
 // Student
-use App\Http\Controllers\Student\CommunityPostController;
 use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\DownloadCertificateController;
@@ -25,7 +25,6 @@ use App\Http\Controllers\Student\StudentJobController;
 // Teacher
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\TeacherApplyController;
-use App\Http\Controllers\Teacher\TeacherCommunityController;
 use App\Http\Controllers\Teacher\TeacherCourseController;
 use App\Http\Controllers\Teacher\TeacherLessonController;
 use App\Http\Controllers\Teacher\TeacherModuleController;
@@ -93,22 +92,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             // Community Routes
             Route::prefix('community')->name('community.')->group(function () {
-                Route::get('/', [CompanyCommunityController::class, 'index'])
+                Route::get('/', [CommunityController::class, 'index'])
                     ->name('index');
 
-                Route::post('/', [CompanyCommunityController::class, 'store'])
+                Route::post('/', [CommunityController::class, 'store'])
                     ->name('store');
 
-                Route::post('/{id}/like', [CompanyCommunityController::class, 'toggleLike'])
+                Route::post('/{id}/like', [CommunityController::class, 'toggleLike'])
                     ->name('like');
 
-                Route::post('/{id}/comment', [CompanyCommunityController::class, 'storeComment'])
+                Route::post('/{id}/comment', [CommunityController::class, 'storeComment'])
                     ->name('comment');
 
-                Route::post('/posts/{id}/report', [CompanyCommunityController::class, 'report'])
+                Route::post('/posts/{id}/report', [CommunityController::class, 'report'])
                     ->name('posts.report');
 
-                Route::delete('/posts/{id}', [CompanyCommunityController::class, 'destroy'])
+                Route::delete('/posts/{id}', [CommunityController::class, 'destroy'])
                     ->name('posts.destroy');
             });
         });
@@ -154,22 +153,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::prefix('community')->name('community.')->group(function () {
 
-                Route::get('/', [CommunityPostController::class, 'index'])
+                Route::get('/', [CommunityController::class, 'index'])
                     ->name('index');
 
-                Route::post('/posts', [CommunityPostController::class, 'store'])
+                Route::post('/posts', [CommunityController::class, 'store'])
                     ->name('posts.store');
 
-                Route::post('/posts/{id}/like', [CommunityPostController::class, 'toggleLike'])
+                Route::post('/posts/{id}/like', [CommunityController::class, 'toggleLike'])
                     ->name('posts.like');
 
-                Route::post('/posts/{postId}/comments', [CommunityPostController::class, 'storeComment'])
+                Route::post('/posts/{postId}/comments', [CommunityController::class, 'storeComment'])
                     ->name('comments.store');
 
-                Route::post('/posts/{id}/report', [CommunityPostController::class, 'report'])
+                Route::post('/posts/{id}/report', [CommunityController::class, 'report'])
                     ->name('posts.report');
 
-                Route::delete('/posts/{id}', [CommunityPostController::class, 'destroy'])
+                Route::delete('/posts/{id}', [CommunityController::class, 'destroy'])
                     ->name('posts.destroy');
             });
 
@@ -250,22 +249,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // 5. Community CRUD (CommunityPost & Comment)
         Route::prefix('community')->name('community.')->group(function () {
-            Route::get('/', [TeacherCommunityController::class, 'index'])
+            Route::get('/', [CommunityController::class, 'index'])
                 ->name('index');
 
-            Route::post('/', [TeacherCommunityController::class, 'store'])
+            Route::post('/', [CommunityController::class, 'store'])
                 ->name('store');
 
-            Route::post('/{id}/like', [TeacherCommunityController::class, 'toggleLike'])
+            Route::post('/{id}/like', [CommunityController::class, 'toggleLike'])
                 ->name('like');
 
-            Route::post('/{id}/comment', [TeacherCommunityController::class, 'storeComment'])
+            Route::post('/{id}/comment', [CommunityController::class, 'storeComment'])
                 ->name('comment');
 
-            Route::post('/posts/{id}/report', [TeacherCommunityController::class, 'report'])
+            Route::post('/posts/{id}/report', [CommunityController::class, 'report'])
                 ->name('posts.report');
 
-            Route::delete('/posts/{id}', [TeacherCommunityController::class, 'destroy'])
+            Route::delete('/posts/{id}', [CommunityController::class, 'destroy'])
                 ->name('posts.destroy');
         });
     });

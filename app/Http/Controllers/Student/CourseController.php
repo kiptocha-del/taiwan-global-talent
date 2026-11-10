@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Models\CourseCategory;
 use App\Models\Module;
+use App\Models\Progress;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -165,6 +166,12 @@ class CourseController extends Controller
             'enrollment' => [
                 'completed_lessons_count' => $enrollment->pivot->completed_lessons_count,
                 'is_completed' => $enrollment->pivot->is_completed,
+                'completed_lesson_ids' => Progress::query()
+                    ->where('user_id', Auth::id())
+                    ->where('is_completed', true)
+                    ->whereIn('lesson_id', $module->lessons->pluck('id'))
+                    ->pluck('lesson_id')
+                    ->values(),
             ],
         ]);
     }

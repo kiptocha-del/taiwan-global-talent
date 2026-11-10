@@ -1,12 +1,19 @@
+import { CheckCircle2 } from 'lucide-react';
 import React from 'react';
 
 interface LessonSyllabusProps {
     lessons: any[];
     activeLessonId: number | null;
+    completedLessonIds?: number[];
     onSelectLesson: (lesson: any) => void;
 }
 
-export default function LessonSyllabus({ lessons = [], activeLessonId, onSelectLesson }: LessonSyllabusProps) {
+export default function LessonSyllabus({
+    lessons = [],
+    activeLessonId,
+    completedLessonIds = [],
+    onSelectLesson,
+}: LessonSyllabusProps) {
     return (
         <div className="sticky top-28 space-y-3 rounded-2xl border border-gray-100 bg-white p-4 shadow-xs">
             <h3 className="px-1 text-xs font-bold tracking-wider text-gray-400 uppercase">
@@ -23,14 +30,28 @@ export default function LessonSyllabus({ lessons = [], activeLessonId, onSelectL
                                 : 'text-gray-700 hover:bg-gray-50'
                         }`}
                     >
-                        <span className={`rounded-md px-1.5 py-0.5 text-[10px] font-bold ${
-                            activeLessonId === lesson.id ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-500'
-                        }`}>
+                        <span
+                            className={`rounded-md px-1.5 py-0.5 text-[10px] font-bold ${
+                                activeLessonId === lesson.id
+                                    ? 'bg-blue-500 text-white'
+                                    : 'bg-gray-100 text-gray-500'
+                            }`}
+                        >
                             {idx + 1}
                         </span>
-                        <div className="truncate text-sm font-bold">
+                        <div className="min-w-0 flex-1 truncate text-sm font-bold">
                             {lesson.title}
                         </div>
+                        {completedLessonIds.includes(lesson.id) && (
+                            <CheckCircle2
+                                className={`size-4 shrink-0 ${
+                                    activeLessonId === lesson.id
+                                        ? 'text-white'
+                                        : 'text-green-600'
+                                }`}
+                                aria-label="Completed"
+                            />
+                        )}
                     </button>
                 ))}
             </div>

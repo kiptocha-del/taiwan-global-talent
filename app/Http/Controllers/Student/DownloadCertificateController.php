@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
-use App\Models\Module;
 use App\Models\CourseCategory;
 use App\Models\Enrollment;
+use App\Models\Module;
 use App\Services\PDFGeneratorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -112,11 +112,11 @@ class DownloadCertificateController extends Controller
                     'pdf_path' => $uploadedPath,
                     'issued_at' => now(),
                 ]);
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                report($e);
+
                 return response()->json([
-                    'error' => 'Failed to process the certificate in real-time.',
-                    'message' => $e->getMessage(),
-                    'trace' => $e->getTraceAsString(),
+                    'error' => 'We could not generate your certificate right now. Please try again later.',
                 ], 500);
             }
         }
@@ -130,10 +130,11 @@ class DownloadCertificateController extends Controller
             // Return download langsung ke device browser user
             return Storage::disk('s3')->download($certificate->pdf_path, "Sertifikat-{$module->title}.pdf");
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            report($e);
+
             return response()->json([
-                'error' => 'Failed to download the file',
-                'message' => $e->getMessage(),
+                'error' => 'We could not download your certificate right now. Please try again later.',
             ], 500);
         }
     }

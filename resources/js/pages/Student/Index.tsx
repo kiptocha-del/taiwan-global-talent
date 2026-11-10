@@ -10,8 +10,10 @@ import {
     Target,
 } from 'lucide-react';
 import MetricCard from '@/components/UI/MetricCard';
+import ProgressRing from '@/components/UI/ProgressRing';
 import { useAuth } from '@/hooks/useAuth';
 import student from '@/routes/student';
+import type { CourseProgress } from '@/types/course';
 import Layout from './Layout';
 
 const quickWins = [
@@ -32,7 +34,13 @@ const quickWins = [
     },
 ];
 
-export default function StudentDashboard() {
+interface StudentDashboardProps {
+    courses?: CourseProgress[];
+}
+
+export default function StudentDashboard({
+    courses = [],
+}: StudentDashboardProps) {
     const { user } = useAuth();
     const firstName = user?.name?.split(' ')[0] || 'friend';
 
@@ -122,26 +130,78 @@ export default function StudentDashboard() {
                                     Continue your journey
                                 </p>
                                 <h2 className="mt-2 font-display text-2xl font-semibold text-brand-strong sm:text-3xl">
-                                    Mandarin Foundations
+                                    Courses in progress
                                 </h2>
                             </div>
-                            <span className="rounded-full bg-status-positive-soft px-3 py-1.5 text-xs font-bold text-status-positive">
-                                Lesson 3 of 8
-                            </span>
+                            {courses.length > 0 && (
+                                <span className="rounded-full bg-status-positive-soft px-3 py-1.5 text-xs font-bold text-status-positive">
+                                    {courses.length}{' '}
+                                    {courses.length === 1
+                                        ? 'course'
+                                        : 'courses'}
+                                </span>
+                            )}
                         </div>
-                        <div className="mt-7 h-2.5 overflow-hidden rounded-full bg-surface-muted">
-                            <div className="h-full w-[38%] rounded-full bg-brand" />
-                        </div>
-                        <div className="mt-3 flex flex-wrap justify-between gap-2 text-xs font-semibold text-muted">
-                            <span>Greetings and introductions</span>
-                            <span>38% complete</span>
-                        </div>
-                        <Link
-                            href={student.courses.index.url()}
-                            className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-brand-strong hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                        >
-                            Open next lesson <ArrowRight className="size-4" />
-                        </Link>
+
+                        {courses.length === 0 ? (
+                            <div className="mt-7 rounded-card border border-dashed border-border bg-surface-muted/60 p-6 text-center">
+                                <p className="text-sm leading-6 text-muted">
+                                    You have no courses in progress. Finished
+                                    courses live on your Certificates page, and
+                                    new ones are waiting in the catalogue.
+                                </p>
+                                <Link
+                                    href={student.courses.index.url()}
+                                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-strong hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                                >
+                                    Browse courses{' '}
+                                    <ArrowRight className="size-4" />
+                                </Link>
+                            </div>
+                        ) : (
+                            <ul className="mt-6 divide-y divide-border">
+                                {courses.map((course) => (
+                                    <li
+                                        key={course.id}
+                                        className="flex min-w-0 items-center gap-4 py-5 first:pt-0 last:pb-0 sm:gap-6"
+                                    >
+                                        <ProgressRing
+                                            value={course.progress}
+                                            size={88}
+                                            label={`${course.title} progress`}
+                                        />
+                                        <div className="min-w-0 flex-1">
+                                            {course.category && (
+                                                <p className="text-xs font-bold tracking-wide text-accent uppercase">
+                                                    {course.category.name}
+                                                </p>
+                                            )}
+                                            <h3 className="mt-1 truncate font-display text-xl font-semibold text-brand-strong">
+                                                {course.title}
+                                            </h3>
+                                            <p className="mt-1 text-sm text-muted">
+                                                {course.completed_lessons} of{' '}
+                                                {course.total_lessons}{' '}
+                                                {course.total_lessons === 1
+                                                    ? 'lesson'
+                                                    : 'lessons'}{' '}
+                                                completed
+                                            </p>
+                                        </div>
+                                        <Link
+                                            href={course.url}
+                                            aria-label={`Continue ${course.title}`}
+                                            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-bold text-brand-strong transition hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                                        >
+                                            <span className="hidden sm:inline">
+                                                Continue
+                                            </span>
+                                            <ArrowRight className="size-4" />
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </article>
 
                     <article className="rounded-panel border border-border bg-surface-muted p-6 sm:p-8">
