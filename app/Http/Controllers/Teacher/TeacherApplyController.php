@@ -11,7 +11,7 @@ class TeacherApplyController extends Controller
     public function create()
     {
         $existingProfile = auth()->user()->teacherProfile;
-        
+
         if ($existingProfile && $existingProfile->status === 'approved') {
             return redirect()->route('teacher.dashboard');
         }
@@ -38,7 +38,7 @@ class TeacherApplyController extends Controller
             $cvPath = $request->file('cv')->store('teachers/cvs', 'public');
         }
 
-        // 3. Handle upload Sertifikat
+        // 3. Certificate upload
         $certificatePath = null;
         if ($request->hasFile('certificate')) {
             $certificatePath = $request->file('certificate')->store('teachers/certificates', 'public');
@@ -46,7 +46,7 @@ class TeacherApplyController extends Controller
 
         // 4. Update data to teacher_profiles tabel
         auth()->user()->teacherProfile()->updateOrCreate(
-            ['user_id' => auth()->id()], // Cari berdasarkan user_id yang sedang login
+            ['user_id' => auth()->id()], // Look up by the signed-in user
             [
                 'full_name' => $request->full_name,
                 'phone' => $request->phone,

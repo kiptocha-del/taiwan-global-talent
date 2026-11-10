@@ -4,9 +4,9 @@ namespace App\Filament\Resources\CompanyJobs\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
-use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
@@ -22,7 +22,7 @@ class CompanyJobForm
                             ->relationship('companyProfile', 'company_display_name')
                             ->searchable()
                             ->required()
-                            ->label('Perusahaan'),
+                            ->label(__('Company')),
 
                         TextInput::make('title')
                             ->required()

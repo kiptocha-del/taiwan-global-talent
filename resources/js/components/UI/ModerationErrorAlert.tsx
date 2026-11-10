@@ -52,7 +52,7 @@ export default function ModerationErrorAlert({
         null,
     );
 
-    // Cek apakah pesan saat ini sedang di-dismiss
+    // Is the current message being dismissed?
     const isDismissed = activeMessage === dismissedMessage;
 
     const handleClose = useCallback(() => {

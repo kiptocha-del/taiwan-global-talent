@@ -5,16 +5,16 @@ import {
     BriefcaseBusiness,
     MessagesSquare,
 } from 'lucide-react';
+import { useTranslation } from '@/context/LanguageContext';
 import { courses } from '@/routes';
 
 const pathways = [
     {
         icon: MessagesSquare,
-        eyebrow: 'Speak with confidence',
-        title: 'Mandarin',
-        description:
-            'Practice introductions, transport, campus life, and workplace conversations while preparing for TOCFL.',
-        action: 'Find your level',
+        eyebrow: 'pillars.p1Eyebrow',
+        title: 'pillars.p1Title',
+        description: 'pillars.p1Desc',
+        action: 'pillars.p1Action',
         backgroundClass: 'bg-status-info-soft',
         accentClass: 'text-status-info',
         borderClass: 'border-t-status-info',
@@ -23,11 +23,10 @@ const pathways = [
     },
     {
         icon: BookOpenText,
-        eyebrow: 'Make study possible',
-        title: 'Scholarships',
-        description:
-            'Compare MOE, TaiwanICDF, and university funding routes, then organize documents and deadlines.',
-        action: 'Explore funding',
+        eyebrow: 'pillars.p2Eyebrow',
+        title: 'pillars.p2Title',
+        description: 'pillars.p2Desc',
+        action: 'pillars.p2Action',
         backgroundClass: 'bg-accent-soft',
         accentClass: 'text-accent',
         borderClass: 'border-t-accent',
@@ -36,11 +35,10 @@ const pathways = [
     },
     {
         icon: BriefcaseBusiness,
-        eyebrow: 'Meet your next step',
-        title: 'Career network',
-        description:
-            'Present your skills clearly and prepare for internships and roles across Taiwan’s industries.',
-        action: 'See opportunities',
+        eyebrow: 'pillars.p3Eyebrow',
+        title: 'pillars.p3Title',
+        description: 'pillars.p3Desc',
+        action: 'pillars.p3Action',
         backgroundClass: 'bg-status-positive-soft',
         accentClass: 'text-status-positive',
         borderClass: 'border-t-status-positive',
@@ -49,20 +47,21 @@ const pathways = [
     },
     {
         icon: Award,
-        eyebrow: 'Celebrate your growth',
-        title: 'Certificates',
-        description:
-            'Keep verified course progress beside your language level, portfolio, and application profile.',
-        action: 'Start collecting',
+        eyebrow: 'pillars.p4Eyebrow',
+        title: 'pillars.p4Title',
+        description: 'pillars.p4Desc',
+        action: 'pillars.p4Action',
         backgroundClass: 'bg-status-warning-soft',
         accentClass: 'text-accent',
         borderClass: 'border-t-status-warning',
         decoration: '★',
         image: null,
     },
-];
+] as const;
 
 export default function CorePillars() {
+    const { t } = useTranslation();
+
     return (
         <section
             id="learning-paths"
@@ -73,15 +72,13 @@ export default function CorePillars() {
                 {/* Header: mx-auto removed so it aligns with the left edge of the cards */}
                 <div className="max-w-3xl text-left">
                     <span className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D0] px-4 py-2 text-sm font-extrabold text-[#9A6410]">
-                        <span aria-hidden="true">✦</span> Pick a place to begin
+                        <span aria-hidden="true">✦</span> {t('pillars.badge')}
                     </span>
                     <h3 className="mt-5 font-display text-4xl leading-tight font-black tracking-[-0.03em] text-[#24458F] md:text-6xl">
-                        Four practical paths into life in Taiwan.
+                        {t('pillars.title')}
                     </h3>
                     <p className="mt-5 max-w-2xl text-base leading-8 font-semibold text-[#24458F]/62">
-                        Begin with Mandarin, funding, career preparation, or
-                        proof of progress. Each path connects to a real decision
-                        students and professionals face in Taiwan.
+                        {t('pillars.lead')}
                     </p>
                 </div>
                 <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -126,20 +123,20 @@ export default function CorePillars() {
                                 <p
                                     className={`mt-5 text-sm font-extrabold ${pathway.accentClass}`}
                                 >
-                                    {pathway.eyebrow}
+                                    {t(pathway.eyebrow)}
                                 </p>
                                 {/* h4 instead of h3: card titles sit under the section heading */}
                                 <h4 className="mt-2 font-display text-3xl font-black tracking-tight text-[#24458F]">
-                                    {pathway.title}
+                                    {t(pathway.title)}
                                 </h4>
                                 <p className="mt-3 text-sm leading-7 font-semibold text-[#24458F]/65">
-                                    {pathway.description}
+                                    {t(pathway.description)}
                                 </p>
                                 <a
                                     href={`${courses.url()}#course-list`}
                                     className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-extrabold text-[#24458F]"
                                 >
-                                    {pathway.action}
+                                    {t(pathway.action)}
                                     <span className="flex h-9 w-9 items-center justify-center rounded-sm bg-white/85 transition group-hover:-translate-y-1 dark:bg-[#111820]">
                                         <ArrowUpRight className="h-4 w-4" />
                                     </span>

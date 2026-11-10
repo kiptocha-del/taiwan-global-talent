@@ -97,7 +97,7 @@ export default function CommunityPostCard({
         }
     };
 
-    // Handler Kirim Komentar Dinamis
+    // Comment submit handler
     const handleComment = (e: React.FormEvent) => {
         e.preventDefault();
 

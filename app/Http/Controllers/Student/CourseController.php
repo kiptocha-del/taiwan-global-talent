@@ -25,7 +25,7 @@ class CourseController extends Controller
                 'instructor' => $category->instructor,
                 'duration' => $category->duration,
                 'price' => $category->price,
-                // Ini kuncinya: ubah path menjadi URL lengkap
+                // Turn the stored path into a full URL
                 'thumbnail_url' => $category->thumbnail_path
                     ? Storage::disk('s3')->url($category->thumbnail_path)
                     : null,

@@ -18,10 +18,11 @@ class GenerateCertificateJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $user;
+
     public $module;
 
-    // Timeout job agak diperlama karena proses Google API bisa butuh waktu
-    public $timeout = 120; 
+    // Generous timeout: the Google API round trip can be slow
+    public $timeout = 120;
 
     public function __construct(User $user, Module $module)
     {
@@ -32,8 +33,8 @@ class GenerateCertificateJob implements ShouldQueue
     public function handle(PDFGeneratorService $pdfService): void
     {
         try {
-            $certCode = 'CERT-' . strtoupper(uniqid()); 
-            
+            $certCode = 'CERT-'.strtoupper(uniqid());
+
             // Generate PDF via Service
             $filePath = $pdfService->generate($this->user, $this->module, $certCode);
 
@@ -44,7 +45,7 @@ class GenerateCertificateJob implements ShouldQueue
                 ->update(['certificate_path' => $filePath]);
 
         } catch (\Exception $e) {
-            Log::error("Gagal generate sertifikat untuk User ID {$this->user->id}: " . $e->getMessage());
+            Log::error("Certificate generation failed for user {$this->user->id}: ".$e->getMessage());
         }
     }
 }

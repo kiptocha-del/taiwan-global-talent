@@ -1,11 +1,13 @@
 import { Link, usePage } from '@inertiajs/react';
 import { Menu, Sparkles, X } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from '@/context/LanguageContext';
 import { about, courses, getInvolved, home, login } from '@/routes';
 import ThemeToggle from '../UI/ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const currentPath = usePage().url.split(/[?#]/, 1)[0];
     const normalizePath = (path: string) =>
@@ -18,11 +20,11 @@ const Navbar = () => {
                 ? 'text-accent after:scale-x-100'
                 : 'after:scale-x-0 hover:bg-[#FFE0C2] hover:text-[#24458F]'
         }`;
-    const mobileLinks = [
-        { label: 'Home', href: home.url() },
-        { label: 'Courses', href: courses.url() },
-        { label: 'About', href: about.url() },
-        { label: 'Get Involved', href: getInvolved.url() },
+    const links = [
+        { label: t('nav.home'), href: home.url() },
+        { label: t('nav.courses'), href: courses.url() },
+        { label: t('nav.about'), href: about.url() },
+        { label: t('nav.getInvolved'), href: getInvolved.url() },
     ];
 
     return (
@@ -39,46 +41,24 @@ const Navbar = () => {
                             Taiwan Global Talent Hub
                         </div>
                         <div className="mt-0.5 text-[11px] font-bold tracking-wide text-[#24458F]/55">
-                            Learn. Connect. Grow.
+                            {t('nav.tagline')}
                         </div>
                     </div>
                 </Link>
 
                 <div className="hidden items-center gap-1 text-sm font-bold text-[#24458F] lg:flex">
-                    <Link
-                        className={navLinkClasses(home.url())}
-                        href={home.url()}
-                        aria-current={isActive(home.url()) ? 'page' : undefined}
-                    >
-                        Home
-                    </Link>
-                    <Link
-                        className={navLinkClasses(courses.url())}
-                        href={courses.url()}
-                        aria-current={
-                            isActive(courses.url()) ? 'page' : undefined
-                        }
-                    >
-                        Courses
-                    </Link>
-                    <Link
-                        className={navLinkClasses(about.url())}
-                        href={about.url()}
-                        aria-current={
-                            isActive(about.url()) ? 'page' : undefined
-                        }
-                    >
-                        About
-                    </Link>
-                    <Link
-                        className={navLinkClasses(getInvolved.url())}
-                        href={getInvolved.url()}
-                        aria-current={
-                            isActive(getInvolved.url()) ? 'page' : undefined
-                        }
-                    >
-                        Get Involved
-                    </Link>
+                    {links.map((link) => (
+                        <Link
+                            key={link.href}
+                            className={navLinkClasses(link.href)}
+                            href={link.href}
+                            aria-current={
+                                isActive(link.href) ? 'page' : undefined
+                            }
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -95,7 +75,7 @@ const Navbar = () => {
                         href={login.url()}
                         className="hidden items-center justify-center rounded-sm bg-[#24458F] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#FF7958] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24458F] sm:inline-flex dark:hover:bg-[#f0c975] dark:hover:text-[#262018]"
                     >
-                        Login
+                        {t('nav.login')}
                     </Link>
                     <button
                         type="button"
@@ -104,9 +84,7 @@ const Navbar = () => {
                         aria-expanded={isOpen}
                         aria-controls="mobile-navigation"
                         aria-label={
-                            isOpen
-                                ? 'Close navigation menu'
-                                : 'Open navigation menu'
+                            isOpen ? t('nav.closeMenu') : t('nav.openMenu')
                         }
                     >
                         {isOpen ? (
@@ -124,9 +102,9 @@ const Navbar = () => {
                     className="border-t border-[#24458F]/8 bg-[#FFF8ED] px-5 py-5 shadow-[0_18px_40px_rgba(36,69,143,0.12)] lg:hidden"
                 >
                     <div className="mx-auto grid max-w-7xl gap-1">
-                        {mobileLinks.map((link) => (
+                        {links.map((link) => (
                             <Link
-                                key={link.label}
+                                key={link.href}
                                 href={link.href}
                                 onClick={() => setIsOpen(false)}
                                 aria-current={
@@ -142,7 +120,7 @@ const Navbar = () => {
                             onClick={() => setIsOpen(false)}
                             className="mt-3 inline-flex items-center justify-center rounded-full bg-[#24458F] px-6 py-3.5 text-sm font-extrabold text-white"
                         >
-                            Login
+                            {t('nav.login')}
                         </Link>
                     </div>
                 </div>

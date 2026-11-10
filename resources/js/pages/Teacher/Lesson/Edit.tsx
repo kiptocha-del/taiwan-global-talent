@@ -114,7 +114,7 @@ export default function Edit({
         post(`/teacher/lessons/${lesson.id}`);
     };
 
-    // Handler Repeater Audios (Sudah disesuaikan propertinya)
+    // Audio repeater handlers
     const addAudioRow = () => {
         setData('audios', [
             ...data.audios,
@@ -134,7 +134,7 @@ export default function Edit({
         );
     };
 
-    // Handler Repeater Sentences (Sudah disesuaikan propertinya)
+    // Sentence repeater handlers
     const addSentenceRow = () => {
         setData('sentences', [
             ...data.sentences,

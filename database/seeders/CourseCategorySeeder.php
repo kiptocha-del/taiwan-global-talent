@@ -15,7 +15,7 @@ class CourseCategorySeeder extends Seeder
                 'name' => 'Mandarin Course',
                 'slug' => 'mandarin-course',
                 'description' => 'Master Mandarin from basic to advanced levels with professional guidance.',
-                'icon' => 'Globe', // Icon dari Lucide
+                'icon' => 'Globe', // Lucide icon name
                 'instructor' => 'Wang Laoshi',
                 'duration' => '12 Weeks',
                 'price' => 500000,

@@ -132,7 +132,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::post('/{module}/lessons/{lesson}/complete', [LessonProgressController::class, 'completeLesson'])
                     ->name('lessons.complete');
 
-                // 2. Sertifikat (Dipindah ke atas wildcard agar tidak tertangkap oleh {categorySlug})
+                // 2. Certificate (kept above the wildcard so {categorySlug} does not swallow it)
                 Route::get('/certificate', [DownloadCertificateController::class, 'index'])
                     ->name('certificate.index');
 
@@ -140,7 +140,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     ->middleware('throttle:certificate-download')
                     ->name('certificate.download');
 
-                // 3. Detail Kategori & Detail Kursus (Paling bawah)
+                // 3. Category and course detail (keep last)
                 Route::get('/{categorySlug}', [CourseController::class, 'showByCategory'])
                     ->name('showCategory');
 

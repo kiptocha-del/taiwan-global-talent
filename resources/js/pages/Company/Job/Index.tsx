@@ -102,7 +102,7 @@ export default function JobIndex({ company, jobs }: PageProps) {
                     ]}
                 />
 
-                {/* Grid List Lowongan */}
+                {/* Job list grid */}
                 {filteredJobs.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredJobs.map((job) => (

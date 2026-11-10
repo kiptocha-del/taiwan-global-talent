@@ -31,7 +31,7 @@ class CommunityPostCreated implements ShouldBroadcastNow
             ],
             'tag' => $post->tag ?? 'General',
             'content' => $post->content,
-            'media_url' => $post->media_url, 
+            'media_url' => $post->media_url,
             'media_type' => $post->media_type,
             'is_pinned' => (bool) $post->is_pinned,
             'likes_count' => 0,
@@ -45,7 +45,7 @@ class CommunityPostCreated implements ShouldBroadcastNow
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return array<int, Channel>
      */
     public function broadcastOn(): array
     {
@@ -55,7 +55,7 @@ class CommunityPostCreated implements ShouldBroadcastNow
     }
 
     /**
-     * Nama event yang akan didengar oleh Laravel Echo di frontend
+     * Event name Laravel Echo listens for on the frontend
      */
     public function broadcastAs(): string
     {

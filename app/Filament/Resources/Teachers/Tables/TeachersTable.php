@@ -22,7 +22,7 @@ class TeachersTable
                     ->searchable(),
 
                 TextColumn::make('email')
-                    ->label('Email Akun')
+                    ->label(__('Account email'))
                     ->sortable()
                     ->searchable(),
 

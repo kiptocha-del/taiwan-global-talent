@@ -19,7 +19,7 @@ export interface CommunityComment {
 export interface CommunityPost {
     id: number;
     user: CommunityUser;
-    tag: string; // Kategori postingan
+    tag: string; // Post category
     content: string;
     media_url: string | null;
     media_type: 'image' | 'video' | null;

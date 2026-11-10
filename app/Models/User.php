@@ -79,7 +79,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasOne(AdminProfile::class);
     }
 
-    // Helper untuk mendapatkan profil sesuai role tanpa N+1
+    // Profile for the user's role without an N+1 query
     public function getProfile()
     {
         $roleSlug = $this->roles->first()?->name ?? 'student';
@@ -102,7 +102,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->name;
     }
 
-    // 2. Subtitle Otomatis (Industri Perusahaan / Universitas)
+    // 2. Automatic subtitle (company industry / university)
     public function getDisplaySubtitleAttribute(): string
     {
         if ($this->relationLoaded('companyProfile') && $this->companyProfile) {
@@ -112,7 +112,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->university ?? 'Taiwan Alumni';
     }
 
-    // 3. Avatar URL Otomatis (Logo Cloudflare R2 / Avatar User)
+    // 3. Automatic avatar URL (company logo on Cloudflare R2, or the user avatar)
     public function getDisplayAvatarAttribute(): ?string
     {
         if ($this->relationLoaded('companyProfile') && $this->companyProfile?->logo_path) {

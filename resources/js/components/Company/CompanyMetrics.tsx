@@ -1,7 +1,7 @@
 import { Briefcase, Users, Eye, CheckCircle } from 'lucide-react';
 
 export default function CompanyMetrics() {
-    // Dummy metrics (bisa diintegrasikan dengan data riil dari backend kelak)
+    // Placeholder metrics (to be replaced with real backend data)
     const stats = [
         {
             title: 'Active Job Openings',

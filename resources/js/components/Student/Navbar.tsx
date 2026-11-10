@@ -30,7 +30,7 @@ export default function Navbar({
         const active = currentUrl.startsWith(path);
 
         if (isMobile) {
-            // Tampilan Vertikal untuk Mobile Hamburger Menu
+            // Vertical layout for the mobile hamburger menu
             return `flex items-center justify-between w-full rounded-xl px-4 py-3 text-sm font-semibold transition ${
                 active
                     ? 'bg-brand-strong text-white shadow-sm dark:text-ink'
@@ -38,7 +38,7 @@ export default function Navbar({
             }`;
         }
 
-        // Tampilan Horizontal untuk Desktop
+        // Horizontal layout for desktop
         return `inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold transition whitespace-nowrap ${
             active
                 ? 'bg-brand-strong text-white shadow-sm dark:text-ink'

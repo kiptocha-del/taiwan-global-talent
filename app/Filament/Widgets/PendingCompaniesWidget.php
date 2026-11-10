@@ -3,11 +3,11 @@
 namespace App\Filament\Widgets;
 
 use App\Models\CompanyProfile;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\Action;
 
 class PendingCompaniesWidget extends TableWidget
 {
@@ -23,21 +23,21 @@ class PendingCompaniesWidget extends TableWidget
             ->query(CompanyProfile::query()->where('status', 'pending'))
             ->columns([
                 TextColumn::make('company_display_name')
-                    ->label('Nama Perusahaan')
+                    ->label(__('Company name'))
                     ->searchable()
                     ->weight('bold'),
 
                 TextColumn::make('pic_name')
-                    ->label('PIC / Penanggung Jawab'),
+                    ->label(__('Contact person')),
 
                 TextColumn::make('pic_phone')
-                    ->label('No. Telp / WA'),
+                    ->label(__('Phone / WhatsApp')),
 
                 TextColumn::make('tax_id')
-                    ->label('NPWP / Tax ID'),
+                    ->label(__('Tax ID')),
 
                 TextColumn::make('created_at')
-                    ->label('Tanggal Daftar')
+                    ->label(__('Registered on'))
                     ->dateTime('d M Y, H:i')
                     ->sortable(), ])
             ->filters([

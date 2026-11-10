@@ -31,7 +31,7 @@ class PartnerInquiryController extends Controller
     {
         // Honeypot: real visitors never see this field, so a value means a bot.
         if ($request->filled('website_confirm')) {
-            return redirect()->route('get-involved')->with('success', 'Thank you! Your inquiry has been received.');
+            return redirect()->route('get-involved')->with('success', __('Thank you! Your inquiry has been received.'));
         }
 
         $validated = $request->validate([
@@ -54,7 +54,7 @@ class PartnerInquiryController extends Controller
 
         PartnerInquiry::create($validated);
 
-        return redirect()->route('get-involved')->with('success', 'Thank you! Your inquiry has been received. Our team will review it and get back to you.');
+        return redirect()->route('get-involved')->with('success', __('Thank you! Your inquiry has been received. Our team will review it and get back to you.'));
     }
 
     /**
@@ -64,7 +64,7 @@ class PartnerInquiryController extends Controller
     private function toChoices(array $options): array
     {
         return collect($options)
-            ->map(fn (string $label, string $value) => ['value' => $value, 'label' => $label])
+            ->map(fn (string $label, string $value) => ['value' => $value, 'label' => __($label)])
             ->values()
             ->all();
     }

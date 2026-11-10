@@ -59,7 +59,7 @@ export default function CourseDetail({ category, courses }: Props) {
                             key={course.id}
                             className="flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-blue-400 md:flex-row md:items-center"
                         >
-                            {/* Info Kursus */}
+                            {/* Course info */}
                             <div className="flex flex-1 items-start gap-4">
                                 <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
                                     <BookOpen size={24} />

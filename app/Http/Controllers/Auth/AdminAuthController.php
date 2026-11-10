@@ -26,7 +26,7 @@ class AdminAuthController extends Controller
         }
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
-            // Regenerate session untuk keamanan
+            // Regenerate the session for security
             $request->session()->regenerate();
 
             return response()->json([

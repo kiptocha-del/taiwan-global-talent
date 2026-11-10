@@ -28,7 +28,7 @@ export default function DownloadProgressBar({ isOpen, courseTitle }: DownloadPro
                 {/* Indikator Progress */}
                 <div className="space-y-2">
                     <div className="h-2 w-full overflow-hidden rounded-full bg-gray-100 relative">
-                        {/* Animasi progress bar berulang (Infinite Shimmer) karena Fetch API tipe Stream tidak mengembalikan Content-Length absolut */}
+                        {/* Looping shimmer: the streamed fetch has no Content-Length, so real progress is unknown */}
                         <div className="h-full rounded-full bg-emerald-600 animate-infinite-loading w-1/2 absolute left-0"></div>
                     </div>
                     <div className="flex justify-between text-[10px] font-medium text-gray-400">

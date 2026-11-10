@@ -1,15 +1,17 @@
 import { Link } from '@inertiajs/react';
 import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
+import { useTranslation } from '@/context/LanguageContext';
 import { about, courses, getInvolved, home, login } from '@/routes';
 
-const siteLinks = [
-    { label: 'Home', href: home.url() },
-    { label: 'Courses', href: courses.url() },
-    { label: 'About', href: about.url() },
-    { label: 'Get Involved', href: getInvolved.url() },
-];
-
 export default function Footer() {
+    const { t } = useTranslation();
+    const siteLinks = [
+        { label: t('nav.home'), href: home.url() },
+        { label: t('nav.courses'), href: courses.url() },
+        { label: t('nav.about'), href: about.url() },
+        { label: t('nav.getInvolved'), href: getInvolved.url() },
+    ];
+
     return (
         <footer className="border-t border-[#24458F]/10 bg-[#FFF8ED] px-5 pt-16 pb-8">
             <div className="mx-auto max-w-7xl">
@@ -29,19 +31,17 @@ export default function Footer() {
                                     Taiwan Global Talent Hub
                                 </span>
                                 <span className="mt-1 block text-xs font-bold text-[#24458F]/50">
-                                    Learn. Connect. Grow.
+                                    {t('nav.tagline')}
                                 </span>
                             </span>
                         </Link>
                         <p className="mt-6 max-w-lg text-sm leading-7 font-semibold text-[#24458F]/58">
-                            A welcoming starting point for Mandarin learning,
-                            Taiwan scholarship planning, community support, and
-                            career preparation.
+                            {t('footer.description')}
                         </p>
                         <div className="mt-6 flex flex-col gap-3 text-sm font-bold text-[#24458F]/62 sm:flex-row sm:gap-6">
                             <span className="flex items-center gap-2">
                                 <MapPin className="h-4 w-4 text-[#FF7958]" />{' '}
-                                Taiwan
+                                {t('footer.location')}
                             </span>
                             <a
                                 href="mailto:hello@taiwanglobaltalent.org"
@@ -53,13 +53,13 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <nav aria-label="Footer navigation">
+                    <nav aria-label={t('footer.navLabel')}>
                         <h2 className="font-display text-sm font-black text-[#24458F]">
-                            Explore
+                            {t('footer.explore')}
                         </h2>
                         <ul className="mt-5 space-y-3">
                             {siteLinks.map((link) => (
-                                <li key={link.label}>
+                                <li key={link.href}>
                                     <Link
                                         href={link.href}
                                         className="text-sm font-semibold text-[#24458F]/58 transition hover:text-[#24458F]"
@@ -73,27 +73,28 @@ export default function Footer() {
 
                     <div>
                         <h2 className="font-display text-sm font-black text-[#24458F]">
-                            Take your next step
+                            {t('footer.nextStep')}
                         </h2>
                         <p className="mt-5 text-sm leading-7 font-semibold text-[#24458F]/58">
-                            Create your profile when you are ready to save
-                            courses and build your Taiwan plan.
+                            {t('footer.nextStepDesc')}
                         </p>
                         <Link
                             href={login.url()}
                             className="mt-6 inline-flex items-center gap-2 border-b-2 border-[#FF8A65] pb-1 text-sm font-extrabold text-[#24458F]"
                         >
-                            Sign in or join <ArrowUpRight className="h-4 w-4" />
+                            {t('footer.signIn')}{' '}
+                            <ArrowUpRight className="h-4 w-4" />
                         </Link>
                     </div>
                 </div>
 
                 <div className="mt-14 flex flex-col gap-3 border-t border-[#24458F]/10 pt-6 text-xs font-semibold text-[#24458F]/45 sm:flex-row sm:items-center sm:justify-between">
-                    <p>© {new Date().getFullYear()} Taiwan Global Talent Hub</p>
                     <p>
-                        Designed for learners, educators, and employers building
-                        futures in Taiwan.
+                        {t('footer.copyright', {
+                            year: new Date().getFullYear(),
+                        })}
                     </p>
+                    <p>{t('footer.designedFor')}</p>
                 </div>
             </div>
         </footer>

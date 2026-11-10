@@ -1,35 +1,76 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
 import type { ReactNode } from 'react';
+import {
+    DEFAULT_LANG,
+    htmlLang,
+    readLanguageCookie,
+    setCurrentLang,
+    translate,
+    writeLanguageCookie,
+} from '@/i18n';
+import type { Lang, TranslationKey, TranslationVars } from '@/i18n';
 
-export type Lang = 'en' | 'id' | 'zh';
+export type { Lang } from '@/i18n';
 
 type LanguageContextType = {
     lang: Lang;
     setLang: (lang: Lang) => void;
+    t: (key: TranslationKey, vars?: TranslationVars) => string;
 };
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-    const [lang, setLang] = useState<Lang>(() => {
-        if (typeof window === 'undefined') {
-            return 'en';
-        }
+interface LanguageProviderProps {
+    children: ReactNode;
+    /**
+     * The language the server rendered the page with (from the shared `locale` prop).
+     * It already reflects the `lang` cookie, so both sides start in step.
+     */
+    initialLang?: Lang;
+}
 
-        const stored = localStorage.getItem('lang') as Lang | null;
+export function LanguageProvider({
+    children,
+    initialLang,
+}: LanguageProviderProps) {
+    const [lang, setLangState] = useState<Lang>(
+        () => initialLang ?? readLanguageCookie() ?? DEFAULT_LANG,
+    );
 
-        return stored ?? 'en';
-    });
+    // Keep the non-React translate helper in step before the first paint.
+    setCurrentLang(lang);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('lang', lang);
-            document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : lang;
+        setCurrentLang(lang);
+
+        if (typeof document !== 'undefined') {
+            document.documentElement.lang = htmlLang(lang);
         }
     }, [lang]);
 
+    const setLang = useCallback((next: Lang) => {
+        writeLanguageCookie(next);
+        setLangState(next);
+    }, []);
+
+    const value = useMemo<LanguageContextType>(
+        () => ({
+            lang,
+            setLang,
+            t: (key, vars) => translate(lang, key, vars),
+        }),
+        [lang, setLang],
+    );
+
     return (
-        <LanguageContext.Provider value={{ lang, setLang }}>
+        <LanguageContext.Provider value={value}>
             {children}
         </LanguageContext.Provider>
     );
@@ -43,4 +84,13 @@ export function useLanguage() {
     }
 
     return context;
+}
+
+/**
+ * Translation hook for components. Re-renders when the language changes.
+ */
+export function useTranslation() {
+    const { t, lang } = useLanguage();
+
+    return { t, lang };
 }

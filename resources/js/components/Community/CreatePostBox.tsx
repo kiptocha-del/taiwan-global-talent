@@ -25,7 +25,7 @@ export default function CreatePostBox({
     const [clientError, setClientError] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-    // Deteksi Route Path Dinamis Berdasarkan Role Pengguna
+    // Pick the route prefix from the user role
     const getDynamicRoutePath = () => {
         if (routePath) {
             return routePath;

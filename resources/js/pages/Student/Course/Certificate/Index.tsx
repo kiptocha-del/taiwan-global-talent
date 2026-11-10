@@ -5,6 +5,7 @@ import DownloadProgressBar from '@/components/UI/DownloadProgressBar';
 import EmptyState from '@/components/UI/EmptyState';
 import PageHeader from '@/components/UI/PageHeader';
 import StatusBadge from '@/components/UI/StatusBadge';
+import { useTranslation } from '@/context/LanguageContext';
 import Layout from '../../Layout';
 
 interface Category {
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export default function CertificateIndex({ modules = [] }: Props) {
+    const { t } = useTranslation();
     const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
     const [activeCourseTitle, setActiveCourseTitle] = useState<string>('');
 
@@ -53,7 +55,7 @@ export default function CertificateIndex({ modules = [] }: Props) {
 
             const downloadLink = document.createElement('a');
             downloadLink.href = downloadUrl;
-            downloadLink.download = `Sertifikat-${moduleTitle}.pdf`;
+            downloadLink.download = t('certificate.fileName', { title: moduleTitle });
             document.body.appendChild(downloadLink);
             downloadLink.click();
 

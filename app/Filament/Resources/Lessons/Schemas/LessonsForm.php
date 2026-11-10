@@ -111,7 +111,7 @@ class LessonsForm
                 ->visible(fn (callable $get) => $get('content_type') === 'audio')
                 ->required(fn (callable $get) => $get('content_type') === 'audio'),
 
-            // Muncul jika tipe konten adalah "pdf"
+            // Shown only when the content type is "pdf"
             FileUpload::make('pdf_path')
                 ->label('Upload Dokumen PDF')
                 ->disk('s3')

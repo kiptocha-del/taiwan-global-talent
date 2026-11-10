@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -14,13 +15,13 @@ class ProfilePageController extends Controller
      */
     public function show()
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
-        
+
         $roleName = $user->roles->first()?->name ?? $user->role_name ?? $user->role ?? 'student';
         $role = strtolower((string) $roleName);
 
-        // Load relasi profile sesuai role
+        // Load the profile relation for the user's role
         if ($role === 'student') {
             $user->loadMissing('studentProfile');
         } elseif ($role === 'teacher') {
@@ -39,7 +40,7 @@ class ProfilePageController extends Controller
      */
     public function update(Request $request)
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
 
         $roleName = $user->roles->first()?->name ?? $user->role_name ?? $user->role ?? 'student';

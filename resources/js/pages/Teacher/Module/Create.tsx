@@ -1,6 +1,7 @@
 import { Head, useForm, Link } from '@inertiajs/react';
 import { ArrowLeft, Save, HelpCircle } from 'lucide-react';
 import TeacherNavbar from '@/components/Teacher/TeacherNavbar';
+import { useTranslation } from '@/context/LanguageContext';
 
 interface Category {
     id: number;
@@ -16,6 +17,7 @@ export default function Create({
     selected_category_id: number;
     teacher?: any;
 }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         category_id: selected_category_id,
@@ -139,7 +141,7 @@ export default function Create({
                                     className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none"
                                 />
                                 <p className="mt-1 text-[11px] text-gray-400 flex items-center gap-1">
-                                    <HelpCircle className="h-3.5 w-3.5" /> ID dari URL: https://docs.google.com/presentation/d/<b>[TEMPLATE_ID]</b>/edit
+                                    <HelpCircle className="h-3.5 w-3.5" /> {t('module.slidesHelp')} https://docs.google.com/presentation/d/<b>[TEMPLATE_ID]</b>/edit
                                 </p>
                                 {errors.google_slides_template_id && <p className="mt-1 text-xs text-red-500">{errors.google_slides_template_id}</p>}
                             </div>

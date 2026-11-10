@@ -54,14 +54,14 @@ export default function Index({ teacher, initialPosts }: TeacherCommunityProps) 
     const posts = initialPosts?.data || [];
     const [activeCommentPostId, setActiveCommentPostId] = useState<number | null>(null);
 
-    // Form Postingan Baru
+    // New post form
     const { data, setData, post, processing, reset, errors } = useForm({
         content: '',
         tag: 'Announcements',
         media: null as File | null,
     });
 
-    // Form Komentar
+    // Comment form
     const commentForm = useForm({
         content: '',
     });

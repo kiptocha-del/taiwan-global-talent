@@ -1,6 +1,8 @@
+import { t } from '@/i18n';
+
 export function playAudio(path: string | null): void {
     if (!path) {
-        alert('Audio path tidak tersedia.');
+        alert(t('media.audioUnavailable'));
 
         return;
     }
@@ -32,7 +34,7 @@ export const getS3Url = (path: string | null): string | null => {
     }
 
     if (path.startsWith('http')) {
-        return path; // Jika sudah full URL
+        return path; // Already a full URL
     }
 
     const baseUrl = import.meta.env.VITE_AWS_URL || '';

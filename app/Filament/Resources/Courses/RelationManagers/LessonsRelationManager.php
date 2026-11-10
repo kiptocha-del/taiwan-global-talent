@@ -4,15 +4,14 @@ namespace App\Filament\Resources\Courses\RelationManagers;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
-use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -20,7 +19,7 @@ class LessonsRelationManager extends RelationManager
 {
     protected static string $relationship = 'lessons';
 
-    // DIUBAH: Menggunakan Schema sesuai dengan Blueprint Filament v5
+    // Uses the Filament v5 Schema blueprint
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -39,7 +38,7 @@ class LessonsRelationManager extends RelationManager
 
                 TextInput::make('sentence_hanzi')
                     ->label('Sentence Hanzi')
-                    ->hidden(fn () => $this->getOwnerRecord()->category_id != 1), 
+                    ->hidden(fn () => $this->getOwnerRecord()->category_id != 1),
 
                 Select::make('vocabularies')
                     ->relationship('vocabularies', 'hanzi')

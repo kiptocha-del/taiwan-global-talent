@@ -5,8 +5,10 @@ import InputText from '@/components/UI/InputText';
 import PageHeader from '@/components/UI/PageHeader';
 import SelectOption from '@/components/UI/SelectOption';
 import TextArea from '@/components/UI/TextArea';
+import { useTranslation } from '@/context/LanguageContext';
 
 export default function CreateJob({ company }: { company: any }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         type: 'Full-time',
@@ -84,7 +86,7 @@ export default function CreateJob({ company }: { company: any }) {
                             />
                         </div>
 
-                        {/* Kota & Kisaran Gaji */}
+                        {/* City and salary range */}
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             {data.location_type !== 'Remote' && (
                                 <InputText
@@ -92,7 +94,7 @@ export default function CreateJob({ company }: { company: any }) {
                                     type="text"
                                     value={data.city}
                                     onChange={(e) => setData('city', e.target.value)}
-                                    placeholder="Contoh: Jakarta Selatan"
+                                    placeholder={t('job.cityPlaceholder')}
                                     error={errors.city}
                                 />
                             )}
@@ -107,7 +109,7 @@ export default function CreateJob({ company }: { company: any }) {
                             />
                         </div>
 
-                        {/* Deskripsi Lowongan */}
+                        {/* Job description */}
                         <TextArea
                             label="Job Description"
                             value={data.description}
