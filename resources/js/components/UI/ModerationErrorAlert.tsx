@@ -82,27 +82,27 @@ export default function ModerationErrorAlert({
     if (variant === 'toast') {
         return (
             <div className="animate-in slide-in-from-top-4 fade-in fixed top-5 right-5 z-50 max-w-md duration-300">
-                <div className="flex items-start gap-3 rounded-2xl border border-red-300 bg-red-600 p-4 text-white shadow-2xl backdrop-blur-md">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/20">
-                        <ShieldAlert className="h-5 w-5 text-white" />
+                <div className="flex items-start gap-3 rounded-2xl border border-status-danger/30 bg-status-danger p-4 text-on-brand shadow-2xl backdrop-blur-md">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-surface/20">
+                        <ShieldAlert className="h-5 w-5 text-on-brand"/>
                     </div>
                     <div className="min-w-0 flex-1 space-y-1">
                         <div className="flex items-center gap-2">
-                            <span className="rounded bg-white/20 px-1.5 py-0.5 text-[10px] font-black tracking-wider uppercase">
+                            <span className="rounded bg-surface/20 px-1.5 py-0.5 text-[10px] font-black tracking-wider uppercase">
                                 Moderation Block
                             </span>
                         </div>
-                        <p className="wrap-break-words text-xs leading-relaxed font-semibold text-red-50">
+                        <p className="wrap-break-words text-xs leading-relaxed font-semibold text-status-danger">
                             {activeMessage}
                         </p>
                     </div>
                     <button
                         type="button"
                         onClick={handleClose}
-                        className="rounded-lg p-1 text-white/80 transition hover:bg-white/20 hover:text-white"
+                        className="rounded-lg p-1 text-on-brand/80 transition hover:bg-surface/20 hover:text-on-brand"
                         aria-label="Close"
                     >
-                        <X className="h-4 w-4" />
+                        <X className="h-4 w-4"/>
                     </button>
                 </div>
             </div>
@@ -110,25 +110,25 @@ export default function ModerationErrorAlert({
     }
 
     return (
-        <div className="relative overflow-hidden rounded-2xl border border-red-200 bg-red-50/90 p-4 text-red-900 shadow-xs backdrop-blur-xs transition-all duration-200">
+        <div className="relative overflow-hidden rounded-2xl border border-status-danger/30 bg-status-danger-soft/90 p-4 text-status-danger shadow-xs backdrop-blur-xs transition-all duration-200">
             <div className="flex items-start gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-600 shadow-xs">
-                    <ShieldAlert className="h-5 w-5" />
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-status-danger-soft text-status-danger shadow-xs">
+                    <ShieldAlert className="h-5 w-5"/>
                 </div>
                 <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center rounded-md bg-red-600 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-white uppercase">
+                        <span className="inline-flex items-center rounded-md bg-status-danger px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-on-brand uppercase">
                             Moderation Alert
                         </span>
-                        <h4 className="truncate text-xs font-bold text-red-950">
+                        <h4 className="truncate text-xs font-bold text-status-danger">
                             {title}
                         </h4>
                     </div>
-                    <p className="wrap-break-words mt-1.5 text-xs leading-relaxed font-semibold text-red-800">
+                    <p className="wrap-break-words mt-1.5 text-xs leading-relaxed font-semibold text-status-danger">
                         {activeMessage}
                     </p>
-                    <p className="mt-2 flex items-center gap-1 text-[11px] font-medium text-red-600/80">
-                        <Info className="h-3 w-3 shrink-0" />
+                    <p className="mt-2 flex items-center gap-1 text-[11px] font-medium text-status-danger/80">
+                        <Info className="h-3 w-3 shrink-0"/>
                         Please check community guidelines and adjust your text
                         or media before resubmitting.
                     </p>
@@ -136,10 +136,10 @@ export default function ModerationErrorAlert({
                 <button
                     type="button"
                     onClick={handleClose}
-                    className="shrink-0 rounded-lg p-1.5 text-red-400 transition hover:bg-red-100 hover:text-red-700"
+                    className="shrink-0 rounded-lg p-1.5 text-status-danger transition hover:bg-status-danger-soft hover:text-status-danger"
                     aria-label="Dismiss alert"
                 >
-                    <X className="h-4 w-4" />
+                    <X className="h-4 w-4"/>
                 </button>
             </div>
         </div>

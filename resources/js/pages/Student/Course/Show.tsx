@@ -59,18 +59,18 @@ export default function Show({ module, currentCategory, enrollment }: any) {
         <Layout>
             <div className="space-y-6">
                 {/* Top Header */}
-                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                <div className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-4 shadow-xs">
                     <Link
                         href={`/student/courses/${currentCategory?.slug}`}
-                        className="rounded-xl border border-gray-200 p-2 text-gray-600 transition-colors hover:bg-gray-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                        className="rounded-xl border border-border p-2 text-muted transition-colors hover:bg-canvas"
                     >
                         <ArrowLeft size={16} />
                     </Link>
                     <div>
-                        <h2 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
+                        <h2 className="text-base font-bold tracking-tight text-ink">
                             {module?.title}
                         </h2>
-                        <p className="text-xs text-gray-400 dark:text-slate-400">
+                        <p className="text-xs text-muted">
                             {currentCategory?.name} Program
                         </p>
                     </div>
@@ -111,7 +111,7 @@ export default function Show({ module, currentCategory, enrollment }: any) {
                                 />
 
                                 {/* 4. Complete Module Button */}
-                                <div className="flex justify-end rounded-2xl border border-gray-100 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                                <div className="flex justify-end rounded-2xl border border-border bg-surface p-4 shadow-xs">
                                     <Button
                                         type="button"
                                         variant="primary"

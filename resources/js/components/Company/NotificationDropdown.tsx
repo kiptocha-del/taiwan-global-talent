@@ -93,11 +93,11 @@ export default function NotificationDropdown({
     const getNotifIcon = (type: string) => {
         switch (type) {
             case 'applicant':
-                return <UserCheck className="h-4 w-4 text-blue-600" />;
+                return <UserCheck className="h-4 w-4 text-accent"/>;
             case 'job':
-                return <Briefcase className="h-4 w-4 text-emerald-600" />;
+                return <Briefcase className="h-4 w-4 text-status-positive"/>;
             default:
-                return <Building2 className="h-4 w-4 text-indigo-600" />;
+                return <Building2 className="h-4 w-4 text-accent"/>;
         }
     };
 
@@ -106,25 +106,25 @@ export default function NotificationDropdown({
             <button
                 type="button"
                 onClick={onToggle}
-                className="relative rounded-lg border border-slate-200 p-2 text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-700 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                className="relative rounded-lg border border-border p-2 text-muted transition-colors hover:bg-canvas hover:text-muted"
             >
-                <Bell className="h-4 w-4" />
+                <Bell className="h-4 w-4"/>
                 {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-indigo-600 text-[10px] font-bold text-white ring-2 ring-white dark:ring-slate-900">
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-on-brand ring-2 ring-surface">
                         {unreadCount}
                     </span>
                 )}
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-80 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl sm:w-96 dark:border-slate-800 dark:bg-slate-900">
-                    <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3 dark:border-slate-800">
+                <div className="absolute right-0 mt-2 w-80 overflow-hidden rounded-xl border border-border bg-surface shadow-2xl sm:w-96">
+                    <div className="flex items-center justify-between border-b border-border px-4 py-3">
                         <div className="flex items-center gap-2">
-                            <h3 className="text-xs font-bold text-slate-900 dark:text-white">
+                            <h3 className="text-xs font-bold text-ink">
                                 {t('notifications.title')}
                             </h3>
                             {unreadCount > 0 && (
-                                <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400">
+                                <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold text-accent">
                                     {t('notifications.newCount', {
                                         count: unreadCount,
                                     })}
@@ -135,15 +135,15 @@ export default function NotificationDropdown({
                             <button
                                 type="button"
                                 onClick={markAllAsRead}
-                                className="flex items-center gap-1 text-[11px] font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+                                className="flex items-center gap-1 text-[11px] font-medium text-accent hover:underline"
                             >
-                                <Check className="h-3 w-3" />{' '}
+                                <Check className="h-3 w-3"/>{''}
                                 {t('notifications.markAllRead')}
                             </button>
                         )}
                     </div>
 
-                    <div className="max-h-80 divide-y divide-slate-100 overflow-y-auto dark:divide-slate-800">
+                    <div className="max-h-80 divide-y divide-border overflow-y-auto">
                         {notifications.length > 0 ? (
                             notifications.map((notif) => (
                                 <Link
@@ -153,33 +153,33 @@ export default function NotificationDropdown({
                                         markAsRead(notif.id);
                                         onToggle();
                                     }}
-                                    className={`flex items-start gap-3 px-4 py-3 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60 ${
+                                    className={`flex items-start gap-3 px-4 py-3 transition-colors hover:bg-canvas ${
                                         !notif.read
-                                            ? 'bg-slate-50/70 dark:bg-slate-800/30'
+                                            ? 'bg-canvas '
                                             : ''
                                     }`}
                                 >
-                                    <div className="mt-0.5 rounded-lg bg-slate-100 p-2 dark:bg-slate-800">
+                                    <div className="mt-0.5 rounded-lg bg-surface-muted p-2">
                                         {getNotifIcon(notif.type)}
                                     </div>
                                     <div className="min-w-0 flex-1">
-                                        <p className="truncate text-xs font-semibold text-slate-900 dark:text-white">
+                                        <p className="truncate text-xs font-semibold text-ink">
                                             {notif.title}
                                         </p>
-                                        <p className="mt-0.5 line-clamp-2 text-[11px] text-slate-600 dark:text-slate-400">
+                                        <p className="mt-0.5 line-clamp-2 text-[11px] text-muted">
                                             {notif.message}
                                         </p>
-                                        <span className="mt-1 block text-[10px] text-slate-400">
+                                        <span className="mt-1 block text-[10px] text-muted">
                                             {notif.time}
                                         </span>
                                     </div>
                                     {!notif.read && (
-                                        <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-indigo-600" />
+                                        <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent"/>
                                     )}
                                 </Link>
                             ))
                         ) : (
-                            <div className="p-6 text-center text-xs text-slate-500">
+                            <div className="p-6 text-center text-xs text-muted">
                                 {t('notifications.empty')}
                             </div>
                         )}

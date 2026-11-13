@@ -42,51 +42,51 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
     return (
         <>
             <Head title={`Add Lesson - ${module.title}`} />
-            <div className="min-h-screen bg-gray-50/50">
+            <div className="min-h-screen bg-canvas">
                 <TeacherNavbar teacher={teacher} />
 
                 <main className="mx-auto max-w-4xl px-4 py-8">
                     <Link
                         href={`/teacher/modules/${module.id}`}
-                        className="mb-6 inline-flex items-center gap-2 text-xs font-semibold text-gray-500 hover:text-gray-900 transition"
+                        className="mb-6 inline-flex items-center gap-2 text-xs font-semibold text-muted hover:text-ink transition"
                     >
-                        <ArrowLeft className="h-4 w-4" /> Back to Module ({module.title})
+                        <ArrowLeft className="h-4 w-4"/> Back to Module ({module.title})
                     </Link>
 
-                    <div className="rounded-3xl border border-gray-100 bg-white p-6 sm:p-8 shadow-xs">
-                        <div className="mb-6 border-b border-gray-100 pb-4">
-                            <span className="rounded-md bg-indigo-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-indigo-600">
+                    <div className="rounded-3xl border border-border bg-surface p-6 sm:p-8 shadow-xs">
+                        <div className="mb-6 border-b border-border pb-4">
+                            <span className="rounded-md bg-accent-soft px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent">
                                 Module: {module.title}
                             </span>
-                            <h1 className="mt-2 text-xl font-bold text-gray-900">Add New Lesson</h1>
+                            <h1 className="mt-2 text-xl font-bold text-ink">Add New Lesson</h1>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {/* Title & Order */}
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                                 <div className="sm:col-span-2">
-                                    <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-700">
+                                    <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted">
                                         Lesson Title
                                     </label>
                                     <input
                                         type="text"
                                         value={data.title}
                                         onChange={(e) => setData('title', e.target.value)}
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-indigo-500 outline-none"
+                                        className="w-full rounded-xl border border-border px-4 py-2.5 text-sm focus:border-accent outline-none"
                                         required
                                     />
-                                    {errors.title && <p className="mt-1 text-xs text-red-500">{errors.title}</p>}
+                                    {errors.title && <p className="mt-1 text-xs text-status-danger">{errors.title}</p>}
                                 </div>
 
                                 <div>
-                                    <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-700">
+                                    <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted">
                                         Order
                                     </label>
                                     <input
                                         type="number"
                                         value={data.order}
                                         onChange={(e) => setData('order', Number(e.target.value))}
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-indigo-500 outline-none"
+                                        className="w-full rounded-xl border border-border px-4 py-2.5 text-sm focus:border-accent outline-none"
                                         required
                                     />
                                 </div>
@@ -94,7 +94,7 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
 
                             {/* Content Type Tabs */}
                             <div>
-                                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-700">
+                                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted">
                                     Content Type
                                 </label>
                                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -110,11 +110,11 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                                             onClick={() => setData('content_type', type.id as any)}
                                             className={`flex items-center justify-center gap-2 rounded-xl border p-3 text-xs font-bold transition ${
                                                 data.content_type === type.id
-                                                    ? 'border-indigo-600 bg-indigo-50 text-indigo-600'
-                                                    : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50'
+                                                    ? 'border-accent bg-accent-soft text-accent'
+                                                    : 'border-border bg-surface text-muted hover:bg-canvas'
                                             }`}
                                         >
-                                            <type.icon className="h-4 w-4" />
+                                            <type.icon className="h-4 w-4"/>
                                             <span>{type.label}</span>
                                         </button>
                                     ))}
@@ -124,14 +124,14 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                             {/* Conditional Rendering: Content Type */}
                             {data.content_type === 'text' && (
                                 <div>
-                                    <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-700">
+                                    <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted">
                                         Lesson Content
                                     </label>
                                     <textarea
                                         rows={6}
                                         value={data.content}
                                         onChange={(e) => setData('content', e.target.value)}
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-indigo-500 outline-none"
+                                        className="w-full rounded-xl border border-border px-4 py-2.5 text-sm focus:border-accent outline-none"
                                     />
                                 </div>
                             )}
@@ -139,7 +139,7 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                             {data.content_type === 'video' && (
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted">
                                             Video Link (YouTube / Vimeo)
                                         </label>
                                         <input
@@ -147,18 +147,18 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                                             value={data.video_url}
                                             onChange={(e) => setData('video_url', e.target.value)}
                                             placeholder="https://www.youtube.com/watch?v=..."
-                                            className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-indigo-500 outline-none"
+                                            className="w-full rounded-xl border border-border px-4 py-2.5 text-sm focus:border-accent outline-none"
                                         />
                                     </div>
                                     <div>
-                                        <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted">
                                             Or Upload Video File (MP4/MKV)
                                         </label>
                                         <input
                                             type="file"
                                             accept="video/mp4,video/mkv"
                                             onChange={(e) => setData('video_file', e.target.files?.[0] || null)}
-                                            className="w-full text-xs text-gray-500"
+                                            className="w-full text-xs text-muted"
                                         />
                                     </div>
                                 </div>
@@ -166,36 +166,36 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
 
                             {data.content_type === 'pdf' && (
                                 <div>
-                                    <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-700">
+                                    <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted">
                                         Upload PDF Document
                                     </label>
                                     <input
                                         type="file"
                                         accept="application/pdf"
                                         onChange={(e) => setData('pdf_file', e.target.files?.[0] || null)}
-                                        className="w-full text-xs text-gray-500"
+                                        className="w-full text-xs text-muted"
                                         required
                                     />
                                 </div>
                             )}
 
                             {data.content_type === 'audio' && (
-                                <div className="space-y-3 rounded-2xl border border-gray-100 bg-gray-50/50 p-4">
+                                <div className="space-y-3 rounded-2xl border border-border bg-canvas p-4">
                                     <div className="flex items-center justify-between">
-                                        <h3 className="text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        <h3 className="text-xs font-bold uppercase tracking-wider text-muted">
                                             Audio Lessons (Repeater)
                                         </h3>
                                         <button
                                             type="button"
                                             onClick={addAudioRow}
-                                            className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600"
+                                            className="inline-flex items-center gap-1 text-xs font-bold text-accent"
                                         >
-                                            <Plus className="h-3.5 w-3.5" /> Add Audio
+                                            <Plus className="h-3.5 w-3.5"/> Add Audio
                                         </button>
                                     </div>
 
                                     {data.audios.map((audio, idx) => (
-                                        <div key={idx} className="flex items-center gap-3 rounded-xl bg-white p-3 border border-gray-100">
+                                        <div key={idx} className="flex items-center gap-3 rounded-xl bg-surface p-3 border border-border">
                                             <input
                                                 type="text"
                                                 placeholder="Description..."
@@ -205,7 +205,7 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                                                     updated[idx].lesson_audio_description = e.target.value;
                                                     setData('audios', updated);
                                                 }}
-                                                className="w-1/2 rounded-lg border border-gray-200 px-3 py-1.5 text-xs outline-none"
+                                                className="w-1/2 rounded-lg border border-border px-3 py-1.5 text-xs outline-none"
                                             />
                                             <input
                                                 type="file"
@@ -217,8 +217,8 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                                                 }}
                                                 className="w-1/2 text-xs"
                                             />
-                                            <button type="button" onClick={() => removeAudioRow(idx)} className="text-red-500">
-                                                <Trash2 className="h-4 w-4" />
+                                            <button type="button"onClick={() => removeAudioRow(idx)} className="text-status-danger">
+                                                <Trash2 className="h-4 w-4"/>
                                             </button>
                                         </div>
                                     ))}
@@ -227,24 +227,24 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
 
                             {/* Mandarin Features (Sentences & Vocabularies) */}
                             {isMandarin && (
-                                <div className="space-y-6 border-t border-gray-100 pt-6">
+                                <div className="space-y-6 border-t border-border pt-6">
                                     {/* Sentences Repeater */}
-                                    <div className="space-y-3 rounded-2xl border border-indigo-50 bg-indigo-50/20 p-4">
+                                    <div className="space-y-3 rounded-2xl border border-accent/30 bg-accent-soft/20 p-4">
                                         <div className="flex items-center justify-between">
-                                            <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-900">
+                                            <h3 className="text-xs font-bold uppercase tracking-wider text-ink">
                                                 List of Sentences (Chinese Hanzi)
                                             </h3>
                                             <button
                                                 type="button"
                                                 onClick={addSentenceRow}
-                                                className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600"
+                                                className="inline-flex items-center gap-1 text-xs font-bold text-accent"
                                             >
-                                                <Plus className="h-3.5 w-3.5" /> Add Sentence
+                                                <Plus className="h-3.5 w-3.5"/> Add Sentence
                                             </button>
                                         </div>
 
                                         {data.sentences.map((sentence, idx) => (
-                                            <div key={idx} className="grid grid-cols-1 gap-2 rounded-xl bg-white p-3 border border-gray-100 sm:grid-cols-3 relative">
+                                            <div key={idx} className="grid grid-cols-1 gap-2 rounded-xl bg-surface p-3 border border-border sm:grid-cols-3 relative">
                                                 <input
                                                     type="text"
                                                     placeholder="Chinese Hanzi..."
@@ -254,7 +254,7 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                                                         updated[idx].hanzi = e.target.value;
                                                         setData('sentences', updated);
                                                     }}
-                                                    className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs outline-none"
+                                                    className="rounded-lg border border-border px-3 py-1.5 text-xs outline-none"
                                                 />
                                                 <input
                                                     type="text"
@@ -265,7 +265,7 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                                                         updated[idx].pinyin = e.target.value;
                                                         setData('sentences', updated);
                                                     }}
-                                                    className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs outline-none"
+                                                    className="rounded-lg border border-border px-3 py-1.5 text-xs outline-none"
                                                 />
                                                 <div className="flex items-center gap-2">
                                                     <input
@@ -277,10 +277,10 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                                                             updated[idx].meaning = e.target.value;
                                                             setData('sentences', updated);
                                                         }}
-                                                        className="w-full rounded-lg border border-gray-200 px-3 py-1.5 text-xs outline-none"
+                                                        className="w-full rounded-lg border border-border px-3 py-1.5 text-xs outline-none"
                                                     />
-                                                    <button type="button" onClick={() => removeSentenceRow(idx)} className="text-red-500">
-                                                        <Trash2 className="h-4 w-4" />
+                                                    <button type="button"onClick={() => removeSentenceRow(idx)} className="text-status-danger">
+                                                        <Trash2 className="h-4 w-4"/>
                                                     </button>
                                                 </div>
                                             </div>
@@ -289,7 +289,7 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
 
                                     {/* Vocabularies Multi Select */}
                                     <div>
-                                        <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted">
                                             Reference Vocabularies
                                         </label>
                                         <select
@@ -299,7 +299,7 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                                                 const options = Array.from(e.target.selectedOptions, (option) => Number(option.value));
                                                 setData('vocabularies', options);
                                             }}
-                                            className="h-32 w-full rounded-xl border border-gray-200 p-2 text-xs focus:border-indigo-500 outline-none"
+                                            className="h-32 w-full rounded-xl border border-border p-2 text-xs focus:border-accent outline-none"
                                         >
                                             {vocabularies.map((vocab: any) => (
                                                 <option key={vocab.id} value={vocab.id}>
@@ -312,13 +312,13 @@ export default function Create({ module, vocabularies = [], teacher }: any) {
                             )}
 
                             {/* Submit */}
-                            <div className="flex justify-end gap-3 border-t border-gray-100 pt-4">
+                            <div className="flex justify-end gap-3 border-t border-border pt-4">
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-indigo-700 transition"
+                                    className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-2.5 text-xs font-bold text-on-brand shadow-xs hover:bg-accent/90 transition"
                                 >
-                                    <Save className="h-4 w-4" /> Save Lesson
+                                    <Save className="h-4 w-4"/> Save Lesson
                                 </button>
                             </div>
                         </form>

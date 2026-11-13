@@ -29,11 +29,11 @@ export default function PaginationNav({ links }: PaginationProps) {
                 let content: React.ReactNode = link.label;
 
                 if (isPrev) {
-                    content = <ChevronLeft className="h-4 w-4" />;
+                    content = <ChevronLeft className="h-4 w-4"/>;
                 }
 
                 if (isNext) {
-                    content = <ChevronRight className="h-4 w-4" />;
+                    content = <ChevronRight className="h-4 w-4"/>;
                 }
 
                 if (!link.url) {
@@ -55,7 +55,7 @@ export default function PaginationNav({ links }: PaginationProps) {
                         aria-current={link.active ? 'page' : undefined}
                         className={`rounded-control px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                             link.active
-                                ? 'bg-brand-strong font-semibold text-white dark:text-ink'
+                                ? 'bg-brand-strong font-semibold text-on-brand'
                                 : 'border border-border bg-surface text-muted hover:bg-surface-muted'
                         }`}
                         dangerouslySetInnerHTML={

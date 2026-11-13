@@ -108,7 +108,7 @@ export default function CreatePostBox({
         inertiaErrors?.media;
 
     return (
-        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xs transition sm:p-5 dark:border-slate-800 dark:bg-slate-900">
+        <div className="rounded-2xl border border-border bg-surface p-4 shadow-xs transition sm:p-5">
             {/* Banner Warning Moderasi / Error */}
             {activeError && (
                 <div className="mb-4">
@@ -121,7 +121,7 @@ export default function CreatePostBox({
 
             <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-indigo-600 text-xs font-bold text-white shadow-xs">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent text-xs font-bold text-on-brand shadow-xs">
                         {user?.avatar_url || user?.avatar ? (
                             <img
                                 src={user.avatar_url || user.avatar}
@@ -143,25 +143,25 @@ export default function CreatePostBox({
                             }
                         }}
                         placeholder="Share updates, job openings, or experiences..."
-                        className="w-full resize-none rounded-xl border-0 p-2 text-xs text-slate-900 outline-none focus:ring-0 sm:text-sm dark:bg-slate-900 dark:text-white"
+                        className="w-full resize-none rounded-xl border-0 p-2 text-xs text-ink outline-none focus:ring-0 sm:text-sm"
                         rows={3}
                         required
                     />
                 </div>
 
                 {previewUrl && (
-                    <div className="relative max-h-60 overflow-hidden rounded-xl border border-slate-200 bg-black/5 dark:border-slate-800">
+                    <div className="relative max-h-60 overflow-hidden rounded-xl border border-border bg-ink/5">
                         <button
                             type="button"
                             onClick={handleRemoveMedia}
-                            className="absolute top-2 right-2 z-10 cursor-pointer rounded-full bg-black/60 p-1.5 text-white transition hover:bg-black"
+                            className="absolute top-2 right-2 z-10 cursor-pointer rounded-full bg-ink/60 p-1.5 text-white transition hover:bg-ink"
                             title="Remove media"
                         >
-                            <X className="h-4 w-4" />
+                            <X className="h-4 w-4"/>
                         </button>
 
                         {data.media?.type.includes('video') ? (
-                            <div className="flex items-center justify-center bg-black">
+                            <div className="flex items-center justify-center bg-ink">
                                 <video
                                     src={previewUrl}
                                     controls
@@ -178,12 +178,12 @@ export default function CreatePostBox({
                     </div>
                 )}
 
-                <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3">
                     <div className="flex items-center gap-2">
                         <select
                             value={data.tag}
                             onChange={(e) => setData('tag', e.target.value)}
-                            className="rounded-xl border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-700 outline-none focus:border-indigo-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
+                            className="rounded-xl border border-border px-2.5 py-1.5 text-xs font-medium text-muted outline-none focus:border-accent"
                         >
                             <option value="General">General</option>
                             <option value="Hiring / Career">
@@ -204,11 +204,11 @@ export default function CreatePostBox({
                             </option>
                         </select>
 
-                        <label className="flex cursor-pointer items-center gap-1.5 rounded-xl bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300">
+                        <label className="flex cursor-pointer items-center gap-1.5 rounded-xl bg-surface-muted px-3 py-1.5 text-xs font-semibold text-muted transition hover:bg-surface-muted">
                             {data.media?.type.includes('video') ? (
-                                <Film className="h-4 w-4 text-purple-600" />
+                                <Film className="h-4 w-4 text-accent"/>
                             ) : (
-                                <Image className="h-4 w-4 text-indigo-600" />
+                                <Image className="h-4 w-4 text-accent"/>
                             )}
                             <span className="hidden sm:inline">
                                 {data.media ? 'Change Attachment' : 'Attachment'}
@@ -226,9 +226,9 @@ export default function CreatePostBox({
                     <button
                         type="submit"
                         disabled={processing || !data.content.trim()}
-                        className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-indigo-600 px-4 py-1.5 text-xs font-bold text-white shadow-xs transition hover:bg-indigo-700 disabled:opacity-50"
+                        className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-accent px-4 py-1.5 text-xs font-bold text-on-brand shadow-xs transition hover:bg-accent/90 disabled:opacity-50"
                     >
-                        <Send className="h-3.5 w-3.5" />
+                        <Send className="h-3.5 w-3.5"/>
                         <span>Post</span>
                     </button>
                 </div>

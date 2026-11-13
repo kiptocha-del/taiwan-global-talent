@@ -28,7 +28,7 @@ export default function StudentJobShow({ job, hasApplied, application }: any) {
 
     return (
         <Layout>
-            <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+            <div className="min-h-screen bg-canvas text-ink">
                 <Head
                     title={`${job.title} - ${job.company_profile?.company_name}`}
                 />
@@ -44,40 +44,40 @@ export default function StudentJobShow({ job, hasApplied, application }: any) {
                     />
 
                     <div className="space-y-6">
-                        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-800 dark:bg-slate-900">
-                            <div className="flex items-center gap-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
-                                <Building2 className="h-4 w-4" />
+                        <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
+                            <div className="flex items-center gap-2 text-xs font-semibold text-accent">
+                                <Building2 className="h-4 w-4"/>
                                 {job.company_profile?.company_name}
                             </div>
 
-                            <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            <h1 className="mt-2 text-2xl font-bold tracking-tight text-ink">
                                 {job.title}
                             </h1>
 
-                            <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
-                                <span className="rounded-md bg-slate-100 px-2.5 py-1 font-semibold dark:bg-slate-800">
+                            <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted">
+                                <span className="rounded-md bg-surface-muted px-2.5 py-1 font-semibold">
                                     {job.type}
                                 </span>
                                 <span className="flex items-center gap-1">
-                                    <MapPin className="h-3.5 w-3.5" />{' '}
+                                    <MapPin className="h-3.5 w-3.5"/>{''}
                                     {job.location_type}{' '}
                                     {job.city ? `(${job.city})` : ''}
                                 </span>
                                 {job.salary_range && (
-                                    <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                                    <span className="font-semibold text-status-positive">
                                         {job.salary_range}
                                     </span>
                                 )}
                             </div>
                         </div>
 
-                        <div className="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+                        <div className="space-y-6 rounded-2xl border border-border bg-surface p-6 shadow-sm">
                             {job.description && (
                                 <div>
-                                    <h2 className="text-sm font-bold text-slate-900 dark:text-white">
+                                    <h2 className="text-sm font-bold text-ink">
                                         Job Description
                                     </h2>
-                                    <p className="mt-2 text-xs leading-relaxed whitespace-pre-line text-slate-600 dark:text-slate-300">
+                                    <p className="mt-2 text-xs leading-relaxed whitespace-pre-line text-muted">
                                         {job.description}
                                     </p>
                                 </div>
@@ -85,20 +85,20 @@ export default function StudentJobShow({ job, hasApplied, application }: any) {
 
                             {job.requirements && (
                                 <div>
-                                    <h2 className="text-sm font-bold text-slate-900 dark:text-white">
+                                    <h2 className="text-sm font-bold text-ink">
                                         Requirements
                                     </h2>
-                                    <p className="mt-2 text-xs leading-relaxed whitespace-pre-line text-slate-600 dark:text-slate-300">
+                                    <p className="mt-2 text-xs leading-relaxed whitespace-pre-line text-muted">
                                         {job.requirements}
                                     </p>
                                 </div>
                             )}
                         </div>
 
-                        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+                        <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
                             {hasApplied ? (
-                                <div className="flex items-center gap-3 rounded-xl bg-emerald-50 p-4 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300">
-                                    <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600" />
+                                <div className="flex items-center gap-3 rounded-xl bg-status-positive-soft p-4 text-status-positive">
+                                    <CheckCircle2 className="h-5 w-5 shrink-0 text-status-positive"/>
                                     <div>
                                         <h4 className="text-xs font-bold">
                                             You Have Applied for This Position
@@ -116,7 +116,7 @@ export default function StudentJobShow({ job, hasApplied, application }: any) {
                                     onSubmit={handleApply}
                                     className="space-y-4"
                                 >
-                                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                                    <h3 className="text-sm font-bold text-ink">
                                         Submit Job Application
                                     </h3>
 

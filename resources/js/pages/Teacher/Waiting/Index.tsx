@@ -17,14 +17,14 @@ export default function Waiting() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-canvas flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <Head title="Waiting for Admin Approval" />
 
             <div className="sm:mx-auto w-full max-w-md">
-                <div className="bg-white py-8 px-4 shadow-xl rounded-2xl sm:px-10 border border-gray-100 text-center">
+                <div className="bg-surface py-8 px-4 shadow-xl rounded-2xl sm:px-10 border border-border text-center">
 
                     {/* Loading / Clock Animation */}
-                    <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-indigo-50 text-indigo-600 mb-6 relative">
+                    <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-accent-soft text-accent mb-6 relative">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -40,24 +40,24 @@ export default function Waiting() {
                             />
                         </svg>
                         <span className="absolute top-0 right-0 flex h-4 w-4">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-4 w-4 bg-indigo-500"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-4 w-4 bg-accent"></span>
                         </span>
                     </div>
 
-                    <h2 className="text-2xl font-extrabold text-gray-900 mb-2">
+                    <h2 className="text-2xl font-extrabold text-ink mb-2">
                         Your Application Is Under Review
                     </h2>
 
-                    <p className="text-sm text-gray-600 mb-6 leading-relaxed">
-                        Thank you for completing your profile. Our team is currently reviewing your submitted information and documents. This process usually takes <strong className="text-gray-800">1–2 business days</strong>.
+                    <p className="text-sm text-muted mb-6 leading-relaxed">
+                        Thank you for completing your profile. Our team is currently reviewing your submitted information and documents. This process usually takes <strong className="text-ink">1–2 business days</strong>.
                     </p>
 
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 text-left">
+                    <div className="bg-status-warning-soft border border-status-warning/30 rounded-lg p-4 mb-6 text-left">
                         <div className="flex">
                             <div className="shrink-0">
                                 <svg
-                                    className="h-5 w-5 text-amber-500"
+                                    className="h-5 w-5 text-status-warning"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                 >
@@ -69,10 +69,10 @@ export default function Waiting() {
                                 </svg>
                             </div>
                             <div className="ml-3">
-                                <h3 className="text-sm font-medium text-amber-800">
+                                <h3 className="text-sm font-medium text-status-warning">
                                     Important Information
                                 </h3>
-                                <p className="mt-1 text-xs text-amber-700 leading-relaxed">
+                                <p className="mt-1 text-xs text-status-warning leading-relaxed">
                                     Once your account has been approved by the administrator, you will be automatically redirected to the Teacher Dashboard.
                                 </p>
                             </div>
@@ -85,7 +85,7 @@ export default function Waiting() {
                             href={`https://wa.me/${adminWhatsApp}?text=Hello%20Admin,%20I%20would%20like%20to%20check%20the%20status%20of%20my%20teacher%20application.`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full flex items-center justify-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 transition shadow-sm"
+                            className="w-full flex items-center justify-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-xl text-on-brand bg-status-positive hover:bg-status-positive transition shadow-sm"
                         >
                             <svg
                                 className="w-5 h-5 mr-2"
@@ -100,7 +100,7 @@ export default function Waiting() {
                         {/* Copy Admin Contact */}
                         <button
                             onClick={copyToClipboard}
-                            className="w-full text-xs text-gray-500 hover:text-gray-700 transition py-1"
+                            className="w-full text-xs text-muted hover:text-muted transition py-1"
                         >
                             {copied
                                 ? '✓ Admin phone number copied!'
@@ -108,14 +108,14 @@ export default function Waiting() {
                         </button>
                     </div>
 
-                    <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
-                        <span className="text-xs text-gray-400">
+                    <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
+                        <span className="text-xs text-muted">
                             Signed in with the wrong account?
                         </span>
 
                         <button
                             onClick={handleLogout}
-                            className="text-xs font-semibold text-red-600 hover:text-red-500 transition focus:outline-none"
+                            className="text-xs font-semibold text-status-danger hover:text-status-danger transition focus:outline-none"
                         >
                             Sign Out
                         </button>

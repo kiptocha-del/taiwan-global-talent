@@ -28,7 +28,7 @@ export default function SearchAndFilterBar({
         <div className="mb-6 flex w-full flex-col items-center gap-3 sm:flex-row">
             {/* Search Input */}
             <div className="relative w-full flex-1">
-                <Search className="absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <Search className="absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-muted"/>
                 <input
                     type="text"
                     value={search}
@@ -43,7 +43,7 @@ export default function SearchAndFilterBar({
                         aria-label="Clear search"
                         className="absolute top-1/2 right-3 -translate-y-1/2 text-muted hover:text-ink"
                     >
-                        <X className="h-4 w-4" />
+                        <X className="h-4 w-4"/>
                     </button>
                 )}
             </div>
@@ -51,7 +51,7 @@ export default function SearchAndFilterBar({
             {/* Dropdown Filter */}
             {onFilterChange && filterOptions.length > 0 && (
                 <div className="relative w-full sm:w-48">
-                    <Filter className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                    <Filter className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-muted"/>
                     <select
                         value={filterValue || ''}
                         onChange={(e) => onFilterChange(e.target.value)}

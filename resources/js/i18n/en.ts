@@ -184,6 +184,7 @@ export const en = {
     'about.ctaTitle': 'Your Taiwan story can start here.',
     'about.ctaLead':
         'Come learn something useful, meet someone kind, and discover a next step that feels possible.',
+    'about.ctaBadge': 'Ready when you are',
     'about.ctaButton': 'Join Taiwan Global Talent Hub',
 
     // Get Involved page

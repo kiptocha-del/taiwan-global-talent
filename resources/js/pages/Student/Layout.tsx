@@ -45,9 +45,9 @@ export default function Layout({ children }: Props) {
                                 aria-label="Toggle main menu"
                             >
                                 {isMobileMenuOpen ? (
-                                    <X className="h-6 w-6" />
+                                    <X className="h-6 w-6"/>
                                 ) : (
-                                    <Menu className="h-6 w-6" />
+                                    <Menu className="h-6 w-6"/>
                                 )}
                             </button>
                         </div>

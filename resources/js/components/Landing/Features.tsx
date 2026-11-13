@@ -25,10 +25,13 @@ const features = [
 
 const Features = () => {
     return (
-        <section id="features" className="bg-[#102a43] px-5 py-24 text-white">
+        <section
+            id="features"
+            className="bg-brand-strong px-5 py-24 text-on-brand"
+        >
             <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
                 <div>
-                    <span className="inline-flex rounded bg-white/10 px-4 py-2 text-xs font-extrabold tracking-widest text-[#f47b20] uppercase">
+                    <span className="inline-flex rounded bg-surface/10 px-4 py-2 text-xs font-extrabold tracking-widest text-accent uppercase">
                         Why choose us?
                     </span>
                     <h2 className="mt-5 text-4xl font-extrabold tracking-tight md:text-6xl">
@@ -48,13 +51,13 @@ const Features = () => {
                     {features.map((feature, index) => (
                         <article
                             key={feature.title}
-                            className="group grid gap-5 rounded-md border border-white/12 bg-white/5.5 p-6 transition hover:border-white/28 md:grid-cols-[64px_1fr]"
+                            className="group grid gap-5 rounded-md border border-surface/12 bg-surface/5.5 p-6 transition hover:border-surface/28 md:grid-cols-[64px_1fr]"
                         >
-                            <div className="flex h-16 w-16 items-center justify-center rounded-md bg-white text-[#173b8f]">
-                                <feature.icon className="h-7 w-7" />
+                            <div className="flex h-16 w-16 items-center justify-center rounded-md bg-surface text-brand-strong">
+                                <feature.icon className="h-7 w-7"/>
                             </div>
                             <div>
-                                <div className="text-xs font-extrabold tracking-widest text-[#f47b20] uppercase">
+                                <div className="text-xs font-extrabold tracking-widest text-accent uppercase">
                                     0{index + 1}
                                 </div>
                                 <h3 className="mt-2 text-2xl font-extrabold">

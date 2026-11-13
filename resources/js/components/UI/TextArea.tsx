@@ -11,7 +11,7 @@ export default function TextArea({
     error,
     helperText,
     rows = 4,
-    className = '',
+    className ='',
     id,
     ...props
 }: TextAreaProps) {

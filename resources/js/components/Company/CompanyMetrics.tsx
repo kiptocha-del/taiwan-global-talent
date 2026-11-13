@@ -8,28 +8,28 @@ export default function CompanyMetrics() {
             value: '0',
             change: 'Ready to post',
             icon: Briefcase,
-            color: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-950/50',
+            color: 'text-accent bg-accent-soft ',
         },
         {
             title: 'Total Applicants',
             value: '0',
             change: '0 this week',
             icon: Users,
-            color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50',
+            color: 'text-status-positive bg-status-positive-soft ',
         },
         {
             title: 'Profile Views',
             value: '124',
             change: '+12% vs last month',
             icon: Eye,
-            color: 'text-sky-600 bg-sky-50 dark:bg-sky-950/50',
+            color: 'text-accent bg-accent-soft ',
         },
         {
             title: 'Hired Candidates',
             value: '0',
             change: '0 fulfilled',
             icon: CheckCircle,
-            color: 'text-purple-600 bg-purple-50 dark:bg-purple-950/50',
+            color: 'text-accent bg-accent-soft ',
         },
     ];
 
@@ -41,21 +41,21 @@ export default function CompanyMetrics() {
                 return (
                     <div
                         key={idx}
-                        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+                        className="rounded-2xl border border-border bg-surface p-5 shadow-sm"
                     >
                         <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                            <span className="text-xs font-semibold text-muted">
                                 {stat.title}
                             </span>
                             <div className={`rounded-xl p-2.5 ${stat.color}`}>
-                                <Icon className="h-5 w-5" />
+                                <Icon className="h-5 w-5"/>
                             </div>
                         </div>
                         <div className="mt-3">
-                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                            <h3 className="text-2xl font-bold text-ink">
                                 {stat.value}
                             </h3>
-                            <p className="mt-1 text-[11px] font-medium text-slate-400">
+                            <p className="mt-1 text-[11px] font-medium text-muted">
                                 {stat.change}
                             </p>
                         </div>

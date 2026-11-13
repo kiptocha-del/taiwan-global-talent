@@ -10,7 +10,7 @@ export default function InputText({
     label,
     error,
     helperText,
-    className = '',
+    className ='',
     id,
     ...props
 }: InputTextProps) {

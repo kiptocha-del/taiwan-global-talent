@@ -22,7 +22,7 @@ export default function Button({
     icon: Icon,
     iconPosition = 'left',
     children,
-    className = '',
+    className ='',
     disabled,
     ...props
 }: ButtonProps) {
@@ -33,11 +33,11 @@ export default function Button({
     // Variant Styles
     const variantStyles: Record<ButtonVariant, string> = {
         primary:
-            'bg-brand-strong text-white shadow-card hover:bg-brand focus:ring-accent dark:text-ink',
+            'bg-brand-strong text-on-brand shadow-card hover:bg-brand focus:ring-accent',
         secondary: 'bg-surface-muted text-ink hover:bg-border focus:ring-brand',
         outline:
             'border border-border text-ink hover:bg-surface-muted focus:ring-brand',
-        danger: 'bg-status-danger text-white shadow-card hover:brightness-95 focus:ring-status-danger',
+        danger: 'bg-status-danger text-on-brand shadow-card hover:brightness-95 focus:ring-status-danger',
         ghost: 'text-muted hover:bg-surface-muted focus:ring-brand',
     };
 
@@ -67,7 +67,7 @@ export default function Button({
                 <Loader2 className={`${iconSizeClass} animate-spin`} />
             ) : (
                 Icon &&
-                iconPosition === 'left' && <Icon className={iconSizeClass} />
+                iconPosition ==='left'&& <Icon className={iconSizeClass} />
             )}
 
             {children && <span>{children}</span>}

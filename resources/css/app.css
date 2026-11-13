@@ -5,34 +5,52 @@
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
+/*
+ * Colour roles
+ * ------------
+ * canvas / surface / surface-muted / border  neutral base (tinted towards the brand)
+ * ink / muted                                text
+ * brand / brand-strong                       primary brand colour (deep teal), used for
+ *                                            identity: dark panels, headings, nav fills
+ * accent / accent-soft                       secondary action colour (blue), reserved for
+ *                                            calls to action, labels, links, big numbers
+ * highlight                                  tertiary accent (turquoise) for decoration
+ * status-*                                   semantic colours, strong + soft pairs
+ * on-brand / on-accent                       text placed on a brand or accent fill
+ *
+ * Light values live in @theme; the .dark block below redefines the same variables, so any
+ * component using a token class switches with no dark: variant of its own.
+ */
 @theme {
     --font-sans: Arial, ui-sans-serif, system-ui, sans-serif;
     --font-display: Georgia, 'Times New Roman', serif;
 
-    --color-canvas: #faf7f2;
-    --color-surface: #fffefa;
-    --color-surface-muted: #f1ece4;
-    --color-border: #e4dbcf;
-    --color-ink: #292d33;
-    --color-muted: #646a70;
-    --color-brand: #31556a;
-    --color-brand-ink: #31556a;
-    --color-brand-strong: #234458;
-    --color-brand-action: #234458;
-    --color-accent: #a95c42;
-    --color-accent-soft: #f3e3d7;
-    --color-highlight: #d3b470;
-    --color-positive: #39735f;
-    --color-status-positive: #39735f;
-    --color-status-positive-soft: #e7ebdf;
-    --color-status-warning: #8d6930;
-    --color-status-warning-soft: #f4ead7;
-    --color-status-danger: #a24940;
-    --color-status-danger-soft: #f5e3df;
-    --color-status-info: #476c83;
-    --color-status-info-soft: #eee7dc;
-    --color-status-neutral: #636970;
-    --color-status-neutral-soft: #edeae5;
+    --color-canvas: #f3f9fa;
+    --color-surface: #ffffff;
+    --color-surface-muted: #dceeef;
+    --color-border: #cfe0e1;
+    --color-ink: #1f2f30;
+    --color-muted: #536667;
+    --color-brand: #0b4d4f;
+    --color-brand-ink: #003e40;
+    --color-brand-strong: #003e40;
+    --color-brand-action: #003e40;
+    --color-on-brand: #ffffff;
+    --color-accent: #2f55e6;
+    --color-accent-soft: #e3e9fd;
+    --color-on-accent: #ffffff;
+    --color-highlight: #24c5c8;
+    --color-positive: #1e7a5a;
+    --color-status-positive: #1e7a5a;
+    --color-status-positive-soft: #dff3ea;
+    --color-status-warning: #996a14;
+    --color-status-warning-soft: #fbf0d6;
+    --color-status-danger: #b53a3a;
+    --color-status-danger-soft: #fae3e3;
+    --color-status-info: #2d5f8c;
+    --color-status-info-soft: #e1ecf7;
+    --color-status-neutral: #536667;
+    --color-status-neutral-soft: #e6eeee;
 
     --text-display-xl: clamp(2.75rem, 6vw, 5rem);
     --text-display-xl--line-height: 1.04;
@@ -44,11 +62,45 @@
     --radius-control: 0.75rem;
     --radius-card: 0.625rem;
     --radius-panel: 0.875rem;
-    --shadow-card: 0 12px 32px rgb(40 45 51 / 7%);
-    --shadow-panel: 0 24px 60px rgb(40 45 51 / 11%);
+    --shadow-card: 0 12px 32px rgb(0 62 64 / 8%);
+    --shadow-panel: 0 24px 60px rgb(0 62 64 / 12%);
     --spacing-page-x: 1.25rem;
     --spacing-page-y: 2rem;
     --spacing-section: 5rem;
+}
+
+/* Dark palette: the same hue family, lifted off black so long reads stay comfortable. */
+.dark {
+    --color-canvas: #062f31;
+    --color-surface: #0b4042;
+    --color-surface-muted: #125456;
+    --color-border: #1f6a6c;
+    --color-ink: #eef7f7;
+    --color-muted: #a9c3c3;
+    --color-brand: #5fd6d9;
+    --color-brand-ink: #8fe4e6;
+    --color-brand-strong: #8fe4e6;
+    --color-brand-action: #8fe4e6;
+    --color-on-brand: #062f31;
+    --color-accent: #8ea2ff;
+    --color-accent-soft: #1c2f6b;
+    --color-on-accent: #062f31;
+    --color-highlight: #2fd1d4;
+    --color-positive: #5fcf9f;
+    --color-status-positive: #5fcf9f;
+    --color-status-positive-soft: #0f4a39;
+    --color-status-warning: #e4b45a;
+    --color-status-warning-soft: #4a3a12;
+    --color-status-danger: #f08a8a;
+    --color-status-danger-soft: #5a2323;
+    --color-status-info: #7fb6e6;
+    --color-status-info-soft: #163a5a;
+    --color-status-neutral: #a9c3c3;
+    --color-status-neutral-soft: #125456;
+    --shadow-card: 0 12px 32px rgb(0 0 0 / 35%);
+    --shadow-panel: 0 24px 60px rgb(0 0 0 / 45%);
+
+    color-scheme: dark;
 }
 
 body {

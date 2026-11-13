@@ -36,7 +36,7 @@ export default function CompanyCommunityIndex({ company, initialPosts }: Props) 
     });
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <div className="min-h-screen bg-canvas text-ink">
             <Head title="Talent & Company Community" />
             <CompanyNavbar company={company} />
 
@@ -45,8 +45,8 @@ export default function CompanyCommunityIndex({ company, initialPosts }: Props) 
                     title="Talent & Company Community"
                     subtitle="Share company achievements, hiring updates, and engage with global talents."
                     actionButton={
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400">
-                            <Sparkles className="h-5 w-5" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
+                            <Sparkles className="h-5 w-5"/>
                         </div>
                     }
                 />
@@ -82,8 +82,8 @@ export default function CompanyCommunityIndex({ company, initialPosts }: Props) 
                         </div>
 
                         {loadingMore && (
-                            <div className="flex items-center justify-center gap-2 p-4 text-xs font-medium text-slate-400">
-                                <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-indigo-600"></span>
+                            <div className="flex items-center justify-center gap-2 p-4 text-xs font-medium text-muted">
+                                <span className="h-4 w-4 animate-spin rounded-full border-2 border-border border-t-indigo-600"></span>
                                 <span>Loading older discussions...</span>
                             </div>
                         )}

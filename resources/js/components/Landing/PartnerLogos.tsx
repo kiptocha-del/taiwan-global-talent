@@ -17,7 +17,7 @@ export default function PartnerLogos({
         ? 'grid-cols-2 sm:grid-cols-4'
         : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4';
     const cardClasses =
-        'flex h-full flex-col items-center justify-center rounded-2xl border border-[#24458F]/10 bg-white px-5 py-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md';
+        'flex h-full flex-col items-center justify-center rounded-2xl border border-border bg-surface px-5 py-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md';
 
     return (
         <ul className={`grid gap-4 ${gridClasses}`}>
@@ -32,11 +32,11 @@ export default function PartnerLogos({
                                 className="max-h-12 w-auto max-w-36 object-contain"
                             />
                         ) : (
-                            <span className="font-display text-lg font-black text-[#24458F]">
+                            <span className="font-display text-lg font-black text-ink">
                                 {partner.name}
                             </span>
                         )}
-                        <span className="mt-3 text-xs font-bold text-[#24458F]/55">
+                        <span className="mt-3 text-xs font-bold text-muted">
                             {partner.logo_url ? partner.name : partner.type}
                         </span>
                     </>

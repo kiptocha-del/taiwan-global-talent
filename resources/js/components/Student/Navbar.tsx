@@ -33,7 +33,7 @@ export default function Navbar({
             // Vertical layout for the mobile hamburger menu
             return `flex items-center justify-between w-full rounded-xl px-4 py-3 text-sm font-semibold transition ${
                 active
-                    ? 'bg-brand-strong text-white shadow-sm dark:text-ink'
+                    ? 'bg-brand-strong text-on-brand shadow-sm'
                     : 'text-muted hover:bg-surface-muted hover:text-ink'
             }`;
         }
@@ -41,7 +41,7 @@ export default function Navbar({
         // Horizontal layout for desktop
         return `inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold transition whitespace-nowrap ${
             active
-                ? 'bg-brand-strong text-white shadow-sm dark:text-ink'
+                ? 'bg-brand-strong text-on-brand shadow-sm'
                 : 'text-muted hover:bg-surface-muted hover:text-ink'
         }`;
     };

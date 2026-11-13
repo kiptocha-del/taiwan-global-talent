@@ -28,7 +28,22 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->colors([
-                'primary' => Color::Amber,
+                // Same roles as resources/css/app.css: blue is the action colour, the grey
+                // scale is tinted towards the brand teal and its dark end stays well above black.
+                'primary' => Color::hex('#2f55e6'),
+                'gray' => [
+                    50 => 'oklch(0.985 0.006 195)',
+                    100 => 'oklch(0.962 0.012 195)',
+                    200 => 'oklch(0.915 0.022 195)',
+                    300 => 'oklch(0.850 0.032 195)',
+                    400 => 'oklch(0.700 0.040 195)',
+                    500 => 'oklch(0.560 0.048 195)',
+                    600 => 'oklch(0.460 0.052 195)',
+                    700 => 'oklch(0.390 0.054 195)',
+                    800 => 'oklch(0.330 0.054 195)',
+                    900 => 'oklch(0.290 0.052 195)',
+                    950 => 'oklch(0.240 0.048 195)',
+                ],
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

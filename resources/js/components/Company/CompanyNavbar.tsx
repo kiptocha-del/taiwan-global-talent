@@ -27,7 +27,7 @@ export default function CompanyNavbar({
         const active = url.startsWith(path);
 
         return `rounded-control px-3 py-2 text-xs font-medium text-muted transition-colors hover:bg-surface-muted hover:text-ink ${
-            active ? 'bg-brand-strong text-white shadow-sm dark:text-ink' : ''
+            active ? 'bg-brand-strong text-on-brand shadow-sm' : ''
         }`;
     };
 
@@ -40,8 +40,8 @@ export default function CompanyNavbar({
                         href={companyRoutes.dashboard.url()}
                         className="flex items-center gap-2.5"
                     >
-                        <div className="flex size-9 items-center justify-center rounded-control bg-brand-strong text-white shadow-card dark:text-ink">
-                            <Building2 className="h-5 w-5" />
+                        <div className="flex size-9 items-center justify-center rounded-control bg-brand-strong text-on-brand shadow-card">
+                            <Building2 className="h-5 w-5"/>
                         </div>
                         <span className="text-base font-bold tracking-tight text-brand-strong">
                             Company Portal

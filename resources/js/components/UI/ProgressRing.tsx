@@ -20,7 +20,7 @@ export default function ProgressRing({
     size = 96,
     strokeWidth = 8,
     label,
-    className = '',
+    className ='',
 }: ProgressRingProps) {
     const clamped = Math.max(0, Math.min(100, Math.round(value)));
     const radius = (size - strokeWidth) / 2;

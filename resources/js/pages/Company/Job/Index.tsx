@@ -67,7 +67,7 @@ export default function JobIndex({ company, jobs }: PageProps) {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50/50">
+        <div className="min-h-screen bg-canvas">
             <Head title="Control Panel - Job" />
             <CompanyNavbar company={company} />
 
@@ -79,9 +79,9 @@ export default function JobIndex({ company, jobs }: PageProps) {
                     actionButton={
                         <Link
                             href="/company/jobs/create"
-                            className="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition-all shadow-xs"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 bg-accent hover:bg-accent/90 text-on-brand rounded-xl text-sm font-semibold transition-all shadow-xs"
                         >
-                            <Plus className="w-4 h-4" />
+                            <Plus className="w-4 h-4"/>
                             Create a New Job
                         </Link>
                     }
@@ -115,13 +115,13 @@ export default function JobIndex({ company, jobs }: PageProps) {
                                     <div className="flex items-center gap-2">
                                         <Link
                                             href={`/company/jobs/${job.id}/edit`}
-                                            className="px-2.5 py-1 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                                            className="px-2.5 py-1 text-xs font-medium text-muted bg-surface-muted hover:bg-surface-muted rounded-lg transition-colors"
                                         >
                                             Edit
                                         </Link>
                                         <button
                                             onClick={() => handleDeleteClick(job.id)}
-                                            className="px-2.5 py-1 text-xs font-medium text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors"
+                                            className="px-2.5 py-1 text-xs font-medium text-status-danger bg-status-danger-soft hover:bg-status-danger-soft rounded-lg transition-colors"
                                         >
                                             Delete
                                         </button>
@@ -139,9 +139,9 @@ export default function JobIndex({ company, jobs }: PageProps) {
                         action={
                             <Link
                                 href="/company/jobs/create"
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-on-brand rounded-xl text-sm font-medium hover:bg-accent/90"
                             >
-                                <Plus className="w-4 h-4" /> Create New Job
+                                <Plus className="w-4 h-4"/> Create New Job
                             </Link>
                         }
                     />

@@ -7,7 +7,7 @@ interface HeaderLogoProps {
 export default function HeaderLogo({ userName }: HeaderLogoProps) {
     return (
         <div className="flex w-full items-center gap-3 md:w-auto">
-            <div className="flex size-10 items-center justify-center rounded-control bg-brand-strong font-bold text-white dark:text-ink">
+            <div className="flex size-10 items-center justify-center rounded-control bg-brand-strong font-bold text-on-brand">
                 TW
             </div>
             <div>

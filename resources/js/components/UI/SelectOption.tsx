@@ -23,7 +23,7 @@ export default function SelectOption({
     options,
     error,
     placeholderOption,
-    className = '',
+    className ='',
     id,
     ...props
 }: SelectOptionProps) {
@@ -46,7 +46,7 @@ export default function SelectOption({
                 onChange={(e) => onChange(e.target.value)}
                 className={`w-full rounded-control border px-3 py-2.5 text-xs transition-all focus:ring-2 focus:outline-none ${
                     error
-                        ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
+                        ? 'border-status-danger focus:border-status-danger focus:ring-status-danger/20'
                         : 'border-border focus:border-brand focus:ring-brand/20'
                 } cursor-pointer bg-surface text-ink disabled:cursor-not-allowed disabled:bg-surface-muted ${className}`}
                 {...props}

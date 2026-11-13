@@ -32,9 +32,9 @@ export default function ProfileHeroCard({
     countryValue,
 }: ProfileHeroCardProps) {
     return (
-        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xs">
-            <div className="relative h-40 w-full bg-linear-to-r from-blue-600 to-indigo-700">
-                <div className="absolute top-4 right-4 cursor-pointer rounded-lg bg-black/20 p-2 text-white backdrop-blur-xs transition hover:bg-black/30">
+        <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-xs">
+            <div className="relative h-40 w-full bg-linear-to-r from-accent to-brand">
+                <div className="absolute top-4 right-4 cursor-pointer rounded-lg bg-ink/20 p-2 text-on-brand backdrop-blur-xs transition hover:bg-ink/30">
                     <Camera size={16} />
                 </div>
             </div>
@@ -45,10 +45,10 @@ export default function ProfileHeroCard({
                         <img
                             src={user.avatar}
                             alt=""
-                            className="h-28 w-28 rounded-full border-4 border-white bg-white object-cover shadow-md"
+                            className="h-28 w-28 rounded-full border-4 border-surface bg-surface object-cover shadow-md"
                         />
                     ) : (
-                        <div className="flex h-28 w-28 items-center justify-center rounded-full border-4 border-white bg-linear-to-br from-blue-500 to-indigo-600 text-3xl font-bold text-white shadow-md">
+                        <div className="flex h-28 w-28 items-center justify-center rounded-full border-4 border-surface bg-linear-to-br from-accent to-brand text-3xl font-bold text-on-brand shadow-md">
                             {user?.name?.charAt(0).toUpperCase()}
                         </div>
                     )}
@@ -58,7 +58,7 @@ export default function ProfileHeroCard({
                     {!isEditing ? (
                         <button
                             onClick={() => setIsEditing(true)}
-                            className="flex items-center gap-1.5 rounded-xl border border-gray-200 px-3 py-1.5 text-xs font-semibold text-gray-600 transition hover:bg-gray-50"
+                            className="flex items-center gap-1.5 rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-muted transition hover:bg-canvas"
                         >
                             <Edit2 size={13} /> Edit Profile
                         </button>
@@ -71,18 +71,18 @@ export default function ProfileHeroCard({
                     {!isEditing ? (
                         <div className="space-y-2">
                             <div className="flex items-center gap-2">
-                                <h2 className="text-2xl font-bold text-gray-900">
+                                <h2 className="text-2xl font-bold text-ink">
                                     {role === 'company' &&
                                     userProfile.company_display_name
                                         ? userProfile.company_display_name
                                         : user?.name}
                                 </h2>
-                                <span className="rounded-md bg-blue-50 px-2 py-0.5 text-[10px] font-bold tracking-wide text-blue-600 uppercase">
+                                <span className="rounded-md bg-accent-soft px-2 py-0.5 text-[10px] font-bold tracking-wide text-accent uppercase">
                                     {role}
                                 </span>
                             </div>
 
-                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium text-gray-500">
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium text-muted">
                                 {role === 'student' && (
                                     <>
                                         {userProfile.university && (

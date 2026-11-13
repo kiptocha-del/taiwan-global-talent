@@ -41,7 +41,7 @@ export default function ConfirmationModal({
                     aria-label="Close dialog"
                     className="absolute top-4 right-4 rounded-control p-1 text-muted hover:bg-surface-muted hover:text-ink"
                 >
-                    <X className="h-4 w-4" />
+                    <X className="h-4 w-4"/>
                 </button>
 
                 <div className="mb-4 flex items-center gap-3.5">
@@ -52,7 +52,7 @@ export default function ConfirmationModal({
                                 : 'bg-status-warning-soft text-status-warning'
                         }`}
                     >
-                        <AlertTriangle className="h-5 w-5" />
+                        <AlertTriangle className="h-5 w-5"/>
                     </div>
                     <h3
                         id="confirmation-title"
@@ -77,7 +77,7 @@ export default function ConfirmationModal({
                         type="button"
                         onClick={onConfirm}
                         disabled={isLoading}
-                        className={`rounded-xl px-4 py-2 text-sm font-medium text-white transition-colors ${
+                        className={`rounded-xl px-4 py-2 text-sm font-medium text-on-brand transition-colors ${
                             isDanger
                                 ? 'bg-status-danger hover:brightness-95'
                                 : 'bg-brand-strong hover:bg-brand'

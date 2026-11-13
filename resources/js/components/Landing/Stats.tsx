@@ -135,7 +135,7 @@ const Stats = () => {
     return (
         <section
             ref={sectionRef}
-            className="border-y border-[#173b8f]/10 bg-[#fbfaf7] py-10"
+            className="border-y border-border bg-surface py-10"
         >
             <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-5 md:grid-cols-4">
                 {stats.map((stat, i) => (
@@ -152,13 +152,13 @@ const Stats = () => {
                             duration: 0.65,
                             ease: 'easeOut',
                         }}
-                        className="rounded-md border border-[#173b8f]/12 bg-white p-6 text-center text-[#173b8f] shadow-sm transition-colors hover:border-[#f47b20]/40"
+                        className="rounded-md border border-border bg-surface p-6 text-center text-brand-strong shadow-sm transition-colors hover:border-accent/40"
                     >
-                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-[#173b8f]/8">
-                            <stat.icon className="h-6 w-6 text-[#173b8f]" />
+                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-brand-strong/8">
+                            <stat.icon className="h-6 w-6 text-brand-strong"/>
                         </div>
 
-                        <h3 className="text-3xl font-extrabold text-[#173b8f]">
+                        <h3 className="text-3xl font-extrabold text-brand-strong">
                             <AnimatedNumber
                                 value={stat.value}
                                 suffix={stat.suffix}
@@ -167,7 +167,7 @@ const Stats = () => {
                             />
                         </h3>
 
-                        <p className="mt-1 text-sm font-semibold text-[#173b8f]/62">
+                        <p className="mt-1 text-sm font-semibold text-muted">
                             {stat.label}
                         </p>
                     </motion.div>

@@ -55,10 +55,10 @@ export default function MandarinAddOnPanel({
     }
 
     return (
-        <div className="space-y-4 rounded-2xl border border-gray-100 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white">
+        <div className="space-y-4 rounded-2xl border border-border bg-surface p-5 shadow-xs">
+            <h3 className="flex items-center gap-2 text-sm font-bold text-ink">
                 <span>Mandarin Vocabularies</span>
-                <span className="rounded-full bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600 dark:bg-blue-950 dark:text-blue-400">
+                <span className="rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold text-accent">
                     {vocabularies.length}
                 </span>
             </h3>
@@ -68,17 +68,17 @@ export default function MandarinAddOnPanel({
                 {vocabularies.map((vocab) => (
                     <div
                         key={vocab.id}
-                        className="flex flex-col justify-between rounded-xl border border-gray-100 bg-gray-50/50 p-3.5 transition hover:bg-white hover:shadow-xs dark:border-slate-800 dark:bg-slate-950/50 dark:hover:bg-slate-900"
+                        className="flex flex-col justify-between rounded-xl border border-border bg-canvas p-3.5 transition hover:bg-surface hover:shadow-xs"
                     >
                         <div className="flex items-start justify-between gap-2">
                             <div>
-                                <h4 className="font-mono text-lg font-bold text-gray-900 dark:text-white">
+                                <h4 className="font-mono text-lg font-bold text-ink">
                                     {vocab.hanzi}
                                 </h4>
-                                <p className="text-xs font-semibold text-blue-600 dark:text-blue-400">
+                                <p className="text-xs font-semibold text-accent">
                                     {vocab.pinyin}
                                 </p>
-                                <p className="mt-1 text-xs text-gray-600 dark:text-slate-300">
+                                <p className="mt-1 text-xs text-muted">
                                     {vocab.meaning}
                                 </p>
                             </div>
@@ -90,17 +90,17 @@ export default function MandarinAddOnPanel({
                                     onClick={() =>
                                         handlePlayAudio(vocab.audio_url)
                                     }
-                                    className="cursor-pointer rounded-lg bg-blue-50 p-2 text-blue-600 transition-colors hover:bg-blue-100 active:scale-95 dark:bg-blue-950 dark:text-blue-400 dark:hover:bg-blue-900"
+                                    className="cursor-pointer rounded-lg bg-accent-soft p-2 text-accent transition-colors hover:bg-accent-soft active:scale-95"
                                     title="Play Audio"
                                 >
-                                    <Volume2 className="h-4 w-4" />
+                                    <Volume2 className="h-4 w-4"/>
                                 </button>
                             )}
                         </div>
 
                         {/* Preview Gambar Vocabulary */}
                         {vocab.image_url && (
-                            <div className="mt-3 border-t border-gray-100 pt-2 dark:border-slate-800">
+                            <div className="mt-3 border-t border-border pt-2">
                                 <button
                                     type="button"
                                     onClick={() =>
@@ -108,9 +108,9 @@ export default function MandarinAddOnPanel({
                                             vocab.image_url ?? null,
                                         )
                                     }
-                                    className="inline-flex cursor-pointer items-center gap-1.5 text-[11px] font-bold text-emerald-600 hover:underline dark:text-emerald-400"
+                                    className="inline-flex cursor-pointer items-center gap-1.5 text-[11px] font-bold text-status-positive hover:underline"
                                 >
-                                    <ImageIcon className="h-3.5 w-3.5" /> View
+                                    <ImageIcon className="h-3.5 w-3.5"/> View
                                     Picture
                                 </button>
                             </div>
@@ -122,19 +122,19 @@ export default function MandarinAddOnPanel({
             {/* Modal Image Zoom */}
             {selectedImage && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-4 backdrop-blur-xs"
                     onClick={() => setSelectedImage(null)}
                 >
                     <div
-                        className="relative max-w-lg rounded-2xl bg-white p-3 shadow-2xl dark:bg-slate-900"
+                        className="relative max-w-lg rounded-2xl bg-surface p-3 shadow-2xl"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
                             type="button"
                             onClick={() => setSelectedImage(null)}
-                            className="absolute -top-3 -right-3 cursor-pointer rounded-full bg-white p-1 text-gray-700 shadow-md hover:bg-gray-100 dark:bg-slate-800 dark:text-gray-300"
+                            className="absolute -top-3 -right-3 cursor-pointer rounded-full bg-surface p-1 text-muted shadow-md hover:bg-surface-muted"
                         >
-                            <X className="h-4 w-4" />
+                            <X className="h-4 w-4"/>
                         </button>
                         <img
                             src={selectedImage}

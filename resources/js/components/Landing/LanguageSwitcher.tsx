@@ -10,7 +10,7 @@ export default function LanguageSwitcher() {
         <div
             role="group"
             aria-label={t('lang.choose')}
-            className="flex items-center gap-1 rounded-sm border border-[#24458F]/15 bg-white/70 p-1 text-xs font-bold dark:border-border dark:bg-surface"
+            className="flex items-center gap-1 rounded-sm border border-border bg-surface/70 p-1 text-xs font-bold"
         >
             {LANGUAGES.map((l) => (
                 <button
@@ -22,8 +22,8 @@ export default function LanguageSwitcher() {
                     lang={l === 'zh' ? 'zh-Hant' : l}
                     className={`rounded-sm px-2 py-1 transition ${
                         lang === l
-                            ? 'bg-[#24458F] text-white dark:bg-accent dark:text-[#262018]'
-                            : 'text-[#24458F] hover:bg-[#FFE0C2] dark:text-ink dark:hover:bg-surface-muted'
+                            ? 'bg-brand-strong text-on-brand'
+                            : 'text-ink hover:bg-surface-muted'
                     }`}
                 >
                     {SHORT_LABELS[l]}

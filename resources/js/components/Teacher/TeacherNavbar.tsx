@@ -51,7 +51,7 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
                             href={teacherRoutes.dashboard.url()}
                             className="flex items-center gap-2"
                         >
-                            <div className="flex size-9 items-center justify-center rounded-control bg-brand-strong text-sm font-bold text-white dark:text-ink">
+                            <div className="flex size-9 items-center justify-center rounded-control bg-brand-strong text-sm font-bold text-on-brand">
                                 EDU
                             </div>
                             <span className="text-base font-bold text-brand-strong">
@@ -70,11 +70,11 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
                                         href={item.href}
                                         className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold transition ${
                                             active
-                                                ? 'bg-brand-strong text-white dark:text-ink'
+                                                ? 'bg-brand-strong text-on-brand'
                                                 : 'text-muted hover:bg-surface-muted hover:text-ink'
                                         }`}
                                     >
-                                        <Icon className="h-4 w-4" />
+                                        <Icon className="h-4 w-4"/>
                                         <span>{item.label}</span>
                                     </Link>
                                 );
@@ -97,7 +97,7 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
                                 <span className="hidden text-xs font-bold text-ink sm:block">
                                     {teacher?.name}
                                 </span>
-                                <ChevronDown className="size-4 text-muted" />
+                                <ChevronDown className="size-4 text-muted"/>
                             </button>
 
                             {dropdownOpen && (
@@ -108,7 +108,7 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
                                         as="button"
                                         className="flex w-full items-center gap-2 px-4 py-2 text-xs font-medium text-status-danger hover:bg-status-danger-soft"
                                     >
-                                        <LogOut className="h-3.5 w-3.5" /> Log
+                                        <LogOut className="h-3.5 w-3.5"/> Log
                                         Out
                                     </Link>
                                 </div>
@@ -120,9 +120,9 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
                             className="rounded-control p-2 text-muted hover:bg-surface-muted md:hidden"
                         >
                             {mobileMenuOpen ? (
-                                <X className="h-5 w-5" />
+                                <X className="h-5 w-5"/>
                             ) : (
-                                <Menu className="h-5 w-5" />
+                                <Menu className="h-5 w-5"/>
                             )}
                         </button>
                     </div>
@@ -137,7 +137,7 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
                                 onClick={() => setMobileMenuOpen(false)}
                                 className="flex items-center gap-3 rounded-control px-4 py-2.5 text-xs font-semibold text-muted hover:bg-surface-muted hover:text-ink"
                             >
-                                <item.icon className="h-4 w-4" />
+                                <item.icon className="h-4 w-4"/>
                                 <span>{item.label}</span>
                             </Link>
                         ))}

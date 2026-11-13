@@ -74,9 +74,9 @@ const ways = [
 ] as const;
 
 const howSteps = [
-    { key: 'getInvolved.how1', badgeClass: 'bg-[#FFD86B]' },
-    { key: 'getInvolved.how2', badgeClass: 'bg-[#CDEEDB]' },
-    { key: 'getInvolved.how3', badgeClass: 'bg-[#FFE0C2]' },
+    { key: 'getInvolved.how1', badgeClass: 'bg-highlight' },
+    { key: 'getInvolved.how2', badgeClass: 'bg-status-positive-soft' },
+    { key: 'getInvolved.how3', badgeClass: 'bg-surface-muted' },
 ] as const;
 
 export default function GetInvolved({
@@ -136,52 +136,52 @@ export default function GetInvolved({
     };
 
     return (
-        <div className="landing-page bg-[#FFF8ED] font-sans text-[#24458F] antialiased selection:bg-[#FFD86B] selection:text-[#24458F]">
+        <div className="landing-page bg-canvas font-sans text-ink antialiased selection:bg-highlight selection:text-ink">
             <Head title={t('getInvolved.headTitle')} />
             <Navbar />
 
             <main>
                 <section className="relative overflow-hidden px-5 pt-32 pb-16 md:pt-36 md:pb-20">
-                    <div className="absolute -top-10 -left-20 h-80 w-80 rounded-full bg-[#FFD86B]/35 blur-3xl" />
-                    <div className="absolute top-28 -right-28 h-96 w-96 rounded-full bg-[#CFE8FF]/70 blur-3xl" />
+                    <div className="absolute -top-10 -left-20 h-80 w-80 rounded-full bg-highlight/35 blur-3xl"/>
+                    <div className="absolute top-28 -right-28 h-96 w-96 rounded-full bg-accent-soft/70 blur-3xl"/>
                     <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center">
                         <div>
-                            <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-extrabold text-[#C4573C] shadow-sm">
-                                <HandHeart className="h-4 w-4" />{' '}
+                            <span className="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm font-extrabold text-accent shadow-sm">
+                                <HandHeart className="h-4 w-4"/>{''}
                                 {t('getInvolved.badge')}
                             </span>
-                            <h1 className="mt-6 font-display text-4xl leading-[1.05] font-black tracking-[-0.04em] text-[#24458F] sm:text-5xl lg:text-6xl">
+                            <h1 className="mt-6 font-display text-4xl leading-[1.05] font-black tracking-[-0.04em] text-ink sm:text-5xl lg:text-6xl">
                                 {t('getInvolved.title')}
                             </h1>
-                            <p className="mt-7 max-w-xl text-lg leading-8 font-semibold text-[#24458F]/66">
+                            <p className="mt-7 max-w-xl text-lg leading-8 font-semibold text-muted">
                                 {t('getInvolved.lead')}
                             </p>
                             <div className="mt-9 flex flex-wrap gap-3">
                                 <a
                                     href="#partner-form"
-                                    className="inline-flex items-center gap-2 rounded-full bg-[#24458F] px-7 py-4 text-sm font-extrabold text-white shadow-[0_12px_28px_rgba(36,69,143,0.2)] transition hover:-translate-y-1 hover:bg-[#FF7958]"
+                                    className="inline-flex items-center gap-2 rounded-full bg-brand-strong px-7 py-4 text-sm font-extrabold text-on-brand shadow-card transition hover:-translate-y-1 hover:bg-accent"
                                 >
                                     {t('getInvolved.shareInterest')}{' '}
-                                    <ArrowRight className="h-4 w-4" />
+                                    <ArrowRight className="h-4 w-4"/>
                                 </a>
                                 <Link
                                     href={login.url()}
-                                    className="rounded-full border-2 border-[#24458F]/12 bg-white/80 px-7 py-4 text-sm font-extrabold text-[#24458F] transition hover:border-[#24458F]/25"
+                                    className="rounded-full border-2 border-border bg-surface/80 px-7 py-4 text-sm font-extrabold text-ink transition hover:border-brand"
                                 >
                                     {t('getInvolved.employerRegister')}
                                 </Link>
                             </div>
                         </div>
 
-                        <div className="rounded-4xl border border-[#24458F]/10 bg-white/80 p-8 shadow-[0_24px_60px_rgba(36,69,143,0.12)]">
-                            <p className="font-display text-xl font-black text-[#24458F]">
+                        <div className="rounded-4xl border border-border bg-surface/80 p-8 shadow-panel">
+                            <p className="font-display text-xl font-black text-ink">
                                 {t('getInvolved.howTitle')}
                             </p>
-                            <ol className="mt-6 space-y-5 text-base leading-7 font-semibold text-[#24458F]/68">
+                            <ol className="mt-6 space-y-5 text-base leading-7 font-semibold text-muted">
                                 {howSteps.map((step, index) => (
                                     <li key={step.key} className="flex gap-4">
                                         <span
-                                            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-display text-sm font-black text-[#24458F] ${step.badgeClass}`}
+                                            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-display text-sm font-black text-ink ${step.badgeClass}`}
                                         >
                                             {index + 1}
                                         </span>
@@ -193,13 +193,13 @@ export default function GetInvolved({
                     </div>
                 </section>
 
-                <section className="bg-white px-5 py-20">
+                <section className="bg-surface px-5 py-20">
                     <div className="mx-auto max-w-7xl">
                         <div className="max-w-3xl">
-                            <span className="inline-flex rounded-full bg-[#FFE0C2] px-4 pt-2 pb-1 text-sm font-extrabold text-[#A94A31]">
+                            <span className="inline-flex rounded-full bg-surface-muted px-4 pt-2 pb-1 text-sm font-extrabold text-accent">
                                 {t('getInvolved.whoBadge')}
                             </span>
-                            <h2 className="mt-5 font-display text-3xl leading-tight font-black tracking-[-0.03em] text-[#24458F] md:text-4xl">
+                            <h2 className="mt-5 font-display text-3xl leading-tight font-black tracking-[-0.03em] text-ink md:text-4xl">
                                 {t('getInvolved.whoTitle')}
                             </h2>
                         </div>
@@ -209,13 +209,13 @@ export default function GetInvolved({
                                     key={way.title}
                                     className={`rounded-4xl border border-border p-7 shadow-card ${way.surfaceClass}`}
                                 >
-                                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/80 text-[#24458F] shadow-sm">
-                                        <way.icon className="h-6 w-6" />
+                                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-surface/80 text-ink shadow-sm">
+                                        <way.icon className="h-6 w-6"/>
                                     </div>
-                                    <h3 className="mt-6 font-display text-2xl font-black text-[#24458F]">
+                                    <h3 className="mt-6 font-display text-2xl font-black text-ink">
                                         {t(way.title)}
                                     </h3>
-                                    <p className="mt-3 text-sm leading-7 font-semibold text-[#24458F]/64">
+                                    <p className="mt-3 text-sm leading-7 font-semibold text-muted">
                                         {t(way.description)}
                                     </p>
                                 </article>
@@ -224,13 +224,13 @@ export default function GetInvolved({
                     </div>
                 </section>
 
-                <section className="bg-[#FFF8ED] px-5 py-20">
+                <section className="bg-canvas px-5 py-20">
                     <div className="mx-auto max-w-7xl">
                         <div className="max-w-3xl">
-                            <span className="inline-flex rounded-full bg-[#CDEEDB] px-4 pt-2 pb-1 text-sm font-extrabold text-[#27705E]">
+                            <span className="inline-flex rounded-full bg-status-positive-soft px-4 pt-2 pb-1 text-sm font-extrabold text-status-positive">
                                 {t('getInvolved.partnersBadge')}
                             </span>
-                            <h2 className="mt-5 font-display text-3xl leading-tight font-black tracking-[-0.03em] text-[#24458F] md:text-4xl">
+                            <h2 className="mt-5 font-display text-3xl leading-tight font-black tracking-[-0.03em] text-ink md:text-4xl">
                                 {t('getInvolved.partnersTitle')}
                             </h2>
                         </div>
@@ -238,7 +238,7 @@ export default function GetInvolved({
                             {partners.length > 0 ? (
                                 <PartnerLogos partners={partners} />
                             ) : (
-                                <p className="max-w-3xl rounded-2xl border border-dashed border-[#24458F]/20 bg-white/60 p-6 text-sm leading-7 font-semibold text-[#24458F]/55">
+                                <p className="max-w-3xl rounded-2xl border border-dashed border-border bg-surface/60 p-6 text-sm leading-7 font-semibold text-muted">
                                     {t('getInvolved.partnersEmpty')}
                                 </p>
                             )}
@@ -248,24 +248,24 @@ export default function GetInvolved({
 
                 <section
                     id="partner-form"
-                    className="scroll-mt-24 bg-white px-5 py-20"
+                    className="scroll-mt-24 bg-surface px-5 py-20"
                 >
                     <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
                         <div>
-                            <span className="inline-flex rounded-full bg-[#FFE0C2] px-4 pt-2 pb-1 text-sm font-extrabold text-[#A94A31]">
+                            <span className="inline-flex rounded-full bg-surface-muted px-4 pt-2 pb-1 text-sm font-extrabold text-accent">
                                 {t('getInvolved.formBadge')}
                             </span>
-                            <h2 className="mt-5 font-display text-3xl leading-tight font-black tracking-[-0.03em] text-[#24458F] md:text-4xl">
+                            <h2 className="mt-5 font-display text-3xl leading-tight font-black tracking-[-0.03em] text-ink md:text-4xl">
                                 {t('getInvolved.formTitle')}
                             </h2>
-                            <p className="mt-5 text-base leading-8 font-semibold text-[#24458F]/65">
+                            <p className="mt-5 text-base leading-8 font-semibold text-muted">
                                 {t('getInvolved.formLead')}
                             </p>
-                            <p className="mt-4 text-sm leading-7 font-semibold text-[#24458F]/55">
+                            <p className="mt-4 text-sm leading-7 font-semibold text-muted">
                                 {t('getInvolved.employerNoteBefore')}{' '}
                                 <Link
                                     href={login.url()}
-                                    className="border-b-2 border-[#FF8A65] font-extrabold text-[#24458F]"
+                                    className="border-b-2 border-accent font-extrabold text-ink"
                                 >
                                     {t('getInvolved.employerNoteLink')}
                                 </Link>
@@ -276,7 +276,7 @@ export default function GetInvolved({
                         {showForm ? (
                             <form
                                 onSubmit={handleSubmit}
-                                className="space-y-8 rounded-4xl border border-[#24458F]/10 bg-[#FFF8ED] p-7 shadow-sm md:p-10"
+                                className="space-y-8 rounded-4xl border border-border bg-canvas p-7 shadow-sm md:p-10"
                                 noValidate
                             >
                                 <div className="grid gap-6 md:grid-cols-2">
@@ -375,13 +375,13 @@ export default function GetInvolved({
                                                     key={choice.value}
                                                     className={`flex cursor-pointer items-center gap-3 rounded-control border px-4 py-3 text-sm font-bold transition ${
                                                         checked
-                                                            ? 'border-[#24458F] bg-white text-[#24458F]'
-                                                            : 'border-border bg-surface text-[#24458F]/70 hover:border-[#24458F]/40'
+                                                            ? 'border-brand-strong bg-surface text-ink'
+                                                            : 'border-border bg-surface text-muted hover:border-brand'
                                                     }`}
                                                 >
                                                     <input
                                                         type="checkbox"
-                                                        className="h-4 w-4 accent-[#24458F]"
+                                                        className="h-4 w-4 accent-brand"
                                                         checked={checked}
                                                         onChange={() =>
                                                             toggleInterest(
@@ -432,7 +432,7 @@ export default function GetInvolved({
                                                     className="h-full w-full object-contain"
                                                 />
                                             ) : (
-                                                <ImageIcon className="h-6 w-6 text-muted" />
+                                                <ImageIcon className="h-6 w-6 text-muted"/>
                                             )}
                                         </div>
                                         <input
@@ -445,7 +445,7 @@ export default function GetInvolved({
                                                         null,
                                                 )
                                             }
-                                            className="block w-full text-xs text-muted file:mr-3 file:rounded-control file:border-0 file:bg-[#24458F] file:px-3 file:py-2 file:text-xs file:font-semibold file:text-white hover:file:bg-[#FF7958]"
+                                            className="block w-full text-xs text-muted file:mr-3 file:rounded-control file:border-0 file:bg-brand-strong file:px-3 file:py-2 file:text-xs file:font-semibold file:text-on-brand hover:file:bg-accent"
                                         />
                                     </div>
                                     <p className="text-xs text-muted">
@@ -484,32 +484,32 @@ export default function GetInvolved({
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#24458F] px-7 py-4 text-sm font-extrabold text-white shadow-[0_12px_28px_rgba(36,69,143,0.18)] transition hover:-translate-y-0.5 hover:bg-[#FF7958] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-strong px-7 py-4 text-sm font-extrabold text-on-brand shadow-card transition hover:-translate-y-0.5 hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                                 >
                                     {processing
                                         ? t('getInvolved.sending')
                                         : t('getInvolved.send')}
                                     {!processing && (
-                                        <ArrowRight className="h-4 w-4" />
+                                        <ArrowRight className="h-4 w-4"/>
                                     )}
                                 </button>
                             </form>
                         ) : (
-                            <div className="rounded-4xl border border-[#24458F]/10 bg-[#E7EBDD] p-8 shadow-sm md:p-10">
-                                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#27705E]">
-                                    <CheckCircle2 className="h-6 w-6" />
+                            <div className="rounded-4xl border border-border bg-status-positive-soft p-8 shadow-sm md:p-10">
+                                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-surface text-status-positive">
+                                    <CheckCircle2 className="h-6 w-6"/>
                                 </span>
-                                <h3 className="mt-5 font-display text-2xl font-black text-[#24458F]">
+                                <h3 className="mt-5 font-display text-2xl font-black text-ink">
                                     {t('getInvolved.thanksTitle')}
                                 </h3>
-                                <p className="mt-3 text-base leading-7 font-semibold text-[#24458F]/68">
+                                <p className="mt-3 text-base leading-7 font-semibold text-muted">
                                     {flash?.success ??
                                         t('getInvolved.thanksDefault')}
                                 </p>
                                 <button
                                     type="button"
                                     onClick={startAnother}
-                                    className="mt-6 inline-flex items-center gap-2 border-b-2 border-[#FF8A65] pb-1 text-sm font-extrabold text-[#24458F]"
+                                    className="mt-6 inline-flex items-center gap-2 border-b-2 border-accent pb-1 text-sm font-extrabold text-ink"
                                 >
                                     {t('getInvolved.submitAnother')}
                                 </button>

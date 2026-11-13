@@ -116,23 +116,23 @@ export default function Apply() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <div className="min-h-screen bg-canvas text-ink">
             <Head title="Company Account Registration" />
             <CompanyNavbar company={null} />
 
             <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-                <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900 ring-1 ring-slate-900/5">
+                <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-xl ring-1 ring-border/5">
                     {/* Header Banner */}
-                    <div className="bg-linear-to-r from-indigo-700 via-indigo-600 to-blue-600 px-8 py-10 text-white">
+                    <div className="bg-linear-to-r from-accent via-accent to-brand px-8 py-10 text-on-brand">
                         <div className="flex items-center space-x-3">
-                            <div className="rounded-lg bg-white/10 p-3 backdrop-blur-md">
-                                <Building2 className="h-8 w-8 text-white" />
+                            <div className="rounded-lg bg-surface/10 p-3 backdrop-blur-md">
+                                <Building2 className="h-8 w-8 text-on-brand"/>
                             </div>
                             <div>
                                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                                     Company Verification Form
                                 </h2>
-                                <p className="mt-1 text-sm text-indigo-100">
+                                <p className="mt-1 text-sm text-accent">
                                     Complete your company details to apply for an official account.
                                 </p>
                             </div>
@@ -142,9 +142,9 @@ export default function Apply() {
                     <form onSubmit={handleSubmit} className="space-y-10 p-8">
                         {/* SECTION 1: LEGAL & VERIFICATION */}
                         <div className="space-y-6">
-                            <div className="flex items-center space-x-2 border-b border-slate-200 pb-3 dark:border-slate-800">
-                                <FileText className="h-5 w-5 text-indigo-600" />
-                                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                            <div className="flex items-center space-x-2 border-b border-border pb-3">
+                                <FileText className="h-5 w-5 text-accent"/>
+                                <h3 className="text-lg font-semibold text-ink">
                                     1. Legal & Verification
                                 </h3>
                             </div>
@@ -180,9 +180,9 @@ export default function Apply() {
 
                         {/* SECTION 2: PUBLIC PROFILE (BRANDING) */}
                         <div className="space-y-6">
-                            <div className="flex items-center space-x-2 border-b border-slate-200 pb-3 dark:border-slate-800">
-                                <Briefcase className="h-5 w-5 text-indigo-600" />
-                                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                            <div className="flex items-center space-x-2 border-b border-border pb-3">
+                                <Briefcase className="h-5 w-5 text-accent"/>
+                                <h3 className="text-lg font-semibold text-ink">
                                     2. Public Profile (Branding)
                                 </h3>
                             </div>
@@ -198,11 +198,11 @@ export default function Apply() {
                                 />
 
                                 <div>
-                                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                    <label className="block text-xs font-semibold text-muted">
                                         URL Slug *
                                     </label>
                                     <div className="mt-1.5 flex rounded-xl shadow-xs">
-                                        <span className="inline-flex items-center rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 px-3 text-xs text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400">
+                                        <span className="inline-flex items-center rounded-l-xl border border-r-0 border-border bg-canvas px-3 text-xs text-muted">
                                             /company/
                                         </span>
                                         <input
@@ -210,12 +210,12 @@ export default function Apply() {
                                             required
                                             readOnly
                                             value={data.slug}
-                                            className="block w-full min-w-0 flex-1 cursor-not-allowed rounded-none rounded-r-xl border border-slate-300 bg-slate-100 px-3 py-2.5 text-xs text-slate-600 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400 focus:outline-none"
+                                            className="block w-full min-w-0 flex-1 cursor-not-allowed rounded-none rounded-r-xl border border-border bg-surface-muted px-3 py-2.5 text-xs text-muted focus:outline-none"
                                             placeholder="acme-studio"
                                         />
                                     </div>
                                     {errors.slug && (
-                                        <p className="mt-1 text-xs text-rose-500 font-medium">
+                                        <p className="mt-1 text-xs text-status-danger font-medium">
                                             {errors.slug}
                                         </p>
                                     )}
@@ -271,11 +271,11 @@ export default function Apply() {
 
                                 {/* Logo Upload Preview */}
                                 <div className="space-y-1.5">
-                                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                    <label className="block text-xs font-semibold text-muted">
                                         Company Logo
                                     </label>
                                     <div className="flex items-center space-x-4">
-                                        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900">
+                                        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-canvas">
                                             {logoPreview ? (
                                                 <img
                                                     src={logoPreview}
@@ -283,7 +283,7 @@ export default function Apply() {
                                                     className="h-full w-full object-cover"
                                                 />
                                             ) : (
-                                                <ImageIcon className="h-6 w-6 text-slate-400" />
+                                                <ImageIcon className="h-6 w-6 text-muted"/>
                                             )}
                                         </div>
                                         <input
@@ -296,21 +296,21 @@ export default function Apply() {
                                                     setLogoPreview,
                                                 )
                                             }
-                                            className="block w-full text-xs text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-indigo-50 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 dark:file:bg-indigo-950 dark:file:text-indigo-400"
+                                            className="block w-full text-xs text-muted file:mr-3 file:rounded-xl file:border-0 file:bg-accent-soft file:px-3 file:py-2 file:text-xs file:font-semibold file:text-accent hover:file:bg-accent-soft"
                                         />
                                     </div>
                                     {errors.logo_path && (
-                                        <p className="text-xs text-rose-500 font-medium">{errors.logo_path}</p>
+                                        <p className="text-xs text-status-danger font-medium">{errors.logo_path}</p>
                                     )}
                                 </div>
 
                                 {/* Banner Upload Preview */}
                                 <div className="space-y-1.5">
-                                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                    <label className="block text-xs font-semibold text-muted">
                                         Company Banner
                                     </label>
                                     <div className="flex items-center space-x-4">
-                                        <div className="flex h-16 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900">
+                                        <div className="flex h-16 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-canvas">
                                             {bannerPreview ? (
                                                 <img
                                                     src={bannerPreview}
@@ -318,7 +318,7 @@ export default function Apply() {
                                                     className="h-full w-full object-cover"
                                                 />
                                             ) : (
-                                                <ImageIcon className="h-6 w-6 text-slate-400" />
+                                                <ImageIcon className="h-6 w-6 text-muted"/>
                                             )}
                                         </div>
                                         <input
@@ -331,11 +331,11 @@ export default function Apply() {
                                                     setBannerPreview,
                                                 )
                                             }
-                                            className="block w-full text-xs text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-indigo-50 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100 dark:file:bg-indigo-950 dark:file:text-indigo-400"
+                                            className="block w-full text-xs text-muted file:mr-3 file:rounded-xl file:border-0 file:bg-accent-soft file:px-3 file:py-2 file:text-xs file:font-semibold file:text-accent hover:file:bg-accent-soft"
                                         />
                                     </div>
                                     {errors.banner_path && (
-                                        <p className="text-xs text-rose-500 font-medium">{errors.banner_path}</p>
+                                        <p className="text-xs text-status-danger font-medium">{errors.banner_path}</p>
                                     )}
                                 </div>
                             </div>
@@ -360,9 +360,9 @@ export default function Apply() {
 
                         {/* SECTION 3: PIC & CONTACT DETAILS */}
                         <div className="space-y-6">
-                            <div className="flex items-center space-x-2 border-b border-slate-200 pb-3 dark:border-slate-800">
-                                <User className="h-5 w-5 text-indigo-600" />
-                                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                            <div className="flex items-center space-x-2 border-b border-border pb-3">
+                                <User className="h-5 w-5 text-accent"/>
+                                <h3 className="text-lg font-semibold text-ink">
                                     3. PIC & Contact Details
                                 </h3>
                             </div>
@@ -431,11 +431,11 @@ export default function Apply() {
                         </div>
 
                         {/* Submit Action */}
-                        <div className="border-t border-slate-200 pt-6 dark:border-slate-800">
+                        <div className="border-t border-border pt-6">
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="flex w-full items-center justify-center rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all hover:bg-indigo-700 disabled:opacity-60 cursor-pointer"
+                                className="flex w-full items-center justify-center rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-on-brand shadow-md shadow-indigo-500/20 transition-all hover:bg-accent/90 disabled:opacity-60 cursor-pointer"
                             >
                                 {processing ? 'Submitting Application...' : 'Submit Application'}
                             </button>

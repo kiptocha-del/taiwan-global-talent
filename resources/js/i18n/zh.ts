@@ -163,6 +163,7 @@ export const zh: Dictionary = {
     'about.c4': '教師與合作夥伴',
     'about.ctaTitle': '你的台灣故事可以從這裡開始。',
     'about.ctaLead': '來學點實用的，認識友善的人，發現一個可行的下一步。',
+    'about.ctaBadge': '隨時歡迎你加入',
     'about.ctaButton': '加入 Taiwan Global Talent Hub',
 
     'getInvolved.headTitle': '加入我們',

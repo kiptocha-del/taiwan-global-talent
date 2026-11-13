@@ -49,7 +49,7 @@ export default function ApplicantIndex({ company, applicants }: PageProps) {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50/50">
+        <div className="min-h-screen bg-canvas">
             <Head title="Control Applicant" />
             <CompanyNavbar company={company} />
 

@@ -23,7 +23,7 @@ export default function PageHeader({
                         href={backUrl}
                         className="mb-1 inline-flex items-center gap-1 text-sm font-medium text-muted transition-colors hover:text-brand"
                     >
-                        <ArrowLeft className="h-3.5 w-3.5" /> Back
+                        <ArrowLeft className="h-3.5 w-3.5"/> Back
                     </Link>
                 )}
                 <h1 className="font-display text-display-md font-bold tracking-tight text-ink">

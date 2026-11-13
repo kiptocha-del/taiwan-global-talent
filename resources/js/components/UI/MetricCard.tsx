@@ -13,7 +13,7 @@ export default function MetricCard({
     value,
     icon,
     graph,
-    className = '',
+    className ='',
 }: MetricCardProps) {
     return (
         <article

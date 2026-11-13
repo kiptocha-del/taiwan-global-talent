@@ -179,6 +179,7 @@ export const id: Dictionary = {
     'about.ctaTitle': 'Kisah Taiwan-mu bisa dimulai di sini.',
     'about.ctaLead':
         'Datang dan pelajari sesuatu yang berguna, temui orang yang baik, dan temukan langkah berikutnya yang terasa mungkin.',
+    'about.ctaBadge': 'Siap kapan pun Anda siap',
     'about.ctaButton': 'Bergabung dengan Taiwan Global Talent Hub',
 
     'getInvolved.headTitle': 'Ikut Terlibat',

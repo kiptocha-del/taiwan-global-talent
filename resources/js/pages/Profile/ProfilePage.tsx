@@ -94,15 +94,15 @@ export default function ProfilePage() {
         switch (role) {
             case 'company':
                 return (
-                    <Building className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                    <Building className="h-4 w-4 text-accent"/>
                 );
             case 'teacher':
                 return (
-                    <UserCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                    <UserCheck className="h-4 w-4 text-status-positive"/>
                 );
             default:
                 return (
-                    <GraduationCap className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                    <GraduationCap className="h-4 w-4 text-accent"/>
                 );
         }
     };
@@ -120,9 +120,9 @@ export default function ProfilePage() {
             />
 
             {/* TOP USER CARD / ACTION BAR */}
-            <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-xs sm:flex-row sm:items-center sm:justify-between dark:border-slate-800 dark:bg-slate-900">
+            <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface p-6 shadow-xs sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-slate-100 text-xl font-bold text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-surface-muted text-xl font-bold text-muted">
                         {user?.avatar ? (
                             <img
                                 src={user.avatar}
@@ -135,15 +135,15 @@ export default function ProfilePage() {
                     </div>
                     <div>
                         <div className="flex items-center gap-2">
-                            <h1 className="text-lg font-bold text-slate-900 dark:text-white">
+                            <h1 className="text-lg font-bold text-ink">
                                 {user?.name}
                             </h1>
-                            <span className="inline-flex items-center gap-1 rounded-md bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700 capitalize dark:bg-indigo-950 dark:text-indigo-300">
+                            <span className="inline-flex items-center gap-1 rounded-md bg-accent-soft px-2 py-0.5 text-xs font-semibold text-accent capitalize">
                                 {getRoleIcon()}
                                 {role}
                             </span>
                         </div>
-                        <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                        <p className="mt-0.5 text-xs text-muted">
                             {user?.email}
                         </p>
                     </div>
@@ -175,16 +175,16 @@ export default function ProfilePage() {
 
             {/* SUCCESS NOTIFICATION */}
             {recentlySuccessful && (
-                <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50/80 p-4 text-xs font-medium text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                <div className="flex items-center gap-2 rounded-xl border border-status-positive/30 bg-status-positive-soft/80 p-4 text-xs font-medium text-status-positive">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-status-positive"/>
                     <span>Profile details updated successfully!</span>
                 </div>
             )}
 
             {/* 1. CORE GENERAL INFORMATION */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
-                <div className="mb-4 flex items-center gap-2 border-b border-slate-100 pb-3 font-bold text-slate-900 dark:border-slate-800 dark:text-white">
-                    <UserIcon className="h-4 w-4 text-slate-400" />
+            <div className="rounded-2xl border border-border bg-surface p-6 shadow-xs">
+                <div className="mb-4 flex items-center gap-2 border-b border-border pb-3 font-bold text-ink">
+                    <UserIcon className="h-4 w-4 text-muted"/>
                     <h3>General Information</h3>
                 </div>
 
@@ -206,30 +206,30 @@ export default function ProfilePage() {
             </div>
 
             {/* 2. VERIFICATION STATUS & ACCOUNT HIERARCHY */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
-                <div className="flex items-center gap-2 border-b border-slate-100 pb-3 font-bold text-slate-900 dark:border-slate-800 dark:text-white">
-                    <FileText className="h-4 w-4 text-slate-400" />
+            <div className="rounded-2xl border border-border bg-surface p-6 shadow-xs">
+                <div className="flex items-center gap-2 border-b border-border pb-3 font-bold text-ink">
+                    <FileText className="h-4 w-4 text-muted"/>
                     <h3>Verification & Account Context</h3>
                 </div>
                 <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/60 p-3.5 dark:border-slate-800 dark:bg-slate-950/50">
-                        <Mail className="h-5 w-5 text-slate-400" />
+                    <div className="flex items-center gap-3 rounded-xl border border-border bg-canvas p-3.5">
+                        <Mail className="h-5 w-5 text-muted"/>
                         <div>
-                            <span className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                            <span className="text-[10px] font-bold tracking-wider text-muted uppercase">
                                 Email Address
                             </span>
-                            <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <p className="text-xs font-semibold text-ink">
                                 {user?.email}
                             </p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/60 p-3.5 dark:border-slate-800 dark:bg-slate-950/50">
-                        <Globe className="h-5 w-5 text-slate-400" />
+                    <div className="flex items-center gap-3 rounded-xl border border-border bg-canvas p-3.5">
+                        <Globe className="h-5 w-5 text-muted"/>
                         <div>
-                            <span className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                            <span className="text-[10px] font-bold tracking-wider text-muted uppercase">
                                 Platform Hierarchy
                             </span>
-                            <p className="text-xs font-semibold text-indigo-600 uppercase dark:text-indigo-400">
+                            <p className="text-xs font-semibold text-accent uppercase">
                                 {role}
                             </p>
                         </div>
@@ -238,14 +238,14 @@ export default function ProfilePage() {
             </div>
 
             {/* 3. PROFESSIONAL SUMMARY / BIO */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
-                <div className="mb-4 border-b border-slate-100 pb-3 font-bold text-slate-900 dark:border-slate-800 dark:text-white">
+            <div className="rounded-2xl border border-border bg-surface p-6 shadow-xs">
+                <div className="mb-4 border-b border-border pb-3 font-bold text-ink">
                     <h3>
                         {role === 'company'
                             ? 'Company Summary Description'
                             : 'Professional Summary / Bio'}
                     </h3>
-                    <p className="mt-0.5 text-xs font-normal text-slate-500 dark:text-slate-400">
+                    <p className="mt-0.5 text-xs font-normal text-muted">
                         Write a brief introduction about your background,
                         experience, or goals.
                     </p>
@@ -261,15 +261,15 @@ export default function ProfilePage() {
             </div>
 
             {/* 4. ROLE SPECIFIC CREDENTIALS */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
-                <div className="mb-4 border-b border-slate-100 pb-3 dark:border-slate-800">
-                    <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white">
-                        <ShieldAlert className="h-4 w-4 text-indigo-500" />
+            <div className="rounded-2xl border border-border bg-surface p-6 shadow-xs">
+                <div className="mb-4 border-b border-border pb-3">
+                    <div className="flex items-center gap-2 font-bold text-ink">
+                        <ShieldAlert className="h-4 w-4 text-accent"/>
                         <h3 className="capitalize">
                             {role} Professional Credentials
                         </h3>
                     </div>
-                    <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                    <p className="mt-0.5 text-xs text-muted">
                         Tailored profile information according to your role
                         on the platform.
                     </p>
@@ -316,7 +316,7 @@ export default function ProfilePage() {
     // Dynamic Wrapping Layout Sesuai Role
     if (role === 'company') {
         return (
-            <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+            <div className="min-h-screen bg-canvas text-ink">
                 <CompanyNavbar company={companyData} />
                 <main className="px-4 py-8 sm:px-6 lg:px-8">
                     {profileForm}

@@ -24,9 +24,9 @@ export default function ApplicantCard({
     onStatusChange,
 }: ApplicantCardProps) {
     return (
-        <div className="flex flex-col justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:border-blue-200 sm:flex-row sm:items-center">
+        <div className="flex flex-col justify-between gap-4 rounded-2xl border border-border bg-surface p-5 transition-all hover:border-accent/30 sm:flex-row sm:items-center">
             <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-blue-100 font-bold text-blue-700">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent-soft font-bold text-accent">
                     {applicant.candidate_avatar ? (
                         <img
                             src={applicant.candidate_avatar}
@@ -40,31 +40,31 @@ export default function ApplicantCard({
 
                 <div className="space-y-1">
                     <div className="flex flex-wrap items-center gap-2">
-                        <h4 className="font-semibold text-gray-900">
+                        <h4 className="font-semibold text-ink">
                             {applicant.candidate_name}
                         </h4>
                         <StatusBadge status={applicant.status} />
                     </div>
 
                     {applicant.job_title && (
-                        <p className="text-xs font-medium text-blue-600">
+                        <p className="text-xs font-medium text-accent">
                             {applicant.job_title}
                         </p>
                     )}
 
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-xs text-gray-500">
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-xs text-muted">
                         <span className="flex items-center gap-1">
-                            <Mail className="h-3.5 w-3.5" />{' '}
+                            <Mail className="h-3.5 w-3.5"/>{''}
                             {applicant.candidate_email}
                         </span>
                         {applicant.candidate_phone && (
                             <span className="flex items-center gap-1">
-                                <Phone className="h-3.5 w-3.5" />{' '}
+                                <Phone className="h-3.5 w-3.5"/>{''}
                                 {applicant.candidate_phone}
                             </span>
                         )}
                         <span className="flex items-center gap-1">
-                            <Calendar className="h-3.5 w-3.5" />{' '}
+                            <Calendar className="h-3.5 w-3.5"/>{''}
                             {applicant.applied_at}
                         </span>
                     </div>
@@ -78,9 +78,9 @@ export default function ApplicantCard({
                         href={applicant.resume_url}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-xl border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-100"
+                        className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-canvas px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-surface-muted"
                     >
-                        <Download className="h-3.5 w-3.5" /> Resume
+                        <Download className="h-3.5 w-3.5"/> Resume
                     </a>
                 )}
 
@@ -88,7 +88,7 @@ export default function ApplicantCard({
                     <select
                         value={applicant.status}
                         onChange={(e) => onStatusChange(e.target.value)}
-                        className="cursor-pointer rounded-xl border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+                        className="cursor-pointer rounded-xl border border-border bg-surface px-2.5 py-1.5 text-xs font-medium text-muted focus:ring-2 focus:ring-accent/20 focus:outline-none"
                     >
                         <option value="pending">Pending</option>
                         <option value="reviewed">Reviewed</option>

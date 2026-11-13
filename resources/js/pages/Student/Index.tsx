@@ -48,8 +48,8 @@ export default function StudentDashboard({
         <Layout>
             <div className="mx-auto max-w-6xl min-w-0 space-y-8 sm:space-y-10">
                 <section className="relative isolate grid min-w-0 gap-8 overflow-hidden rounded-panel bg-accent-soft p-6 shadow-card sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                    <div className="absolute -top-16 -right-10 -z-10 size-56 rounded-full bg-surface/55" />
-                    <div className="absolute -right-12 -bottom-24 -z-10 size-56 rounded-full bg-highlight/25" />
+                    <div className="absolute -top-16 -right-10 -z-10 size-56 rounded-full bg-surface/55"/>
+                    <div className="absolute -right-12 -bottom-24 -z-10 size-56 rounded-full bg-highlight/25"/>
                     <div className="relative min-w-0">
                         <span className="inline-flex items-center gap-2 rounded-full bg-surface/80 px-4 py-2 text-xs font-bold tracking-wide text-brand-strong">
                             <Sparkles
@@ -67,13 +67,13 @@ export default function StudentDashboard({
                         </p>
                         <Link
                             href={student.courses.index.url()}
-                            className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-strong px-6 py-3 text-sm font-bold text-white shadow-card transition hover:-translate-y-0.5 hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent dark:text-ink"
+                            className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-strong px-6 py-3 text-sm font-bold text-on-brand shadow-card transition hover:-translate-y-0.5 hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
-                            Continue learning <ArrowRight className="size-4" />
+                            Continue learning <ArrowRight className="size-4"/>
                         </Link>
                     </div>
 
-                    <aside className="relative rounded-card border border-white/60 bg-surface/80 p-5 shadow-card backdrop-blur-sm sm:p-6">
+                    <aside className="relative rounded-card border border-surface/60 bg-surface/80 p-5 shadow-card backdrop-blur-sm sm:p-6">
                         <div className="flex items-center justify-between gap-3">
                             <div>
                                 <p className="text-xs font-bold tracking-wide text-accent uppercase">
@@ -96,7 +96,7 @@ export default function StudentDashboard({
                         </p>
                         <div className="mt-5 flex items-center gap-3 border-t border-border pt-4 text-sm font-semibold text-ink">
                             <span className="flex size-9 items-center justify-center rounded-full bg-surface-muted text-brand">
-                                <Target className="size-4" aria-hidden="true" />
+                                <Target className="size-4"aria-hidden="true"/>
                             </span>
                             10 minutes is a good start
                         </div>
@@ -155,7 +155,7 @@ export default function StudentDashboard({
                                     className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-strong hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                                 >
                                     Browse courses{' '}
-                                    <ArrowRight className="size-4" />
+                                    <ArrowRight className="size-4"/>
                                 </Link>
                             </div>
                         ) : (
@@ -196,7 +196,7 @@ export default function StudentDashboard({
                                             <span className="hidden sm:inline">
                                                 Continue
                                             </span>
-                                            <ArrowRight className="size-4" />
+                                            <ArrowRight className="size-4"/>
                                         </Link>
                                     </li>
                                 ))}
