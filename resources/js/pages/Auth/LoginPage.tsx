@@ -179,8 +179,8 @@ const LoginPage = () => {
             <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl overflow-hidden rounded-panel border border-border bg-surface shadow-panel lg:grid-cols-[0.95fr_1.05fr]">
                 <section className="relative hidden overflow-hidden bg-brand-strong p-10 text-on-brand lg:block">
                     <img
-                        src="/images/landing/cozy-taiwan-clubhouse.webp"
-                        alt="People planning career and learning goals"
+                        src="/images/landing/yilan-county.webp"
+                        alt="Collaborators team building in Yilan County"
                         className="absolute inset-0 h-full w-full object-cover opacity-[0.72] saturate-110"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-brand-strong/80 to-brand-strong/30"/>
@@ -521,8 +521,8 @@ const LoginPage = () => {
            <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl overflow-hidden rounded-panel border border-border bg-surface shadow-panel lg:grid-cols-[0.95fr_1.05fr]">
                 <section className="relative hidden overflow-hidden bg-brand-strong p-10 text-on-brand lg:block">
                     <img
-                        src="/images/landing/cozy-taiwan-clubhouse.webp"
-                        alt="People planning career and learning goals"
+                        src="/images/landing/yilan-county.webp"
+                        alt="Collaborators team building in Yilan County"
                         className="absolute inset-0 h-full w-full object-cover opacity-[0.72] saturate-110"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-brand-strong/80 to-brand-strong/30"/>
