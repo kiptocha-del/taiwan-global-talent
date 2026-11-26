@@ -35,8 +35,8 @@ const roles: RoleOption[] = [
     },
     {
         id: 'company',
-        label: 'Company',
-        desc: 'Find prepared international talent for Taiwan-based roles.',
+        label: 'Partner / Company',
+        desc: 'Partner with us or find prepared international talent for Taiwan-based roles.',
         icon: Building2,
         goal: 'Recruitment and verified talent matching',
     },

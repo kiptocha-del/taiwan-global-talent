@@ -2,7 +2,6 @@ import { Link } from '@inertiajs/react';
 import { Bell, UserCheck, Briefcase, Building2, Check } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from '@/context/LanguageContext';
-import type { TranslationKey } from '@/i18n';
 
 export interface NotificationItem {
     id: string | number;
@@ -20,45 +19,6 @@ interface NotificationDropdownProps {
     initialNotifications?: NotificationItem[];
 }
 
-// Placeholder notifications shown until the backend provides real ones.
-const SAMPLE_NOTIFICATIONS: ReadonlyArray<{
-    id: number;
-    title: TranslationKey;
-    message: TranslationKey;
-    time: TranslationKey;
-    read: boolean;
-    type: NotificationItem['type'];
-    link: string;
-}> = [
-    {
-        id: 1,
-        title: 'notifications.sample1Title',
-        message: 'notifications.sample1Message',
-        time: 'notifications.sample1Time',
-        read: false,
-        type: 'applicant',
-        link: '/company/applicants',
-    },
-    {
-        id: 2,
-        title: 'notifications.sample2Title',
-        message: 'notifications.sample2Message',
-        time: 'notifications.sample2Time',
-        read: false,
-        type: 'system',
-        link: '/company/dashboard',
-    },
-    {
-        id: 3,
-        title: 'notifications.sample3Title',
-        message: 'notifications.sample3Message',
-        time: 'notifications.sample3Time',
-        read: true,
-        type: 'job',
-        link: '/company/jobs',
-    },
-];
-
 export default function NotificationDropdown({
     isOpen,
     onToggle,
@@ -69,16 +29,9 @@ export default function NotificationDropdown({
         () => new Set(),
     );
 
-    const notifications: NotificationItem[] = (
-        initialNotifications.length > 0
-            ? initialNotifications
-            : SAMPLE_NOTIFICATIONS.map((sample) => ({
-                  ...sample,
-                  title: t(sample.title),
-                  message: t(sample.message),
-                  time: t(sample.time),
-              }))
-    ).map((n) => ({ ...n, read: n.read || readIds.has(n.id) }));
+    const notifications: NotificationItem[] = initialNotifications.map(
+        (n) => ({ ...n, read: n.read || readIds.has(n.id) }),
+    );
 
     const unreadCount = notifications.filter((n) => !n.read).length;
 

@@ -1,7 +1,6 @@
 import { Link, router } from '@inertiajs/react';
 import {
     Award,
-    ExternalLink,
     LogOut,
     User as UserIcon,
     ChevronDown,
@@ -151,19 +150,6 @@ export default function ProfileDropdown({
                                 <Award className="h-3.5 w-3.5 text-muted"/>
                                 <span>My Certificates</span>
                             </Link>
-                        )}
-
-                        {/* Company Public Page Link */}
-                        {company?.slug && (
-                            <a
-                                href={`/company/${company.slug}`}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-medium text-muted transition hover:bg-canvas"
-                            >
-                                <ExternalLink className="h-3.5 w-3.5 text-muted"/>
-                                <span>Public Page</span>
-                            </a>
                         )}
                     </div>
 

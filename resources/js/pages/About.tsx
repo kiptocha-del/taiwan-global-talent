@@ -76,7 +76,7 @@ export default function About() {
                         style={{ clipPath: SLANT.photo }}
                     >
                         <img
-                            src="/images/landing/diverse-collaboration.png"
+                            src="/images/landing/diverse-collaboration.jpg"
                             alt=""
                             className="h-full w-full object-cover object-[68%_center]"
                         />
@@ -120,7 +120,7 @@ export default function About() {
                             style={{ clipPath: SLANT.photoMobile }}
                         >
                             <img
-                                src="/images/landing/diverse-collaboration.png"
+                                src="/images/landing/diverse-collaboration.jpg"
                                 alt=""
                                 className="h-full w-full object-cover object-[68%_center]"
                             />

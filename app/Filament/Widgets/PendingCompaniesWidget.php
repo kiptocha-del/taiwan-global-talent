@@ -2,9 +2,8 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Actions\ApplicationReviewActions;
 use App\Models\CompanyProfile;
-use Filament\Actions\Action;
-use Filament\Actions\BulkActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
@@ -19,13 +18,21 @@ class PendingCompaniesWidget extends TableWidget
 
     public function table(Table $table): Table
     {
+        $profile = fn (CompanyProfile $record): CompanyProfile => $record;
+
         return $table
-            ->query(CompanyProfile::query()->where('status', 'pending'))
+            ->query(CompanyProfile::query()->where('status', CompanyProfile::STATUS_PENDING))
             ->columns([
                 TextColumn::make('company_display_name')
                     ->label(__('Company name'))
                     ->searchable()
                     ->weight('bold'),
+
+                TextColumn::make('organization_type')
+                    ->label('Type')
+                    ->badge()
+                    ->color('gray')
+                    ->formatStateUsing(fn (?string $state): string => CompanyProfile::ORGANIZATION_TYPES[$state] ?? (string) $state),
 
                 TextColumn::make('pic_name')
                     ->label(__('Contact person')),
@@ -39,32 +46,11 @@ class PendingCompaniesWidget extends TableWidget
                 TextColumn::make('created_at')
                     ->label(__('Registered on'))
                     ->dateTime('d M Y, H:i')
-                    ->sortable(), ])
-            ->filters([
-                //
-            ])
-            ->headerActions([
-                //
+                    ->sortable(),
             ])
             ->recordActions([
-                Action::make('approve')
-                    ->label('Approve')
-                    ->icon('heroicon-m-check')
-                    ->color('success')
-                    ->requiresConfirmation()
-                    ->action(fn (CompanyProfile $record) => $record->update(['status' => 'approved'])),
-
-                Action::make('reject')
-                    ->label('Reject')
-                    ->icon('heroicon-m-x-mark')
-                    ->color('danger')
-                    ->requiresConfirmation()
-                    ->action(fn (CompanyProfile $record) => $record->update(['status' => 'rejected'])),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    //
-                ]),
+                ApplicationReviewActions::approve($profile),
+                ApplicationReviewActions::deny($profile),
             ])
             ->emptyStateHeading('No Pending Companies')
             ->emptyStateDescription('All company registrations have been processed.')

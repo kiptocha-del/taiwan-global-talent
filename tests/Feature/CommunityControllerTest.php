@@ -183,6 +183,11 @@ class CommunityControllerTest extends TestCase
         $user = User::factory()->create();
         $user->assignRole($role);
 
+        // Teacher routes sit behind the teacher-status check, so the user needs an approved profile.
+        if ($role === 'teacher') {
+            $user->teacherProfile()->create(['full_name' => $user->name, 'status' => 'approved']);
+        }
+
         return $user;
     }
 

@@ -50,31 +50,33 @@ Route::post('/login-admin', [AdminAuthController::class, 'login'])
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    // Company Apply & Waiting
-    Route::prefix('company/apply')->name('company.')->group(function () {
+    // Company (partner) application form & status page
+    Route::middleware('role:company')->prefix('company/apply')->name('company.')->group(function () {
         Route::get('/', [CompanyApplyController::class, 'create'])
             ->name('register');
         Route::post('/store', [CompanyApplyController::class, 'store'])
             ->name('store');
-        Route::get('/waiting', [CompanyApplyController::class, 'waiting'])
-            ->name('waiting');
+        Route::get('/status', [CompanyApplyController::class, 'status'])
+            ->name('status');
     });
 
-    // Teacher Apply & Waiting
-    Route::prefix('teacher/apply')->name('teacher.')->group(function () {
+    // Teacher application form & status page
+    Route::middleware('role:teacher')->prefix('teacher/apply')->name('teacher.')->group(function () {
         Route::get('/', [TeacherApplyController::class, 'create'])
             ->name('apply');
         Route::post('/store', [TeacherApplyController::class, 'store'])
             ->name('store');
-        Route::get('/waiting-approval', [TeacherApplyController::class, 'waiting'])
-            ->name('waiting');
+        Route::get('/status', [TeacherApplyController::class, 'status'])
+            ->name('status');
     });
+
+    // Shared by the student and company profile pages
+    Route::patch('/profile/update', [ProfilePageController::class, 'update'])
+        ->middleware('role:student|company')
+        ->name('profile.update');
 
     // COMPANY ROLE
     Route::middleware(['role:company', 'check.company.status'])->group(function () {
-
-        Route::patch('/profile/update', [ProfilePageController::class, 'update'])
-            ->name('profile.update');
 
         Route::prefix('company')->name('company.')->group(function () {
             Route::get('/dashboard', [CompanyDashboardController::class, 'index'])
@@ -84,11 +86,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 ->name('profile.show');
 
             // Job Postings Routes
-            Route::resource('jobs', CompanyJobController::class);
+            Route::resource('jobs', CompanyJobController::class)->except('show');
 
             // Applicants Routes
             Route::get('/applicants', [CompanyApplicantController::class, 'index'])
                 ->name('applicants.index');
+
+            Route::patch('/applicants/{application}/status', [CompanyApplicantController::class, 'updateStatus'])
+                ->name('applicants.status');
 
             // Community Routes
             Route::prefix('community')->name('community.')->group(function () {
@@ -185,13 +190,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     ->name('apply');
             });
         });
-
-        Route::patch('/profile/update', [ProfilePageController::class, 'update'])
-            ->name('profile.update');
     });
 
     // TEACHER ROLE
-    Route::middleware('role:teacher')->prefix('teacher')->name('teacher.')->group(function () {
+    Route::middleware(['role:teacher', 'check.teacher.status'])->prefix('teacher')->name('teacher.')->group(function () {
         // 1. Dashboard Overview
         Route::get('/dashboard', [TeacherDashboardController::class, 'index'])
             ->name('dashboard');

@@ -3,10 +3,12 @@
 namespace Tests\Feature;
 
 use App\Jobs\GenerateCertificateJob;
+use App\Models\Certificate;
 use App\Models\Enrollment;
 use App\Models\Lesson;
 use App\Models\Module;
 use App\Models\Progress;
+use App\Models\StudentProfile;
 use App\Models\User;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Database\Eloquent\Collection;
@@ -110,6 +112,35 @@ class LessonProgressTest extends TestCase
         $this->complete($this->lessons->last());
 
         Queue::assertPushed(GenerateCertificateJob::class, 1);
+    }
+
+    public function test_dashboard_summary_is_counted_from_the_students_own_records(): void
+    {
+        $finished = Module::factory()->create();
+        Enrollment::factory()->completed()->create([
+            'user_id' => $this->student->id,
+            'module_id' => $finished->id,
+        ]);
+        Certificate::create([
+            'user_id' => $this->student->id,
+            'module_id' => $finished->id,
+            'pdf_path' => 'certificates/test.pdf',
+        ]);
+        StudentProfile::create(['user_id' => $this->student->id, 'mandarin_level' => 'B1']);
+
+        // Another student's finished course must not be counted.
+        Enrollment::factory()->completed()->create();
+
+        $this->actingAs($this->student)
+            ->get(route('student.dashboard'))
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Student/Index')
+                ->where('summary', [
+                    'courses_completed' => 1,
+                    'certificates' => 1,
+                    'mandarin_level' => 'B1',
+                ]));
     }
 
     public function test_dashboard_lists_unfinished_courses_by_progress_and_hides_finished_ones(): void

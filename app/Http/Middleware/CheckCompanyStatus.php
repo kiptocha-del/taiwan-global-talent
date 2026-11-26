@@ -4,37 +4,23 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class CheckCompanyStatus
 {
-    public function handle(Request $request, Closure $next)
+    /**
+     * Only approved organizations reach the company portal; everyone else goes to the form or their status page.
+     */
+    public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
-        $company = $user->companyProfile;
+        $profile = $request->user()->companyProfile;
 
-        if (! $company) {
-            if ($request->routeIs('company.register') || $request->routeIs('company.store')) {
-                return $next($request);
-            }
-
+        if (! $profile) {
             return redirect()->route('company.register');
         }
 
-        if ($company->status === 'pending') {
-            if ($request->routeIs('company.waiting')) {
-                return $next($request);
-            }
-
-            return redirect()->route('company.waiting');
-        }
-
-        if ($company->status === 'rejected') {
-            if ($request->routeIs('company.register') || $request->routeIs('company.store')) {
-                return $next($request);
-            }
-
-            return redirect()->route('company.register')->with('error', 'Registration rejected: '.$company->rejection_reason);
+        if (! $profile->isApproved()) {
+            return redirect()->route('company.status');
         }
 
         return $next($request);

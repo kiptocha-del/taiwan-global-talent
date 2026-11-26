@@ -44,6 +44,13 @@ return [
         'application_credentials' => env('GOOGLE_APPLICATION_CREDENTIALS'),
     ],
 
+    // Mirrors Get Involved contact form messages into a Google Sheet (optional).
+    'google_sheets' => [
+        'credentials' => env('GOOGLE_SHEETS_CREDENTIALS'),
+        'spreadsheet_id' => env('GOOGLE_SHEETS_SPREADSHEET_ID'),
+        'tab' => env('GOOGLE_SHEETS_TAB', 'Sheet1'),
+    ],
+
     'sightengine' => [
         'api_user' => env('SIGHTENGINE_API_USER'),
         'api_secret' => env('SIGHTENGINE_API_SECRET'),

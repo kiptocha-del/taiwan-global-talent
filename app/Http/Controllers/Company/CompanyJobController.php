@@ -120,6 +120,15 @@ class CompanyJobController extends Controller
         return redirect()->route('company.jobs.index')->with('success', 'Job posting updated successfully!');
     }
 
+    public function destroy(CompanyJob $job)
+    {
+        $this->authorizeCompany($job);
+
+        $job->delete();
+
+        return redirect()->route('company.jobs.index')->with('success', 'Job posting deleted successfully!');
+    }
+
     private function authorizeCompany(CompanyJob $job)
     {
         $company = auth()->user()->companyProfile;

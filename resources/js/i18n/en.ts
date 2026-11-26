@@ -72,7 +72,7 @@ export const en = {
         'Connecting international talent with Taiwan’s learning and work ecosystem.',
     'companies.link': 'See our partners and get involved',
     'companies.empty':
-        'Partner names and logos will appear here once participation and brand-use approval are confirmed. We do not imply partnerships before they are official.',
+        'Partner names and logos will appear here once their partner accounts are approved. We do not imply partnerships before they are official.',
 
     // Landing: call to action
     'cta.eyebrow': 'Taiwan, one practical step at a time',
@@ -195,14 +195,14 @@ export const en = {
     'getInvolved.lead':
         'Universities, Mandarin centers, scholarship programs, employers, and mentors all shape the journey. Tell us how you would like to be part of it.',
     'getInvolved.shareInterest': 'Share your interest',
-    'getInvolved.employerRegister': 'Employers: register as a company',
-    'getInvolved.howTitle': 'How partnership works',
+    'getInvolved.employerRegister': 'Become a partner: sign in and apply',
+    'getInvolved.howTitle': 'How it works',
     'getInvolved.how1':
         'Tell us about your organization and how you would like to get involved.',
     'getInvolved.how2':
         'Our team reviews every inquiry and reaches out to agree on next steps.',
     'getInvolved.how3':
-        'Once confirmed, your name and logo appear among our partners.',
+        'To be listed among our partners, sign in and apply for a partner account.',
     'getInvolved.whoBadge': 'Who can get involved',
     'getInvolved.whoTitle': 'There is a place for every kind of partner.',
     'getInvolved.w1Title': 'Universities',
@@ -223,14 +223,14 @@ export const en = {
     'getInvolved.partnersBadge': 'Our partners',
     'getInvolved.partnersTitle': 'Organizations building this hub with us.',
     'getInvolved.partnersEmpty':
-        'Partner names and logos will appear here once participation and brand-use approval are confirmed. We do not imply partnerships before they are official.',
-    'getInvolved.formBadge': 'Partner inquiry',
+        'Partner names and logos will appear here once their partner accounts are approved. We do not imply partnerships before they are official.',
+    'getInvolved.formBadge': 'Contact us',
     'getInvolved.formTitle': 'Tell us how you would like to get involved.',
     'getInvolved.formLead':
-        'A few details are enough to start the conversation. Your contact information stays private; only your name and logo appear publicly once a partnership is confirmed.',
+        'A few details are enough to start the conversation. This form is only a message to our team, and everything you send stays private.',
     'getInvolved.employerNoteBefore':
-        'Employers hiring through the hub should instead',
-    'getInvolved.employerNoteLink': 'sign in and register a company account',
+        'To be listed as a partner or to hire through the hub,',
+    'getInvolved.employerNoteLink': 'sign in and apply for a partner account',
     'getInvolved.employerNoteAfter': '.',
     'getInvolved.orgName': 'Organization name *',
     'getInvolved.orgNamePlaceholder': 'e.g. National Taiwan University',
@@ -245,35 +245,19 @@ export const en = {
     'getInvolved.message': 'Message',
     'getInvolved.messagePlaceholder':
         'Anything that helps us understand what you have in mind.',
-    'getInvolved.logoLabel': 'Logo (PNG, JPG, or WebP, up to 2 MB)',
-    'getInvolved.logoPreview': 'Logo preview',
-    'getInvolved.logoNote':
-        'Shown publicly only after your partnership is approved.',
     'getInvolved.honeypot': 'Leave this field empty',
     'getInvolved.sending': 'Sending...',
-    'getInvolved.send': 'Send partner inquiry',
+    'getInvolved.send': 'Send message',
     'getInvolved.thanksTitle': 'Thank you for reaching out.',
     'getInvolved.thanksDefault':
         'Your inquiry has been received. Our team will review it and get back to you.',
-    'getInvolved.submitAnother': 'Submit another inquiry',
+    'getInvolved.submitAnother': 'Send another message',
 
     // Company portal: notifications
     'notifications.title': 'Notifications',
     'notifications.newCount': '{count} new',
     'notifications.markAllRead': 'Mark all as read',
     'notifications.empty': 'No notifications right now.',
-    'notifications.sample1Title': 'New applicant',
-    'notifications.sample1Message':
-        'Kevin Tan just applied for the Senior React Developer position.',
-    'notifications.sample1Time': '10 minutes ago',
-    'notifications.sample2Title': 'Verification status',
-    'notifications.sample2Message':
-        'Your company profile has been approved by the admin.',
-    'notifications.sample2Time': '2 hours ago',
-    'notifications.sample3Title': 'Job posting live',
-    'notifications.sample3Message':
-        'Your "Frontend Engineer" posting has been published.',
-    'notifications.sample3Time': '1 day ago',
 
     // Student portal
     'course.startLearning': 'Start learning',

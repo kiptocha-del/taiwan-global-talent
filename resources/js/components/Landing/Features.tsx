@@ -40,8 +40,10 @@ const Features = () => {
                     </h2>
                     <div className="mt-9 overflow-hidden rounded-md">
                         <img
-                            src="/images/landing/diverse-collaboration.png"
+                            src="/images/landing/diverse-collaboration.jpg"
                             alt="Diverse group collaborating around a laptop"
+                            loading="lazy"
+                            decoding="async"
                             className="aspect-16/10 w-full object-cover"
                         />
                     </div>

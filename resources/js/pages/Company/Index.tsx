@@ -5,13 +5,17 @@ import CompanyInfoSection from '@/components/Company/CompanyInfoSection';
 import CompanyMetrics from '@/components/Company/CompanyMetrics';
 import CompanyNavbar from '@/components/Company/CompanyNavbar';
 import CompanyVerificationAlert from '@/components/Company/CompanyVerificationAlert';
-import type { CompanyProfile } from '@/types/company/type';
+import type {
+    CompanyMetricsData,
+    CompanyProfile,
+} from '@/types/company/type';
 
 interface IndexProps {
     company: CompanyProfile | null;
+    metrics: CompanyMetricsData | null;
 }
 
-export default function Index({ company }: IndexProps) {
+export default function Index({ company, metrics }: IndexProps) {
     return (
         <div className="min-h-screen bg-canvas text-ink">
             <Head title="Company Dashboard" />
@@ -48,7 +52,7 @@ export default function Index({ company }: IndexProps) {
                             reason={company.rejection_reason}
                         />
 
-                        <CompanyMetrics />
+                        {metrics && <CompanyMetrics metrics={metrics} />}
 
                         <CompanyInfoSection company={company} />
                     </>

@@ -7,7 +7,6 @@ use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -19,11 +18,6 @@ class PartnerInquiriesTable
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
-                ImageColumn::make('logo_path')
-                    ->label('Logo')
-                    ->disk('s3')
-                    ->circular(),
-
                 TextColumn::make('organization_name')
                     ->label('Organization')
                     ->searchable()
@@ -47,8 +41,7 @@ class PartnerInquiriesTable
                     ->formatStateUsing(fn (string $state): string => PartnerInquiry::STATUSES[$state] ?? $state)
                     ->color(fn (string $state): string => match ($state) {
                         PartnerInquiry::STATUS_NEW => 'warning',
-                        PartnerInquiry::STATUS_APPROVED => 'success',
-                        PartnerInquiry::STATUS_DECLINED => 'danger',
+                        PartnerInquiry::STATUS_CONTACTED => 'success',
                         default => 'gray',
                     })
                     ->sortable(),
@@ -59,7 +52,7 @@ class PartnerInquiriesTable
                     ->sortable(),
 
                 TextColumn::make('reviewed_at')
-                    ->label('Reviewed')
+                    ->label('First Handled')
                     ->dateTime('d M Y, H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -73,21 +66,20 @@ class PartnerInquiriesTable
                     ->options(PartnerInquiry::ORGANIZATION_TYPES),
             ])
             ->recordActions([
-                Action::make('approve')
-                    ->label('Approve')
-                    ->icon('heroicon-m-check')
+                Action::make('markContacted')
+                    ->label('Mark Contacted')
+                    ->icon('heroicon-m-chat-bubble-left-right')
                     ->color('success')
-                    ->requiresConfirmation()
-                    ->visible(fn (PartnerInquiry $record): bool => $record->status !== PartnerInquiry::STATUS_APPROVED)
-                    ->action(fn (PartnerInquiry $record) => $record->update(['status' => PartnerInquiry::STATUS_APPROVED])),
+                    ->visible(fn (PartnerInquiry $record): bool => $record->status === PartnerInquiry::STATUS_NEW)
+                    ->action(fn (PartnerInquiry $record) => $record->update(['status' => PartnerInquiry::STATUS_CONTACTED])),
 
-                Action::make('decline')
-                    ->label('Decline')
-                    ->icon('heroicon-m-x-mark')
-                    ->color('danger')
+                Action::make('close')
+                    ->label('Close')
+                    ->icon('heroicon-m-archive-box')
+                    ->color('gray')
                     ->requiresConfirmation()
-                    ->visible(fn (PartnerInquiry $record): bool => $record->status !== PartnerInquiry::STATUS_DECLINED)
-                    ->action(fn (PartnerInquiry $record) => $record->update(['status' => PartnerInquiry::STATUS_DECLINED])),
+                    ->visible(fn (PartnerInquiry $record): bool => $record->status !== PartnerInquiry::STATUS_CLOSED)
+                    ->action(fn (PartnerInquiry $record) => $record->update(['status' => PartnerInquiry::STATUS_CLOSED])),
 
                 EditAction::make(),
             ])
@@ -96,8 +88,8 @@ class PartnerInquiriesTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No partner inquiries yet')
-            ->emptyStateDescription('Submissions from the Get Involved page will appear here.')
+            ->emptyStateHeading('No inquiries yet')
+            ->emptyStateDescription('Messages from the Get Involved contact form will appear here.')
             ->emptyStateIcon('heroicon-o-hand-raised');
     }
 }

@@ -16,31 +16,38 @@ import student from '@/routes/student';
 import type { CourseProgress } from '@/types/course';
 import Layout from './Layout';
 
-const quickWins = [
-    {
-        label: 'Profile ready',
-        value: '70%',
-        icon: Target,
-    },
-    {
-        label: 'Mandarin level',
-        value: 'A2',
-        icon: BookOpen,
-    },
-    {
-        label: 'Achievements',
-        value: '2',
-        icon: Award,
-    },
-];
+interface StudentSummary {
+    courses_completed: number;
+    certificates: number;
+    mandarin_level: string | null;
+}
 
 interface StudentDashboardProps {
     courses?: CourseProgress[];
+    summary: StudentSummary;
 }
 
 export default function StudentDashboard({
     courses = [],
+    summary,
 }: StudentDashboardProps) {
+    const quickWins = [
+        {
+            label: 'Courses completed',
+            value: summary.courses_completed,
+            icon: Target,
+        },
+        {
+            label: 'Mandarin level',
+            value: summary.mandarin_level || 'Not set',
+            icon: BookOpen,
+        },
+        {
+            label: 'Certificates',
+            value: summary.certificates,
+            icon: Award,
+        },
+    ];
     const { user } = useAuth();
     const firstName = user?.name?.split(' ')[0] || 'friend';
 
@@ -58,7 +65,7 @@ export default function StudentDashboard({
                             />
                             YOUR LEARNING HOME
                         </span>
-                        <h1 className="mt-5 max-w-2xl font-display text-display-lg font-semibold tracking-tight break-words text-brand-strong">
+                        <h1 className="mt-5 max-w-2xl font-display text-display-lg font-semibold tracking-tight wrap-break-word text-brand-strong">
                             Good morning, {firstName}.
                         </h1>
                         <p className="mt-4 max-w-xl text-base leading-7 text-muted sm:text-lg">
@@ -215,10 +222,8 @@ export default function StudentDashboard({
                             Coming up
                         </h2>
                         <p className="mt-3 text-sm leading-6 text-muted">
-                            Taiwan Tech Career Fair community prep session
-                        </p>
-                        <p className="mt-4 text-xs font-bold text-accent">
-                            Saturday · 10:00 AM
+                            No events are scheduled yet. New sessions will
+                            appear here once they are announced.
                         </p>
                     </article>
                 </section>

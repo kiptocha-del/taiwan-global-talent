@@ -2,28 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
+/**
+ * A message sent through the public Get Involved contact form.
+ */
 class PartnerInquiry extends Model
 {
     use HasFactory;
 
     public const STATUS_NEW = 'new';
 
-    public const STATUS_APPROVED = 'approved';
+    public const STATUS_CONTACTED = 'contacted';
 
-    public const STATUS_DECLINED = 'declined';
+    public const STATUS_CLOSED = 'closed';
 
     /**
      * @var array<string, string>
      */
     public const STATUSES = [
         self::STATUS_NEW => 'New',
-        self::STATUS_APPROVED => 'Approved',
-        self::STATUS_DECLINED => 'Declined',
+        self::STATUS_CONTACTED => 'Contacted',
+        self::STATUS_CLOSED => 'Closed',
     ];
 
     /**
@@ -50,11 +51,27 @@ class PartnerInquiry extends Model
         'other' => 'Something else',
     ];
 
+    /**
+     * Column headings shared by the CSV download and the Google Sheet.
+     *
+     * @var list<string>
+     */
+    public const EXPORT_HEADINGS = [
+        'Submitted',
+        'Organization',
+        'Type',
+        'Website',
+        'Contact name',
+        'Contact email',
+        'Wants to',
+        'Message',
+        'Status',
+    ];
+
     protected $fillable = [
         'organization_name',
         'organization_type',
         'website_url',
-        'logo_path',
         'contact_name',
         'contact_email',
         'involvement_interests',
@@ -62,6 +79,10 @@ class PartnerInquiry extends Model
         'status',
         'admin_notes',
         'reviewed_at',
+    ];
+
+    protected $attributes = [
+        'status' => self::STATUS_NEW,
     ];
 
     protected $casts = [
@@ -76,17 +97,6 @@ class PartnerInquiry extends Model
                 $inquiry->reviewed_at = now();
             }
         });
-
-        static::deleting(function (PartnerInquiry $inquiry) {
-            if ($inquiry->logo_path) {
-                Storage::disk('s3')->delete($inquiry->logo_path);
-            }
-        });
-    }
-
-    public function getLogoUrlAttribute(): ?string
-    {
-        return $this->logo_path ? Storage::disk('s3')->url($this->logo_path) : null;
     }
 
     public function getOrganizationTypeLabelAttribute(): string
@@ -94,31 +104,27 @@ class PartnerInquiry extends Model
         return self::ORGANIZATION_TYPES[$this->organization_type] ?? ucfirst(str_replace('_', ' ', $this->organization_type));
     }
 
-    public function scopeApproved(Builder $query): Builder
-    {
-        return $query->where('status', self::STATUS_APPROVED);
-    }
-
     /**
-     * Approved partners shaped for the public landing and Get Involved pages.
+     * One row in the order of EXPORT_HEADINGS.
      *
-     * @return array<int, array{id: int, name: string, type: string, website_url: string|null, logo_url: string|null}>
+     * @return list<string>
      */
-    public static function approvedForDisplay(?int $limit = null): array
+    public function toExportRow(): array
     {
-        return self::query()
-            ->approved()
-            ->orderByDesc('reviewed_at')
-            ->orderByDesc('id')
-            ->when($limit, fn (Builder $query) => $query->limit($limit))
-            ->get()
-            ->map(fn (PartnerInquiry $inquiry) => [
-                'id' => $inquiry->id,
-                'name' => $inquiry->organization_name,
-                'type' => $inquiry->organization_type_label,
-                'website_url' => $inquiry->website_url,
-                'logo_url' => $inquiry->logo_url,
-            ])
-            ->all();
+        $interests = collect($this->involvement_interests)
+            ->map(fn (string $interest): string => self::INVOLVEMENT_INTERESTS[$interest] ?? $interest)
+            ->implode(', ');
+
+        return [
+            (string) $this->created_at?->format('Y-m-d H:i'),
+            $this->organization_name,
+            $this->organization_type_label,
+            (string) $this->website_url,
+            $this->contact_name,
+            $this->contact_email,
+            $interests,
+            (string) $this->message,
+            self::STATUSES[$this->status] ?? (string) $this->status,
+        ];
     }
 }

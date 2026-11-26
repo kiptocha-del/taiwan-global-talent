@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\CompanyJobs\Schemas;
 
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -74,15 +73,6 @@ class CompanyJobForm
                         RichEditor::make('requirements')
                             ->columnSpanFull(),
                     ]),
-
-                Section::make('Metadata')
-                    ->schema([
-                        DateTimePicker::make('published_at')
-                            ->label('Date Published'),
-
-                        DateTimePicker::make('application_deadline')
-                            ->label('Application Deadline'),
-                    ])->columns(2),
             ])->columns(1);
     }
 }

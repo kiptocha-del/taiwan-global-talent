@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Certificate;
 use App\Models\Enrollment;
 use App\Models\Progress;
+use App\Models\StudentProfile;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -13,8 +15,15 @@ class DashboardController extends Controller
 {
     public function index(Request $request): Response
     {
+        $userId = $request->user()->id;
+
         return Inertia::render('Student/Index', [
-            'courses' => $this->coursesInProgress($request->user()->id),
+            'courses' => $this->coursesInProgress($userId),
+            'summary' => [
+                'courses_completed' => Enrollment::where('user_id', $userId)->where('is_completed', true)->count(),
+                'certificates' => Certificate::where('user_id', $userId)->count(),
+                'mandarin_level' => StudentProfile::where('user_id', $userId)->value('mandarin_level'),
+            ],
         ]);
     }
 

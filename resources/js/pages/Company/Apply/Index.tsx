@@ -12,7 +12,12 @@ import CompanyNavbar from '@/components/Company/CompanyNavbar';
 import FileUploadDropzone from '@/components/UI/FileUploadDropzone';
 import InputText from '@/components/UI/InputText';
 import SelectOption from '@/components/UI/SelectOption';
+import type { SelectItemOption } from '@/components/UI/SelectOption';
 import TextArea from '@/components/UI/TextArea';
+import { downscaleImage } from '@/utils/media.helper';
+
+/** Logos are shown at most 96px tall, so 400px leaves room for high-density screens. */
+const LOGO_MAX_SIDE = 400;
 
 interface CompanyApplyFormState {
     // 1. Legal & Verification
@@ -22,7 +27,7 @@ interface CompanyApplyFormState {
 
     // 2. Public Profile (Branding)
     company_display_name: string;
-    slug: string;
+    organization_type: string;
     industry: string;
     website_url: string;
     founded_year: string;
@@ -42,50 +47,61 @@ interface CompanyApplyFormState {
     hq_address: string;
 }
 
-export default function Apply() {
-    const { data, setData, post, processing, errors, reset } =
+/** Text answers from an earlier, denied application, used to pre-fill the form. */
+type ExistingProfile = Partial<
+    Record<
+        Exclude<
+            keyof CompanyApplyFormState,
+            'business_registration_path' | 'logo_path' | 'banner_path'
+        >,
+        string | number | null
+    >
+>;
+
+interface ApplyProps {
+    existingProfile: ExistingProfile | null;
+    hasBusinessDocument: boolean;
+    rejectionReason: string | null;
+    organizationTypes: SelectItemOption[];
+}
+
+export default function Apply({
+    existingProfile,
+    hasBusinessDocument,
+    rejectionReason,
+    organizationTypes,
+}: ApplyProps) {
+    const text = (field: keyof ExistingProfile, fallback = '') =>
+        String(existingProfile?.[field] ?? fallback);
+
+    const { data, setData, post, processing, errors } =
         useForm<CompanyApplyFormState>({
-            company_legal_name: '',
-            tax_id: '',
+            company_legal_name: text('company_legal_name'),
+            tax_id: text('tax_id'),
             business_registration_path: null,
 
-            company_display_name: '',
-            slug: '',
-            industry: '',
-            website_url: '',
-            founded_year: '',
-            company_size: 0,
+            company_display_name: text('company_display_name'),
+            organization_type: text('organization_type'),
+            industry: text('industry'),
+            website_url: text('website_url'),
+            founded_year: text('founded_year'),
+            company_size: Number(existingProfile?.company_size ?? 0),
             logo_path: null,
             banner_path: null,
-            bio: '',
-            description: '',
+            bio: text('bio'),
+            description: text('description'),
 
-            pic_name: '',
-            pic_phone: '',
-            pic_position: '',
-            official_email: '',
-            city: '',
-            country: 'Taiwan',
-            hq_address: '',
+            pic_name: text('pic_name'),
+            pic_phone: text('pic_phone'),
+            pic_position: text('pic_position'),
+            official_email: text('official_email'),
+            city: text('city'),
+            country: text('country', 'Taiwan'),
+            hq_address: text('hq_address'),
         });
 
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
     const [bannerPreview, setBannerPreview] = useState<string | null>(null);
-
-    const handleDisplayNameChange = (value: string) => {
-        const generatedSlug = value
-            .toLowerCase()
-            .trim()
-            .replace(/[^a-z0-9\s-]/g, '')
-            .replace(/[\s_]+/g, '-')
-            .replace(/^-+|-+$/g, '');
-
-        setData((prevData) => ({
-            ...prevData,
-            company_display_name: value,
-            slug: generatedSlug,
-        }));
-    };
 
     const handleFileChange = (
         field: keyof CompanyApplyFormState,
@@ -102,17 +118,18 @@ export default function Apply() {
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleLogoChange = async (file: File | null) => {
+        handleFileChange(
+            'logo_path',
+            file ? await downscaleImage(file, LOGO_MAX_SIDE) : null,
+            setLogoPreview,
+        );
+    };
+
+    const handleSubmit =(e: React.FormEvent) => {
         e.preventDefault();
 
-        post(route('company.store'), {
-            forceFormData: true,
-            onSuccess: () => {
-                reset();
-                setLogoPreview(null);
-                setBannerPreview(null);
-            },
-        });
+        post(route('company.store'), { forceFormData: true });
     };
 
     return (
@@ -130,14 +147,31 @@ export default function Apply() {
                             </div>
                             <div>
                                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                                    Company Verification Form
+                                    Partner & Company Application
                                 </h2>
-                                <p className="mt-1 text-sm text-accent">
-                                    Complete your company details to apply for an official account.
+                                <p className="mt-1 text-sm text-on-brand/80">
+                                    Complete your organization details once. After approval your logo joins our partners on the home page.
                                 </p>
                             </div>
                         </div>
                     </div>
+
+                    {rejectionReason && (
+                        <div
+                            role="alert"
+                            className="mx-8 mt-8 rounded-xl border border-status-danger/30 bg-status-danger-soft p-4"
+                        >
+                            <h3 className="text-sm font-bold text-status-danger">
+                                Your previous application was not approved
+                            </h3>
+                            <p className="mt-1 text-xs leading-relaxed text-status-danger">
+                                {rejectionReason}
+                            </p>
+                            <p className="mt-2 text-xs text-status-danger">
+                                Correct the details below and submit again.
+                            </p>
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit} className="space-y-10 p-8">
                         {/* SECTION 1: LEGAL & VERIFICATION */}
@@ -169,7 +203,11 @@ export default function Apply() {
                             </div>
 
                             <FileUploadDropzone
-                                label="Upload Business Document (PDF / Image)"
+                                label={
+                                    hasBusinessDocument
+                                        ? 'Replace Business Document (optional — your earlier upload is kept)'
+                                        : 'Upload Business Document (PDF / Image) *'
+                                }
                                 value={data.business_registration_path}
                                 onChange={(file) => setData('business_registration_path', file)}
                                 accept=".pdf,image/*"
@@ -192,34 +230,20 @@ export default function Apply() {
                                     label="Public Brand Name *"
                                     required
                                     value={data.company_display_name}
-                                    onChange={(e) => handleDisplayNameChange(e.target.value)}
+                                    onChange={(e) => setData('company_display_name', e.target.value)}
                                     placeholder="e.g. Acme Studio"
                                     error={errors.company_display_name}
                                 />
 
-                                <div>
-                                    <label className="block text-xs font-semibold text-muted">
-                                        URL Slug *
-                                    </label>
-                                    <div className="mt-1.5 flex rounded-xl shadow-xs">
-                                        <span className="inline-flex items-center rounded-l-xl border border-r-0 border-border bg-canvas px-3 text-xs text-muted">
-                                            /company/
-                                        </span>
-                                        <input
-                                            type="text"
-                                            required
-                                            readOnly
-                                            value={data.slug}
-                                            className="block w-full min-w-0 flex-1 cursor-not-allowed rounded-none rounded-r-xl border border-border bg-surface-muted px-3 py-2.5 text-xs text-muted focus:outline-none"
-                                            placeholder="acme-studio"
-                                        />
-                                    </div>
-                                    {errors.slug && (
-                                        <p className="mt-1 text-xs text-status-danger font-medium">
-                                            {errors.slug}
-                                        </p>
-                                    )}
-                                </div>
+                                <SelectOption
+                                    label="Organization Type *"
+                                    required
+                                    value={data.organization_type}
+                                    onChange={(val) => setData('organization_type', val)}
+                                    placeholderOption="Select Type"
+                                    options={organizationTypes}
+                                    error={errors.organization_type}
+                                />
 
                                 <SelectOption
                                     label="Industry Sector *"
@@ -290,10 +314,8 @@ export default function Apply() {
                                             type="file"
                                             accept="image/*"
                                             onChange={(e) =>
-                                                handleFileChange(
-                                                    'logo_path',
+                                                handleLogoChange(
                                                     e.target.files?.[0] || null,
-                                                    setLogoPreview,
                                                 )
                                             }
                                             className="block w-full text-xs text-muted file:mr-3 file:rounded-xl file:border-0 file:bg-accent-soft file:px-3 file:py-2 file:text-xs file:font-semibold file:text-accent hover:file:bg-accent-soft"

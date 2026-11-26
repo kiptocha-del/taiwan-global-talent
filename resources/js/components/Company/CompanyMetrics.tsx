@@ -1,33 +1,37 @@
 import { Briefcase, Users, Eye, CheckCircle } from 'lucide-react';
+import type { CompanyMetricsData } from '@/types/company/type';
 
-export default function CompanyMetrics() {
-    // Placeholder metrics (to be replaced with real backend data)
+export default function CompanyMetrics({
+    metrics,
+}: {
+    metrics: CompanyMetricsData;
+}) {
     const stats = [
         {
             title: 'Active Job Openings',
-            value: '0',
-            change: 'Ready to post',
+            value: metrics.active_jobs,
+            change: 'Currently published',
             icon: Briefcase,
             color: 'text-accent bg-accent-soft ',
         },
         {
             title: 'Total Applicants',
-            value: '0',
-            change: '0 this week',
+            value: metrics.total_applicants,
+            change: `${metrics.applicants_this_week} in the last 7 days`,
             icon: Users,
             color: 'text-status-positive bg-status-positive-soft ',
         },
         {
-            title: 'Profile Views',
-            value: '124',
-            change: '+12% vs last month',
+            title: 'Job Views',
+            value: metrics.job_views,
+            change: 'Across all your postings',
             icon: Eye,
             color: 'text-accent bg-accent-soft ',
         },
         {
             title: 'Hired Candidates',
-            value: '0',
-            change: '0 fulfilled',
+            value: metrics.hired,
+            change: 'Applications marked hired',
             icon: CheckCircle,
             color: 'text-accent bg-accent-soft ',
         },

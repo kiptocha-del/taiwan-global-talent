@@ -19,7 +19,7 @@ class TeacherForm
                     ->maxLength(255),
 
                 TextInput::make('email')
-                    ->label('Email Address')
+                    ->label('Google Account Email')
                     ->email()
                     ->required()
                     ->unique(ignoreRecord: true)
@@ -54,8 +54,17 @@ class TeacherForm
                         'rejected' => 'Rejected',
                     ])
                     ->required()
-                    ->default('pending')
-                    ->native(false),
+                    ->default('approved')
+                    ->native(false)
+                    ->live(),
+
+                Textarea::make('rejection_reason')
+                    ->label('Rejection Reason')
+                    ->helperText('Shown to the applicant on their status page.')
+                    ->visible(fn ($get) => $get('status') === 'rejected')
+                    ->required(fn ($get) => $get('status') === 'rejected')
+                    ->rows(2)
+                    ->columnSpanFull(),
             ]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckCompanyStatus;
+use App\Http\Middleware\CheckTeacherStatus;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\SetLocale;
@@ -34,6 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'verified' => EnsureEmailIsVerified::class,
             'role' => RoleMiddleware::class,
             'check.company.status' => CheckCompanyStatus::class,
+            'check.teacher.status' => CheckTeacherStatus::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

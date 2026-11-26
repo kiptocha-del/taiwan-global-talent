@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PartnerInquiry;
+use App\Models\CompanyProfile;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,7 +19,7 @@ class LandingController extends Controller
     public function __invoke(): Response
     {
         return Inertia::render('Landing', [
-            'partners' => PartnerInquiry::approvedForDisplay(self::TEASER_PARTNER_LIMIT),
+            'partners' => CompanyProfile::approvedForDisplay(self::TEASER_PARTNER_LIMIT),
         ]);
     }
 }

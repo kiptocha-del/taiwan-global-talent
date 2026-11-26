@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\CompanyProfile;
 use App\Models\PartnerInquiry;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -28,9 +29,12 @@ class GetInvolvedTest extends TestCase
 
     public function test_get_involved_page_lists_only_approved_partners(): void
     {
-        PartnerInquiry::factory()->approved()->count(2)->create();
-        PartnerInquiry::factory()->create();
-        PartnerInquiry::factory()->declined()->create();
+        CompanyProfile::factory()->approved()->count(2)->create();
+        CompanyProfile::factory()->create();
+        CompanyProfile::factory()->rejected()->create();
+
+        // A contact form message never lists its sender as a partner, whatever its status.
+        PartnerInquiry::factory()->contacted()->create();
 
         $this->get(route('get-involved'))
             ->assertOk()
@@ -45,7 +49,7 @@ class GetInvolvedTest extends TestCase
 
     public function test_home_page_teaser_receives_at_most_eight_approved_partners(): void
     {
-        PartnerInquiry::factory()->approved()->count(10)->create();
+        CompanyProfile::factory()->approved()->count(10)->create();
 
         $this->get(route('home'))
             ->assertOk()
@@ -54,12 +58,9 @@ class GetInvolvedTest extends TestCase
                 ->has('partners', 8));
     }
 
-    public function test_guest_can_submit_a_partner_inquiry_with_a_logo(): void
+    public function test_guest_can_send_a_contact_message(): void
     {
-        $response = $this->post(route('get-involved.store'), [
-            ...$this->validPayload(),
-            'logo' => UploadedFile::fake()->createWithContent('logo.png', base64_decode(self::ONE_PIXEL_PNG)),
-        ]);
+        $response = $this->post(route('get-involved.store'), $this->validPayload());
 
         $response->assertRedirect(route('get-involved'))->assertSessionHas('success');
 
@@ -69,9 +70,6 @@ class GetInvolvedTest extends TestCase
         $this->assertSame(PartnerInquiry::STATUS_NEW, $inquiry->status);
         $this->assertSame(['teach_mandarin', 'mentor'], $inquiry->involvement_interests);
         $this->assertNull($inquiry->reviewed_at);
-        $this->assertNotNull($inquiry->logo_path);
-
-        Storage::disk('s3')->assertExists($inquiry->logo_path);
     }
 
     public function test_submission_requires_the_core_fields(): void
@@ -90,18 +88,15 @@ class GetInvolvedTest extends TestCase
         $this->assertDatabaseCount('partner_inquiries', 0);
     }
 
-    public function test_svg_logos_are_rejected(): void
+    public function test_the_contact_form_stores_no_uploaded_files(): void
     {
-        $svg = '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>';
+        $this->post(route('get-involved.store'), [
+            ...$this->validPayload(),
+            'logo' => UploadedFile::fake()->createWithContent('logo.png', base64_decode(self::ONE_PIXEL_PNG)),
+        ])->assertRedirect(route('get-involved'))->assertSessionHas('success');
 
-        $this->from(route('get-involved'))
-            ->post(route('get-involved.store'), [
-                ...$this->validPayload(),
-                'logo' => UploadedFile::fake()->createWithContent('logo.svg', $svg),
-            ])
-            ->assertSessionHasErrors('logo');
-
-        $this->assertDatabaseCount('partner_inquiries', 0);
+        $this->assertDatabaseCount('partner_inquiries', 1);
+        $this->assertSame([], Storage::disk('s3')->allFiles());
     }
 
     public function test_honeypot_submissions_are_dropped_silently(): void
@@ -123,14 +118,13 @@ class GetInvolvedTest extends TestCase
         $this->post(route('get-involved.store'), [])->assertTooManyRequests();
     }
 
-    public function test_approving_an_inquiry_records_the_review_time(): void
+    public function test_handling_an_inquiry_records_the_time(): void
     {
         $inquiry = PartnerInquiry::factory()->create();
 
-        $inquiry->update(['status' => PartnerInquiry::STATUS_APPROVED]);
+        $inquiry->update(['status' => PartnerInquiry::STATUS_CONTACTED]);
 
         $this->assertNotNull($inquiry->fresh()->reviewed_at);
-        $this->assertCount(1, PartnerInquiry::approvedForDisplay());
     }
 
     /**

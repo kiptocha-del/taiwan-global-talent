@@ -154,31 +154,12 @@ class GoogleAuthController extends Controller
             return redirect()->route('student.dashboard');
         }
 
+        // The portal middleware sends applicants on to their form or status page.
         if ($user->hasRole('company')) {
-            $companyProfile = $user->companyProfile;
-
-            if (! $companyProfile) {
-                return redirect()->route('company.register');
-            }
-
-            if (in_array($companyProfile->status, ['pending', 'rejected'], true)) {
-                return redirect()->route('company.waiting');
-            }
-
             return redirect()->route('company.dashboard');
         }
 
         if ($user->hasRole('teacher')) {
-            $teacherProfile = $user->teacherProfile;
-
-            if (! $teacherProfile || blank($teacherProfile->cv_path)) {
-                return redirect()->route('teacher.apply');
-            }
-
-            if (in_array($teacherProfile->status, ['pending', 'rejected'], true)) {
-                return redirect()->route('teacher.waiting');
-            }
-
             return redirect()->route('teacher.dashboard');
         }
 

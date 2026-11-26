@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class ProfilePageController extends Controller
@@ -68,13 +69,16 @@ class ProfilePageController extends Controller
             $rules['expertise'] = 'nullable|string|max:255';
             $rules['learning_goal'] = 'nullable|string|max:255';
         } elseif ($role === 'company') {
-            $rules['company_legal_name'] = 'nullable|string|max:255';
-            $rules['company_display_name'] = 'nullable|string|max:255';
-            $rules['tax_id'] = 'nullable|string|max:100';
+            $rules['company_legal_name'] = 'required|string|max:255';
+            $rules['company_display_name'] = 'required|string|max:255';
+            $rules['tax_id'] = [
+                'nullable', 'string', 'max:100',
+                Rule::unique('company_profiles', 'tax_id')->ignore($user->companyProfile?->id),
+            ];
             $rules['website_url'] = 'nullable|url|max:255';
-            $rules['pic_name'] = 'nullable|string|max:255';
-            $rules['pic_position'] = 'nullable|string|max:255';
-            $rules['pic_phone'] = 'nullable|string|max:50';
+            $rules['pic_name'] = 'required|string|max:255';
+            $rules['pic_position'] = 'required|string|max:255';
+            $rules['pic_phone'] = 'required|string|max:50';
         }
 
         $validated = $request->validate($rules);
@@ -111,20 +115,18 @@ class ProfilePageController extends Controller
                 ]
             );
         } elseif ($role === 'company') {
-            $user->companyProfile()->updateOrCreate(
-                ['user_id' => $user->id],
-                [
-                    'company_legal_name' => $validated['company_legal_name'] ?? null,
-                    'company_display_name' => $validated['company_display_name'] ?? null,
-                    'tax_id' => $validated['tax_id'] ?? null,
-                    'website_url' => $validated['website_url'] ?? null,
-                    'pic_name' => $validated['pic_name'] ?? null,
-                    'pic_position' => $validated['pic_position'] ?? null,
-                    'pic_phone' => $validated['pic_phone'] ?? null,
-                    'country' => $validated['country'] ?? null,
-                    'bio' => $validated['bio'] ?? null,
-                ]
-            );
+            // The profile itself is only ever created by the application form.
+            $user->companyProfile?->update([
+                'company_legal_name' => $validated['company_legal_name'],
+                'company_display_name' => $validated['company_display_name'],
+                'tax_id' => $validated['tax_id'] ?? null,
+                'website_url' => $validated['website_url'] ?? null,
+                'pic_name' => $validated['pic_name'],
+                'pic_position' => $validated['pic_position'],
+                'pic_phone' => $validated['pic_phone'],
+                'country' => $validated['country'] ?? $user->companyProfile->country,
+                'bio' => $validated['bio'] ?? null,
+            ]);
         }
 
         return redirect()->back()->with('success', 'Profile updated successfully!');

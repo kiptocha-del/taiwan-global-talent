@@ -7,7 +7,6 @@ import {
     GraduationCap,
     HandHeart,
     HeartHandshake,
-    ImageIcon,
     Languages,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -36,7 +35,6 @@ interface PartnerInquiryFormState {
     contact_email: string;
     involvement_interests: string[];
     message: string;
-    logo: File | null;
     website_confirm: string;
 }
 
@@ -88,7 +86,6 @@ export default function GetInvolved({
     const flash = usePage().props.flash as
         { success?: string | null } | undefined;
     const [showForm, setShowForm] = useState(!flash?.success);
-    const [logoPreview, setLogoPreview] = useState<string | null>(null);
 
     const { data, setData, post, processing, errors, reset } =
         useForm<PartnerInquiryFormState>({
@@ -99,7 +96,6 @@ export default function GetInvolved({
             contact_email: '',
             involvement_interests: [],
             message: '',
-            logo: null,
             website_confirm: '',
         });
 
@@ -112,20 +108,13 @@ export default function GetInvolved({
         );
     };
 
-    const handleLogoChange = (file: File | null) => {
-        setData('logo', file);
-        setLogoPreview(file ? URL.createObjectURL(file) : null);
-    };
-
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
         post(storePartnerInquiry.url(), {
-            forceFormData: true,
             preserveScroll: true,
             onSuccess: () => {
                 reset();
-                setLogoPreview(null);
                 setShowForm(false);
             },
         });
@@ -413,50 +402,6 @@ export default function GetInvolved({
                                     )}
                                     error={errors.message}
                                 />
-
-                                <div className="space-y-1.5">
-                                    <label
-                                        htmlFor="partner-logo"
-                                        className="block text-xs font-semibold text-ink"
-                                    >
-                                        {t('getInvolved.logoLabel')}
-                                    </label>
-                                    <div className="flex items-center gap-4">
-                                        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-control border border-border bg-surface">
-                                            {logoPreview ? (
-                                                <img
-                                                    src={logoPreview}
-                                                    alt={t(
-                                                        'getInvolved.logoPreview',
-                                                    )}
-                                                    className="h-full w-full object-contain"
-                                                />
-                                            ) : (
-                                                <ImageIcon className="h-6 w-6 text-muted"/>
-                                            )}
-                                        </div>
-                                        <input
-                                            id="partner-logo"
-                                            type="file"
-                                            accept="image/png,image/jpeg,image/webp"
-                                            onChange={(event) =>
-                                                handleLogoChange(
-                                                    event.target.files?.[0] ??
-                                                        null,
-                                                )
-                                            }
-                                            className="block w-full text-xs text-muted file:mr-3 file:rounded-control file:border-0 file:bg-brand-strong file:px-3 file:py-2 file:text-xs file:font-semibold file:text-on-brand hover:file:bg-accent"
-                                        />
-                                    </div>
-                                    <p className="text-xs text-muted">
-                                        {t('getInvolved.logoNote')}
-                                    </p>
-                                    {errors.logo && (
-                                        <p className="text-xs font-medium text-status-danger">
-                                            {errors.logo}
-                                        </p>
-                                    )}
-                                </div>
 
                                 <div
                                     aria-hidden="true"

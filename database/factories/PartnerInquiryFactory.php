@@ -22,7 +22,6 @@ class PartnerInquiryFactory extends Factory
             'organization_name' => fake()->company(),
             'organization_type' => fake()->randomElement(array_keys(PartnerInquiry::ORGANIZATION_TYPES)),
             'website_url' => fake()->url(),
-            'logo_path' => null,
             'contact_name' => fake()->name(),
             'contact_email' => fake()->unique()->safeEmail(),
             'involvement_interests' => Arr::random(array_keys(PartnerInquiry::INVOLVEMENT_INTERESTS), 2),
@@ -32,24 +31,23 @@ class PartnerInquiryFactory extends Factory
     }
 
     /**
-     * Indicate that an admin has approved the partner for public display.
+     * Indicate that the admin team has replied to the sender.
      */
-    public function approved(): static
+    public function contacted(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => PartnerInquiry::STATUS_APPROVED,
-            'logo_path' => 'partner-logos/'.fake()->uuid().'.png',
+            'status' => PartnerInquiry::STATUS_CONTACTED,
             'reviewed_at' => now(),
         ]);
     }
 
     /**
-     * Indicate that an admin has declined the partner.
+     * Indicate that the conversation is finished.
      */
-    public function declined(): static
+    public function closed(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => PartnerInquiry::STATUS_DECLINED,
+            'status' => PartnerInquiry::STATUS_CLOSED,
             'reviewed_at' => now(),
         ]);
     }

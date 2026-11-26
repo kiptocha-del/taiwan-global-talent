@@ -26,6 +26,14 @@ export interface CompanyProfile {
     business_registration_url: string | null;
 }
 
+export interface CompanyMetricsData {
+    active_jobs: number;
+    total_applicants: number;
+    applicants_this_week: number;
+    job_views: number;
+    hired: number;
+}
+
 export interface DashboardProps {
     company: CompanyProfile | null;
 }

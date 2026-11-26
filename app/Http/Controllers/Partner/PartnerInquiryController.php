@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Partner;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\AppendPartnerInquiryToSheet;
+use App\Models\CompanyProfile;
 use App\Models\PartnerInquiry;
+use App\Services\GoogleSheetsService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -13,21 +17,21 @@ use Inertia\Response;
 class PartnerInquiryController extends Controller
 {
     /**
-     * Display the public Get Involved page with approved partners and the inquiry form.
+     * Display the public Get Involved page with the approved partner organizations and the contact form.
      */
     public function index(): Response
     {
         return Inertia::render('GetInvolved', [
-            'partners' => PartnerInquiry::approvedForDisplay(),
+            'partners' => CompanyProfile::approvedForDisplay(),
             'organizationTypes' => $this->toChoices(PartnerInquiry::ORGANIZATION_TYPES),
             'involvementInterests' => $this->toChoices(PartnerInquiry::INVOLVEMENT_INTERESTS),
         ]);
     }
 
     /**
-     * Store a partner inquiry submitted by a guest for admin review.
+     * Store a contact form message for the admin team and copy it to the team's Google Sheet.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, GoogleSheetsService $sheets): RedirectResponse
     {
         // Honeypot: real visitors never see this field, so a value means a bot.
         if ($request->filled('website_confirm')) {
@@ -43,16 +47,14 @@ class PartnerInquiryController extends Controller
             'involvement_interests' => ['required', 'array', 'min:1'],
             'involvement_interests.*' => [Rule::in(array_keys(PartnerInquiry::INVOLVEMENT_INTERESTS))],
             'message' => ['nullable', 'string', 'max:2000'],
-            'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
-        unset($validated['logo']);
+        $inquiry = PartnerInquiry::create($validated);
 
-        if ($request->hasFile('logo')) {
-            $validated['logo_path'] = $request->file('logo')->store('partner-logos', 's3');
+        // The message is saved either way; a queue or Google problem must not fail the visitor's submission.
+        if ($sheets->isConfigured()) {
+            rescue(fn () => Bus::dispatch(new AppendPartnerInquiryToSheet($inquiry)));
         }
-
-        PartnerInquiry::create($validated);
 
         return redirect()->route('get-involved')->with('success', __('Thank you! Your inquiry has been received. Our team will review it and get back to you.'));
     }

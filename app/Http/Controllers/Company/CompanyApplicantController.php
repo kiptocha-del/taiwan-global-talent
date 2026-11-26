@@ -53,6 +53,12 @@ class CompanyApplicantController extends Controller
 
     public function updateStatus(Request $request, JobApplication $application)
     {
+        $company = $request->user()->companyProfile;
+
+        if (! $company || $application->job?->company_profile_id !== $company->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
             'status' => 'required|in:pending,reviewed,interviewed,hired,rejected',
         ]);

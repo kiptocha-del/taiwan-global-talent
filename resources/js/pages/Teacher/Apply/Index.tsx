@@ -12,14 +12,30 @@ interface ApplyFormState {
     certificate: File | null;
 }
 
-export default function Apply() {
-    const { data, setData, post, processing, errors, reset } =
+interface ApplyProps {
+    /** Text answers from an earlier, denied application, used to pre-fill the form. */
+    existingProfile: Partial<
+        Record<
+            'full_name' | 'phone' | 'expertise' | 'learning_goal' | 'bio',
+            string | null
+        >
+    > | null;
+    hasCv: boolean;
+    rejectionReason: string | null;
+}
+
+export default function Apply({
+    existingProfile,
+    hasCv,
+    rejectionReason,
+}: ApplyProps) {
+    const { data, setData, post, processing, errors } =
         useForm<ApplyFormState>({
-            full_name: '',
-            phone: '',
-            expertise: '',
-            learning_goal: '',
-            bio: '',
+            full_name: existingProfile?.full_name ?? '',
+            phone: existingProfile?.phone ?? '',
+            expertise: existingProfile?.expertise ?? '',
+            learning_goal: existingProfile?.learning_goal ?? '',
+            bio: existingProfile?.bio ?? '',
             cv: null,
             certificate: null,
         });
@@ -27,10 +43,7 @@ export default function Apply() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        post(route('teacher.store'), {
-            forceFormData: true,
-            onSuccess: () => reset(),
-        });
+        post(route('teacher.store'), { forceFormData: true });
     };
 
     return (
@@ -43,10 +56,27 @@ export default function Apply() {
                         Teacher Application Form
                     </h2>
                     <p className="mt-2 text-sm text-muted">
-                        Please fill out the form below according to your profile
-                        schema.
+                        Fill in your details once. Our team reviews every
+                        application before the teacher dashboard opens.
                     </p>
                 </div>
+
+                {rejectionReason && (
+                    <div
+                        role="alert"
+                        className="mb-6 rounded-md border border-status-danger/30 bg-status-danger-soft p-4"
+                    >
+                        <h3 className="text-sm font-bold text-status-danger">
+                            Your previous application was not approved
+                        </h3>
+                        <p className="mt-1 text-sm text-status-danger">
+                            {rejectionReason}
+                        </p>
+                        <p className="mt-2 text-xs text-status-danger">
+                            Correct the details below and submit again.
+                        </p>
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Full Name */}
@@ -153,7 +183,9 @@ export default function Apply() {
                     {/* Upload CV */}
                     <div>
                         <label className="block text-sm font-medium text-muted">
-                            Upload CV (PDF)
+                            {hasCv
+                                ? 'Replace CV (optional — your earlier upload is kept)'
+                                : 'Upload CV (PDF)'}
                         </label>
                         <input
                             type="file"

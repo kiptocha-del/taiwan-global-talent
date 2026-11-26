@@ -68,7 +68,7 @@ export const id: Dictionary = {
         'Menghubungkan talenta internasional dengan ekosistem belajar dan kerja di Taiwan.',
     'companies.link': 'Lihat mitra kami dan ikut terlibat',
     'companies.empty':
-        'Nama dan logo mitra akan tampil di sini setelah partisipasi dan izin penggunaan merek dikonfirmasi. Kami tidak mengklaim kemitraan sebelum resmi.',
+        'Nama dan logo mitra akan tampil di sini setelah akun mitra mereka disetujui. Kami tidak mengklaim kemitraan sebelum resmi.',
 
     'cta.eyebrow': 'Taiwan, selangkah demi selangkah',
     'cta.title': 'Siap membuat rencana Taiwan-mu lebih nyata?',
@@ -189,14 +189,14 @@ export const id: Dictionary = {
     'getInvolved.lead':
         'Universitas, pusat bahasa Mandarin, program beasiswa, perusahaan, dan mentor semuanya membentuk perjalanan ini. Ceritakan bagaimana kamu ingin menjadi bagiannya.',
     'getInvolved.shareInterest': 'Sampaikan minatmu',
-    'getInvolved.employerRegister': 'Perusahaan: daftar sebagai perusahaan',
-    'getInvolved.howTitle': 'Cara kemitraan bekerja',
+    'getInvolved.employerRegister': 'Jadi mitra: masuk dan ajukan',
+    'getInvolved.howTitle': 'Cara kerjanya',
     'getInvolved.how1':
         'Ceritakan tentang organisasimu dan bagaimana kamu ingin terlibat.',
     'getInvolved.how2':
         'Tim kami meninjau setiap permintaan dan menghubungimu untuk menyepakati langkah berikutnya.',
     'getInvolved.how3':
-        'Setelah dikonfirmasi, nama dan logomu tampil di antara mitra kami.',
+        'Agar tampil di antara mitra kami, masuk dan ajukan akun mitra.',
     'getInvolved.whoBadge': 'Siapa yang bisa terlibat',
     'getInvolved.whoTitle': 'Ada tempat untuk setiap jenis mitra.',
     'getInvolved.w1Title': 'Universitas',
@@ -218,14 +218,14 @@ export const id: Dictionary = {
     'getInvolved.partnersTitle':
         'Organisasi yang membangun hub ini bersama kami.',
     'getInvolved.partnersEmpty':
-        'Nama dan logo mitra akan tampil di sini setelah partisipasi dan izin penggunaan merek dikonfirmasi. Kami tidak mengklaim kemitraan sebelum resmi.',
-    'getInvolved.formBadge': 'Permintaan kemitraan',
+        'Nama dan logo mitra akan tampil di sini setelah akun mitra mereka disetujui. Kami tidak mengklaim kemitraan sebelum resmi.',
+    'getInvolved.formBadge': 'Hubungi kami',
     'getInvolved.formTitle': 'Ceritakan bagaimana kamu ingin terlibat.',
     'getInvolved.formLead':
-        'Beberapa detail sudah cukup untuk memulai percakapan. Informasi kontakmu tetap privat; hanya nama dan logomu yang tampil ke publik setelah kemitraan dikonfirmasi.',
+        'Beberapa detail sudah cukup untuk memulai percakapan. Formulir ini hanya pesan untuk tim kami, dan semua yang kamu kirim tetap privat.',
     'getInvolved.employerNoteBefore':
-        'Perusahaan yang merekrut melalui hub sebaiknya',
-    'getInvolved.employerNoteLink': 'masuk dan mendaftarkan akun perusahaan',
+        'Agar tampil sebagai mitra atau merekrut melalui hub,',
+    'getInvolved.employerNoteLink': 'masuk dan ajukan akun mitra',
     'getInvolved.employerNoteAfter': '.',
     'getInvolved.orgName': 'Nama organisasi *',
     'getInvolved.orgNamePlaceholder': 'mis. National Taiwan University',
@@ -240,34 +240,18 @@ export const id: Dictionary = {
     'getInvolved.message': 'Pesan',
     'getInvolved.messagePlaceholder':
         'Apa pun yang membantu kami memahami rencanamu.',
-    'getInvolved.logoLabel': 'Logo (PNG, JPG, atau WebP, maksimal 2 MB)',
-    'getInvolved.logoPreview': 'Pratinjau logo',
-    'getInvolved.logoNote':
-        'Ditampilkan ke publik hanya setelah kemitraanmu disetujui.',
     'getInvolved.honeypot': 'Biarkan kolom ini kosong',
     'getInvolved.sending': 'Mengirim...',
-    'getInvolved.send': 'Kirim permintaan kemitraan',
+    'getInvolved.send': 'Kirim pesan',
     'getInvolved.thanksTitle': 'Terima kasih telah menghubungi kami.',
     'getInvolved.thanksDefault':
         'Permintaanmu telah kami terima. Tim kami akan meninjaunya dan menghubungimu kembali.',
-    'getInvolved.submitAnother': 'Kirim permintaan lain',
+    'getInvolved.submitAnother': 'Kirim pesan lain',
 
     'notifications.title': 'Notifikasi',
     'notifications.newCount': '{count} baru',
     'notifications.markAllRead': 'Tandai semua dibaca',
     'notifications.empty': 'Tidak ada notifikasi saat ini.',
-    'notifications.sample1Title': 'Pelamar baru',
-    'notifications.sample1Message':
-        'Kevin Tan baru saja melamar posisi Senior React Developer.',
-    'notifications.sample1Time': '10 menit yang lalu',
-    'notifications.sample2Title': 'Status verifikasi',
-    'notifications.sample2Message':
-        'Profil perusahaanmu telah disetujui oleh admin.',
-    'notifications.sample2Time': '2 jam yang lalu',
-    'notifications.sample3Title': 'Lowongan tayang',
-    'notifications.sample3Message':
-        'Lowongan "Frontend Engineer" berhasil dipublikasikan.',
-    'notifications.sample3Time': '1 hari yang lalu',
 
     'course.startLearning': 'Mulai belajar',
     'course.review': 'Ulas kembali',

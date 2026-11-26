@@ -17,7 +17,7 @@ export default function PartnerLogos({
         ? 'grid-cols-2 sm:grid-cols-4'
         : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4';
     const cardClasses =
-        'flex h-full flex-col items-center justify-center rounded-2xl border border-border bg-surface px-5 py-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md';
+        'flex h-full flex-col items-center justify-center rounded-2xl px-5 py-6 text-center transition hover:-translate-y-0.5';
 
     return (
         <ul className={`grid gap-4 ${gridClasses}`}>
@@ -29,6 +29,7 @@ export default function PartnerLogos({
                                 src={partner.logo_url}
                                 alt={`${partner.name} logo`}
                                 loading="lazy"
+                                decoding="async"
                                 className="max-h-12 w-auto max-w-36 object-contain"
                             />
                         ) : (

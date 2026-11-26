@@ -4,7 +4,6 @@ namespace App\Filament\Resources\PartnerInquiries\Schemas;
 
 use App\Models\PartnerInquiry;
 use Filament\Forms\Components\CheckboxList;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -19,8 +18,8 @@ class PartnerInquiryForm
     {
         return $schema->components([
 
-            Section::make('Review')
-                ->description('Approving an inquiry publishes the organization name and logo on the public site.')
+            Section::make('Follow-up')
+                ->description('Track where the conversation stands. Partners are listed publicly from Companies, not from here.')
                 ->schema([
                     Grid::make(2)
                         ->schema([
@@ -31,8 +30,8 @@ class PartnerInquiryForm
                                 ->native(false),
 
                             Placeholder::make('reviewed_at_display')
-                                ->label('Reviewed At')
-                                ->content(fn (?PartnerInquiry $record) => $record?->reviewed_at?->format('d M Y, H:i') ?? 'Not reviewed yet'),
+                                ->label('First Handled At')
+                                ->content(fn (?PartnerInquiry $record) => $record?->reviewed_at?->format('d M Y, H:i') ?? 'Not handled yet'),
 
                             Textarea::make('admin_notes')
                                 ->label('Internal Notes')
@@ -60,16 +59,8 @@ class PartnerInquiryForm
                             TextInput::make('website_url')
                                 ->label('Website')
                                 ->url()
-                                ->maxLength(255),
-
-                            FileUpload::make('logo_path')
-                                ->label('Logo')
-                                ->image()
-                                ->disk('s3')
-                                ->directory('partner-logos')
-                                ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
-                                ->maxSize(2048)
-                                ->imagePreviewHeight('120'),
+                                ->maxLength(255)
+                                ->columnSpanFull(),
                         ]),
                 ]),
 
