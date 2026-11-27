@@ -4,12 +4,15 @@ import CTA from '@/components/Landing/CTA';
 import Footer from '@/components/Landing/Footer';
 import Hero from '@/components/Landing/Hero';
 import HowItWorks from '@/components/Landing/HowItWorks';
-import Membership from '@/components/Landing/Membership';
 import Navbar from '@/components/Landing/Navbar';
 import Testimonials from '@/components/Landing/Testimonials';
-import CorePillars from '@/components/UI/CorePillars';
+import type { PartnerLogo } from '@/types/partner';
 
-export default function Landing() {
+interface LandingProps {
+    partners?: PartnerLogo[];
+}
+
+export default function Landing({ partners = [] }: LandingProps) {
     useLayoutEffect(() => {
         const previousScrollRestoration = window.history.scrollRestoration;
         const scrollToFirstSection = () => {
@@ -34,14 +37,12 @@ export default function Landing() {
     }, []);
 
     return (
-        <div className="bg-clubhouse-cream font-sans text-clubhouse-blue antialiased selection:bg-clubhouse-yellow selection:text-clubhouse-blue">
+        <div className="landing-page min-h-screen bg-canvas font-sans text-ink antialiased selection:bg-highlight selection:text-ink">
             <Navbar />
             <Hero />
-            <CorePillars />
             <HowItWorks />
-            <Membership />
             <Testimonials />
-            <Companies />
+            <Companies partners={partners} />
             <CTA />
             <Footer />
         </div>

@@ -21,6 +21,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            'locale' => SetLocale::currentLanguage(),
 
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
@@ -35,7 +36,7 @@ class HandleInertiaRequests extends Middleware
                         return null;
                     }
 
-                    // Preload relasi roles Spatie sekali saja untuk mencegah N+1 Query
+                    // Load the Spatie roles once to avoid N+1 queries
                     $user->loadMissing('roles');
                     $roles = $user->getRoleNames();
                     $primaryRole = $roles->first() ?? 'student';
@@ -49,13 +50,13 @@ class HandleInertiaRequests extends Middleware
                         'role_name' => $primaryRole,
                         'roles' => $roles,
 
-                        // Memuat data profile spesifik sesuai role
+                        // Role-specific profile data
                         'profile' => $this->getProfileData($user, $primaryRole),
                     ];
                 },
             ],
 
-            // Cache data kategori kursus selama 1 hari (60 x 24 min) agar tidak kueri DB di setiap request
+            // Cache course categories for a day so they are not queried on every request
             'course_categories' => fn () => Cache::remember('inertia_course_categories', 1440, function () {
                 return CourseCategory::orderBy('order')->get(['id', 'name', 'slug']);
             }),
@@ -63,7 +64,7 @@ class HandleInertiaRequests extends Middleware
     }
 
     /**
-     * Memuat data profile datar (flat) sesuai role user.
+     * Flat profile data for the user's role.
      */
     private function getProfileData($user, string $role): ?array
     {

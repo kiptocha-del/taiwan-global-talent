@@ -5,8 +5,10 @@ import InputText from '@/components/UI/InputText';
 import PageHeader from '@/components/UI/PageHeader';
 import SelectOption from '@/components/UI/SelectOption';
 import TextArea from '@/components/UI/TextArea';
+import { useTranslation } from '@/context/LanguageContext';
 
 export default function CreateJob({ company }: { company: any }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         type: 'Full-time',
@@ -24,7 +26,7 @@ export default function CreateJob({ company }: { company: any }) {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <div className="min-h-screen bg-canvas text-ink">
             <Head title="Create New Job - Company Portal" />
 
             <CompanyNavbar company={company} />
@@ -36,12 +38,12 @@ export default function CreateJob({ company }: { company: any }) {
                     backUrl="/company/jobs"
                 />
 
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-800 dark:bg-slate-900">
-                    <div className="mb-6 border-b border-slate-100 pb-4 dark:border-slate-800">
-                        <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
+                    <div className="mb-6 border-b border-border pb-4">
+                        <h1 className="text-xl font-bold tracking-tight text-ink">
                             Create New Job
                         </h1>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                        <p className="text-xs text-muted">
                             Fill in the information for the job position you want to open.
                         </p>
                     </div>
@@ -84,7 +86,7 @@ export default function CreateJob({ company }: { company: any }) {
                             />
                         </div>
 
-                        {/* Kota & Kisaran Gaji */}
+                        {/* City and salary range */}
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             {data.location_type !== 'Remote' && (
                                 <InputText
@@ -92,7 +94,7 @@ export default function CreateJob({ company }: { company: any }) {
                                     type="text"
                                     value={data.city}
                                     onChange={(e) => setData('city', e.target.value)}
-                                    placeholder="Contoh: Jakarta Selatan"
+                                    placeholder={t('job.cityPlaceholder')}
                                     error={errors.city}
                                 />
                             )}
@@ -107,7 +109,7 @@ export default function CreateJob({ company }: { company: any }) {
                             />
                         </div>
 
-                        {/* Deskripsi Lowongan */}
+                        {/* Job description */}
                         <TextArea
                             label="Job Description"
                             value={data.description}
@@ -129,50 +131,50 @@ export default function CreateJob({ company }: { company: any }) {
 
                         {/* Status Publikasi */}
                         <div>
-                            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
+                            <label className="block text-xs font-bold text-muted">
                                 Status Publikasi
                             </label>
                             <div className="mt-2 flex items-center gap-6">
-                                <label className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300 cursor-pointer">
+                                <label className="flex items-center gap-2 text-xs text-muted cursor-pointer">
                                     <input
                                         type="radio"
                                         name="status"
                                         value="published"
                                         checked={data.status === 'published'}
                                         onChange={() => setData('status', 'published')}
-                                        className="text-indigo-600 focus:ring-indigo-500"
+                                        className="text-accent focus:ring-accent"
                                     />
                                     Publikasikan Langsung
                                 </label>
-                                <label className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300 cursor-pointer">
+                                <label className="flex items-center gap-2 text-xs text-muted cursor-pointer">
                                     <input
                                         type="radio"
                                         name="status"
                                         value="draft"
                                         checked={data.status === 'draft'}
                                         onChange={() => setData('status', 'draft')}
-                                        className="text-indigo-600 focus:ring-indigo-500"
+                                        className="text-accent focus:ring-accent"
                                     />
                                     Save Draft
                                 </label>
                             </div>
                             {errors.status && (
-                                <p className="mt-1 text-xs text-rose-500">{errors.status}</p>
+                                <p className="mt-1 text-xs text-status-danger">{errors.status}</p>
                             )}
                         </div>
 
                         {/* Tombol Aksi */}
-                        <div className="flex items-center justify-end gap-3 border-t border-slate-100 pt-4 dark:border-slate-800">
+                        <div className="flex items-center justify-end gap-3 border-t border-border pt-4">
                             <Link
                                 href="/company/jobs"
-                                className="rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+                                className="rounded-xl border border-border px-4 py-2.5 text-xs font-semibold text-muted hover:bg-canvas transition-colors"
                             >
                                 Cancel
                             </Link>
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="rounded-xl bg-indigo-600 px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-indigo-500/20 hover:bg-indigo-700 disabled:opacity-50 transition-colors"
+                                className="rounded-xl bg-accent px-5 py-2.5 text-xs font-semibold text-on-brand shadow-md shadow-indigo-500/20 hover:bg-accent/90 disabled:opacity-50 transition-colors"
                             >
                                 {processing ? 'Creating...' : 'Create Job'}
                             </button>

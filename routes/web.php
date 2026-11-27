@@ -3,16 +3,19 @@
 // Auth
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\GoogleAuthController;
+// Community (shared by student, teacher and company portals)
+use App\Http\Controllers\Community\CommunityController;
 // Company
 use App\Http\Controllers\Company\CompanyApplicantController;
 use App\Http\Controllers\Company\CompanyApplyController;
-use App\Http\Controllers\Company\CompanyCommunityController;
 use App\Http\Controllers\Company\CompanyJobController;
 use App\Http\Controllers\Company\DashboardController as CompanyDashboardController;
+// Landing & Partners
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\Partner\PartnerInquiryController;
 // Profile
 use App\Http\Controllers\Profile\ProfilePageController;
 // Student
-use App\Http\Controllers\Student\CommunityPostController;
 use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\DownloadCertificateController;
@@ -22,19 +25,21 @@ use App\Http\Controllers\Student\StudentJobController;
 // Teacher
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\TeacherApplyController;
-use App\Http\Controllers\Teacher\TeacherCommunityController;
 use App\Http\Controllers\Teacher\TeacherCourseController;
 use App\Http\Controllers\Teacher\TeacherLessonController;
 use App\Http\Controllers\Teacher\TeacherModuleController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::inertia('/', 'Landing')->name('home');
+Route::get('/', LandingController::class)->name('home');
+Route::inertia('/courses', 'Courses')->name('courses');
 Route::inertia('/about', 'About')->name('about');
 
-Route::get('/login', function () {
-    return Inertia::render('Auth/LoginPage');
-})->name('login');
+Route::get('/get-involved', [PartnerInquiryController::class, 'index'])->name('get-involved');
+Route::post('/get-involved', [PartnerInquiryController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('get-involved.store');
+
+Route::get('/login', [GoogleAuthController::class, 'index'])->name('login');
 
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
@@ -45,31 +50,33 @@ Route::post('/login-admin', [AdminAuthController::class, 'login'])
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    // Company Apply & Waiting
-    Route::prefix('company/apply')->name('company.')->group(function () {
+    // Company (partner) application form & status page
+    Route::middleware('role:company')->prefix('company/apply')->name('company.')->group(function () {
         Route::get('/', [CompanyApplyController::class, 'create'])
             ->name('register');
         Route::post('/store', [CompanyApplyController::class, 'store'])
             ->name('store');
-        Route::get('/waiting', [CompanyApplyController::class, 'waiting'])
-            ->name('waiting');
+        Route::get('/status', [CompanyApplyController::class, 'status'])
+            ->name('status');
     });
 
-    // Teacher Apply & Waiting
-    Route::prefix('teacher/apply')->name('teacher.')->group(function () {
+    // Teacher application form & status page
+    Route::middleware('role:teacher')->prefix('teacher/apply')->name('teacher.')->group(function () {
         Route::get('/', [TeacherApplyController::class, 'create'])
             ->name('apply');
         Route::post('/store', [TeacherApplyController::class, 'store'])
             ->name('store');
-        Route::get('/waiting-approval', [TeacherApplyController::class, 'waiting'])
-            ->name('waiting');
+        Route::get('/status', [TeacherApplyController::class, 'status'])
+            ->name('status');
     });
+
+    // Shared by the student and company profile pages
+    Route::patch('/profile/update', [ProfilePageController::class, 'update'])
+        ->middleware('role:student|company')
+        ->name('profile.update');
 
     // COMPANY ROLE
     Route::middleware(['role:company', 'check.company.status'])->group(function () {
-
-        Route::patch('/profile/update', [ProfilePageController::class, 'update'])
-            ->name('profile.update');
 
         Route::prefix('company')->name('company.')->group(function () {
             Route::get('/dashboard', [CompanyDashboardController::class, 'index'])
@@ -79,30 +86,33 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 ->name('profile.show');
 
             // Job Postings Routes
-            Route::resource('jobs', CompanyJobController::class);
+            Route::resource('jobs', CompanyJobController::class)->except('show');
 
             // Applicants Routes
             Route::get('/applicants', [CompanyApplicantController::class, 'index'])
                 ->name('applicants.index');
 
+            Route::patch('/applicants/{application}/status', [CompanyApplicantController::class, 'updateStatus'])
+                ->name('applicants.status');
+
             // Community Routes
             Route::prefix('community')->name('community.')->group(function () {
-                Route::get('/', [CompanyCommunityController::class, 'index'])
+                Route::get('/', [CommunityController::class, 'index'])
                     ->name('index');
 
-                Route::post('/', [CompanyCommunityController::class, 'store'])
+                Route::post('/', [CommunityController::class, 'store'])
                     ->name('store');
 
-                Route::post('/{id}/like', [CompanyCommunityController::class, 'toggleLike'])
+                Route::post('/{id}/like', [CommunityController::class, 'toggleLike'])
                     ->name('like');
 
-                Route::post('/{id}/comment', [CompanyCommunityController::class, 'storeComment'])
+                Route::post('/{id}/comment', [CommunityController::class, 'storeComment'])
                     ->name('comment');
 
-                Route::post('/posts/{id}/report', [CompanyCommunityController::class, 'report'])
+                Route::post('/posts/{id}/report', [CommunityController::class, 'report'])
                     ->name('posts.report');
 
-                Route::delete('/posts/{id}', [CompanyCommunityController::class, 'destroy'])
+                Route::delete('/posts/{id}', [CommunityController::class, 'destroy'])
                     ->name('posts.destroy');
             });
         });
@@ -127,7 +137,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::post('/{module}/lessons/{lesson}/complete', [LessonProgressController::class, 'completeLesson'])
                     ->name('lessons.complete');
 
-                // 2. Sertifikat (Dipindah ke atas wildcard agar tidak tertangkap oleh {categorySlug})
+                // 2. Certificate (kept above the wildcard so {categorySlug} does not swallow it)
                 Route::get('/certificate', [DownloadCertificateController::class, 'index'])
                     ->name('certificate.index');
 
@@ -135,7 +145,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     ->middleware('throttle:certificate-download')
                     ->name('certificate.download');
 
-                // 3. Detail Kategori & Detail Kursus (Paling bawah)
+                // 3. Category and course detail (keep last)
                 Route::get('/{categorySlug}', [CourseController::class, 'showByCategory'])
                     ->name('showCategory');
 
@@ -148,22 +158,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::prefix('community')->name('community.')->group(function () {
 
-                Route::get('/', [CommunityPostController::class, 'index'])
+                Route::get('/', [CommunityController::class, 'index'])
                     ->name('index');
 
-                Route::post('/posts', [CommunityPostController::class, 'store'])
+                Route::post('/posts', [CommunityController::class, 'store'])
                     ->name('posts.store');
 
-                Route::post('/posts/{id}/like', [CommunityPostController::class, 'toggleLike'])
+                Route::post('/posts/{id}/like', [CommunityController::class, 'toggleLike'])
                     ->name('posts.like');
 
-                Route::post('/posts/{postId}/comments', [CommunityPostController::class, 'storeComment'])
+                Route::post('/posts/{postId}/comments', [CommunityController::class, 'storeComment'])
                     ->name('comments.store');
 
-                Route::post('/posts/{id}/report', [CommunityPostController::class, 'report'])
+                Route::post('/posts/{id}/report', [CommunityController::class, 'report'])
                     ->name('posts.report');
 
-                Route::delete('/posts/{id}', [CommunityPostController::class, 'destroy'])
+                Route::delete('/posts/{id}', [CommunityController::class, 'destroy'])
                     ->name('posts.destroy');
             });
 
@@ -180,13 +190,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     ->name('apply');
             });
         });
-
-        Route::patch('/profile/update', [ProfilePageController::class, 'update'])
-            ->name('profile.update');
     });
 
     // TEACHER ROLE
-    Route::middleware('role:teacher')->prefix('teacher')->name('teacher.')->group(function () {
+    Route::middleware(['role:teacher', 'check.teacher.status'])->prefix('teacher')->name('teacher.')->group(function () {
         // 1. Dashboard Overview
         Route::get('/dashboard', [TeacherDashboardController::class, 'index'])
             ->name('dashboard');
@@ -244,22 +251,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // 5. Community CRUD (CommunityPost & Comment)
         Route::prefix('community')->name('community.')->group(function () {
-            Route::get('/', [TeacherCommunityController::class, 'index'])
+            Route::get('/', [CommunityController::class, 'index'])
                 ->name('index');
 
-            Route::post('/', [TeacherCommunityController::class, 'store'])
+            Route::post('/', [CommunityController::class, 'store'])
                 ->name('store');
 
-            Route::post('/{id}/like', [TeacherCommunityController::class, 'toggleLike'])
+            Route::post('/{id}/like', [CommunityController::class, 'toggleLike'])
                 ->name('like');
 
-            Route::post('/{id}/comment', [TeacherCommunityController::class, 'storeComment'])
+            Route::post('/{id}/comment', [CommunityController::class, 'storeComment'])
                 ->name('comment');
 
-            Route::post('/posts/{id}/report', [TeacherCommunityController::class, 'report'])
+            Route::post('/posts/{id}/report', [CommunityController::class, 'report'])
                 ->name('posts.report');
 
-            Route::delete('/posts/{id}', [TeacherCommunityController::class, 'destroy'])
+            Route::delete('/posts/{id}', [CommunityController::class, 'destroy'])
                 ->name('posts.destroy');
         });
     });

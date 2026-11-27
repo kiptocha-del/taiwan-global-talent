@@ -14,7 +14,7 @@ class Certificate extends Model
         'module_id',
         'pdf_path',
         'issued_at',
-        
+
     ];
 
     public function user()
@@ -37,7 +37,7 @@ class Certificate extends Model
             }
 
             if (empty($model->certificate_code)) {
-                $model->certificate_code = strtoupper(Str::random(12)); // contoh: GTC-ABCD-1234
+                $model->certificate_code = strtoupper(Str::random(12)); // e.g. GTC-ABCD-1234
             }
 
             if (empty($model->issued_at)) {

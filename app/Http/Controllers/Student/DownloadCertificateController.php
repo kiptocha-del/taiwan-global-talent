@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
-use App\Models\Module;
 use App\Models\CourseCategory;
 use App\Models\Enrollment;
+use App\Models\Module;
 use App\Services\PDFGeneratorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,7 +81,7 @@ class DownloadCertificateController extends Controller
     {
         $user = Auth::user();
 
-        // 1. Pastikan user memang sudah menyelesaikan kelas ini (cek tabel enrollments)
+        // 1. Make sure the user has actually completed this module (enrollments table)
         $enrollment = DB::table('enrollments')
             ->where('user_id', $user->id)
             ->where('module_id', $module->id)
@@ -91,14 +91,14 @@ class DownloadCertificateController extends Controller
             abort(403, 'You have not completed this course yet. Please complete all the lessons to download the certificate.');
         }
 
-        // 2. Cek apakah record sertifikat sudah ada di database (Model Certificate)
+        // 2. Check whether a certificate record already exists
         $certificate = Certificate::where('user_id', $user->id)
             ->where('module_id', $module->id)
             ->first();
 
         // 3. JIKA BELUM ADA, GENERATE LANGSUNG SAAT INI JUGA (SINKRON)
         if (! $certificate) {
-            // Buat kode unik acak untuk sertifikat
+            // Random unique certificate code
             $temporaryCode = 'CERT-'.strtoupper(Str::random(12));
 
             try {
@@ -112,11 +112,11 @@ class DownloadCertificateController extends Controller
                     'pdf_path' => $uploadedPath,
                     'issued_at' => now(),
                 ]);
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                report($e);
+
                 return response()->json([
-                    'error' => 'Failed to process the certificate in real-time.',
-                    'message' => $e->getMessage(),
-                    'trace' => $e->getTraceAsString(),
+                    'error' => 'We could not generate your certificate right now. Please try again later.',
                 ], 500);
             }
         }
@@ -128,12 +128,13 @@ class DownloadCertificateController extends Controller
             }
 
             // Return download langsung ke device browser user
-            return Storage::disk('s3')->download($certificate->pdf_path, "Sertifikat-{$module->title}.pdf");
+            return Storage::disk('s3')->download($certificate->pdf_path, __('Certificate')."-{$module->title}.pdf");
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            report($e);
+
             return response()->json([
-                'error' => 'Failed to download the file',
-                'message' => $e->getMessage(),
+                'error' => 'We could not download your certificate right now. Please try again later.',
             ], 500);
         }
     }

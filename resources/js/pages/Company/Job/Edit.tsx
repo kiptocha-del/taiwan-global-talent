@@ -24,7 +24,7 @@ export default function EditJob({ company, job }: { company: any; job: any }) {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        <div className="min-h-screen bg-canvas text-ink">
             <Head title={`Edit - ${job.title}`} />
             <CompanyNavbar company={company} />
 
@@ -36,7 +36,7 @@ export default function EditJob({ company, job }: { company: any; job: any }) {
                     backUrl="/company/jobs"
                 />
 
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-800 dark:bg-slate-900">
+                <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Job Position Title */}
                         <InputText
@@ -145,17 +145,17 @@ export default function EditJob({ company, job }: { company: any; job: any }) {
                         />
 
                         {/* Action Buttons */}
-                        <div className="flex items-center justify-end gap-3 border-t border-slate-100 pt-4 dark:border-slate-800">
+                        <div className="flex items-center justify-end gap-3 border-t border-border pt-4">
                             <Link
                                 href="/company/jobs"
-                                className="rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-semibold text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800"
+                                className="rounded-xl border border-border px-4 py-2.5 text-xs font-semibold text-muted transition-colors hover:bg-canvas"
                             >
                                 Cancel
                             </Link>
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="cursor-pointer rounded-xl bg-indigo-600 px-5 py-2.5 text-xs font-semibold text-white shadow-md transition-colors hover:bg-indigo-700 disabled:opacity-50"
+                                className="cursor-pointer rounded-xl bg-accent px-5 py-2.5 text-xs font-semibold text-on-brand shadow-md transition-colors hover:bg-accent/90 disabled:opacity-50"
                             >
                                 {processing
                                     ? 'Updating...'

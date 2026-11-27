@@ -97,7 +97,7 @@ export default function CommunityPostCard({
         }
     };
 
-    // Handler Kirim Komentar Dinamis
+    // Comment submit handler
     const handleComment = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -132,11 +132,11 @@ export default function CommunityPostCard({
     };
 
     return (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xs transition sm:p-5 dark:border-slate-800 dark:bg-slate-900">
+        <div className="overflow-hidden rounded-2xl border border-border bg-surface p-4 shadow-xs transition sm:p-5">
             {/* Header Post */}
             <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-indigo-600 text-xs font-bold text-white">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent text-xs font-bold text-on-brand">
                         {post.user?.avatar_url ? (
                             <img
                                 src={post.user.avatar_url}
@@ -148,37 +148,37 @@ export default function CommunityPostCard({
                         )}
                     </div>
                     <div className="min-w-0 flex-1">
-                        <h4 className="truncate text-xs font-bold text-slate-900 sm:text-sm dark:text-white">
+                        <h4 className="truncate text-xs font-bold text-ink sm:text-sm">
                             {post.user?.name}
                         </h4>
-                        <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">
+                        <p className="truncate text-[11px] text-muted">
                             {post.user?.university || 'Member'}
                         </p>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1 rounded-md bg-indigo-50 px-2 py-0.5 text-[10px] font-bold text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400">
-                        <Tag className="h-3 w-3" /> {post.tag || 'General'}
+                    <span className="inline-flex items-center gap-1 rounded-md bg-accent-soft px-2 py-0.5 text-[10px] font-bold text-accent">
+                        <Tag className="h-3 w-3"/> {post.tag ||'General'}
                     </span>
 
                     {isOwner ? (
                         <button
                             type="button"
                             onClick={handleDelete}
-                            className="cursor-pointer p-1 text-slate-400 transition-colors hover:text-rose-600"
+                            className="cursor-pointer p-1 text-muted transition-colors hover:text-status-danger"
                             title="Delete Post"
                         >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-4 w-4"/>
                         </button>
                     ) : (
                         <button
                             type="button"
                             onClick={() => setShowReportModal(true)}
-                            className="cursor-pointer p-1 text-slate-400 transition-colors hover:text-amber-600"
+                            className="cursor-pointer p-1 text-muted transition-colors hover:text-status-warning"
                             title="Report Post"
                         >
-                            <Flag className="h-4 w-4" />
+                            <Flag className="h-4 w-4"/>
                         </button>
                     )}
                 </div>
@@ -186,12 +186,12 @@ export default function CommunityPostCard({
 
             {/* Content & Media Attachment */}
             <div className="mt-3 space-y-3">
-                <p className="wrap-break-words text-xs leading-relaxed text-slate-800 sm:text-sm dark:text-slate-200">
+                <p className="wrap-break-words text-xs leading-relaxed text-ink sm:text-sm">
                     {post.content}
                 </p>
 
                 {post.media_url && (
-                    <div className="flex max-h-96 w-full items-center justify-center overflow-hidden rounded-xl border border-slate-100 bg-black dark:border-slate-800">
+                    <div className="flex max-h-96 w-full items-center justify-center overflow-hidden rounded-xl border border-border bg-ink">
                         {post.media_type === 'video' ? (
                             <video
                                 src={post.media_url}
@@ -210,18 +210,18 @@ export default function CommunityPostCard({
             </div>
 
             {/* Social Actions */}
-            <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-bold text-slate-500 dark:border-slate-800 dark:text-slate-400">
+            <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs font-bold text-muted">
                 <button
                     type="button"
                     onClick={handleLike}
-                    className={`inline-flex cursor-pointer items-center gap-1.5 transition hover:text-indigo-600 ${
+                    className={`inline-flex cursor-pointer items-center gap-1.5 transition hover:text-accent ${
                         post.is_liked_by_me
-                            ? 'text-indigo-600 dark:text-indigo-400'
+                            ? 'text-accent '
                             : ''
                     }`}
                 >
                     <ThumbsUp
-                        className={`h-4 w-4 ${post.is_liked_by_me ? 'fill-indigo-600 dark:fill-indigo-400' : ''}`}
+                        className={`h-4 w-4 ${post.is_liked_by_me ?'fill-accent':''}`}
                     />
                     <span>{post.likes_count ?? 0} Like</span>
                 </button>
@@ -229,9 +229,9 @@ export default function CommunityPostCard({
                 <button
                     type="button"
                     onClick={() => setShowComments(!showComments)}
-                    className="inline-flex cursor-pointer items-center gap-1.5 transition hover:text-slate-900 dark:hover:text-white"
+                    className="inline-flex cursor-pointer items-center gap-1.5 transition hover:text-ink"
                 >
-                    <MessageSquare className="h-4 w-4 text-indigo-500" />
+                    <MessageSquare className="h-4 w-4 text-accent"/>
                     <span>
                         {post.comments_count ?? post.comments?.length ?? 0}{' '}
                         Comment
@@ -241,19 +241,19 @@ export default function CommunityPostCard({
 
             {/* Comment Section */}
             {showComments && (
-                <div className="mt-3 space-y-3 border-t border-slate-100 pt-3 dark:border-slate-800">
+                <div className="mt-3 space-y-3 border-t border-border pt-3">
                     {commentError && (
-                        <div className="flex items-center justify-between gap-2 rounded-xl border border-rose-200 bg-rose-50 p-2.5 text-xs font-semibold text-rose-600 dark:border-rose-900 dark:bg-rose-950/50 dark:text-rose-400">
+                        <div className="flex items-center justify-between gap-2 rounded-xl border border-status-danger/30 bg-status-danger-soft p-2.5 text-xs font-semibold text-status-danger">
                             <div className="flex items-center gap-2">
-                                <AlertCircle className="h-4 w-4 shrink-0 text-rose-500" />
+                                <AlertCircle className="h-4 w-4 shrink-0 text-status-danger"/>
                                 <span>{commentError}</span>
                             </div>
                             <button
                                 type="button"
                                 onClick={() => setCommentError(null)}
-                                className="text-rose-400 hover:text-rose-600"
+                                className="text-status-danger hover:text-status-danger"
                             >
-                                <X className="h-3.5 w-3.5" />
+                                <X className="h-3.5 w-3.5"/>
                             </button>
                         </div>
                     )}
@@ -270,14 +270,14 @@ export default function CommunityPostCard({
                                 }
                             }}
                             placeholder="Write a comment..."
-                            className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs outline-none focus:border-indigo-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                            className="flex-1 rounded-xl border border-border bg-canvas px-3 py-1.5 text-xs outline-none focus:border-accent"
                             required
                         />
                         <button
                             type="submit"
-                            className="cursor-pointer rounded-xl bg-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white transition-colors hover:bg-indigo-700"
+                            className="cursor-pointer rounded-xl bg-accent px-3.5 py-1.5 text-xs font-bold text-on-brand transition-colors hover:bg-accent/90"
                         >
-                            <Send className="h-3.5 w-3.5" />
+                            <Send className="h-3.5 w-3.5"/>
                         </button>
                     </form>
 
@@ -285,12 +285,12 @@ export default function CommunityPostCard({
                         {post.comments?.map((comment) => (
                             <div
                                 key={comment.id}
-                                className="rounded-xl bg-slate-50 p-2.5 text-xs dark:bg-slate-800/50"
+                                className="rounded-xl bg-canvas p-2.5 text-xs"
                             >
-                                <span className="font-bold text-slate-900 dark:text-white">
+                                <span className="font-bold text-ink">
                                     {comment.user?.name}:{' '}
                                 </span>
-                                <span className="wrap-break-words text-slate-700 dark:text-slate-300">
+                                <span className="wrap-break-words text-muted">
                                     {comment.content}
                                 </span>
                             </div>
@@ -301,13 +301,13 @@ export default function CommunityPostCard({
 
             {/* Report Modal */}
             {showReportModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-                    <div className="w-full max-w-md space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-xl dark:border-slate-800 dark:bg-slate-900">
-                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 p-4 backdrop-blur-xs">
+                    <div className="w-full max-w-md space-y-4 rounded-2xl border border-border bg-surface p-5 shadow-xl">
+                        <h3 className="text-sm font-bold text-ink">
                             Report Community Post
                         </h3>
                         <form onSubmit={handleReport} className="space-y-3">
-                            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                            <label className="block text-xs font-semibold text-muted">
                                 Choose Reason
                             </label>
                             <select
@@ -315,7 +315,7 @@ export default function CommunityPostCard({
                                 onChange={(e) =>
                                     setReportReason(e.target.value)
                                 }
-                                className="w-full rounded-xl border border-slate-200 bg-white p-2.5 text-xs focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                                className="w-full rounded-xl border border-border bg-surface p-2.5 text-xs focus:outline-none"
                             >
                                 <option value="Scam / Spam">Scam / Spam</option>
                                 <option value="18+ / Adult Content">
@@ -330,13 +330,13 @@ export default function CommunityPostCard({
                                 <button
                                     type="button"
                                     onClick={() => setShowReportModal(false)}
-                                    className="rounded-xl border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800"
+                                    className="rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-muted hover:bg-canvas"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="cursor-pointer rounded-xl bg-amber-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-amber-700"
+                                    className="cursor-pointer rounded-xl bg-status-warning px-3 py-1.5 text-xs font-bold text-on-brand hover:bg-status-warning"
                                 >
                                     Submit Report
                                 </button>

@@ -12,7 +12,7 @@ export default function TeacherFields({
     errors,
 }: TeacherFieldsProps) {
     return (
-        <div className="animate-in fade-in grid grid-cols-1 gap-4 rounded-xl border border-gray-100 bg-gray-50/60 p-4 duration-150 md:grid-cols-2">
+        <div className="animate-in fade-in grid grid-cols-1 gap-4 rounded-xl border border-border bg-canvas p-4 duration-150 md:grid-cols-2">
             <div>
                 <InputText
                     label="Full Name (For Certification)"
@@ -21,7 +21,7 @@ export default function TeacherFields({
                     onChange={(e: any) => setData('full_name', e.target.value)}
                 />
                 {errors.full_name && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p className="mt-1 text-xs text-status-danger">
                         {errors.full_name}
                     </p>
                 )}
@@ -34,7 +34,7 @@ export default function TeacherFields({
                     onChange={(e: any) => setData('phone', e.target.value)}
                 />
                 {errors.phone && (
-                    <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
+                    <p className="mt-1 text-xs text-status-danger">{errors.phone}</p>
                 )}
             </div>
             <div className="md:col-span-2">
@@ -45,7 +45,7 @@ export default function TeacherFields({
                     onChange={(e: any) => setData('expertise', e.target.value)}
                 />
                 {errors.expertise && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p className="mt-1 text-xs text-status-danger">
                         {errors.expertise}
                     </p>
                 )}

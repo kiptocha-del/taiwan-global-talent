@@ -65,7 +65,7 @@ class TeacherCourseController extends Controller
             $thumbnailPath = $request->file('thumbnail')->store('course-categories/thumbnails', 's3');
         }
 
-        // Tentukan urutan terakhir (order)
+        // Next position in the ordering
         $nextOrder = (int) CourseCategory::max('order') + 1;
 
         CourseCategory::create([

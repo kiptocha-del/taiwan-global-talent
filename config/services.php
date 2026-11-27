@@ -38,10 +38,17 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT_URI'),
+        'redirect' => env('GOOGLE_REDIRECT_URI') ?: rtrim(env('APP_URL', 'http://localhost'), '/').'/auth/google/callback',
         'refresh_token' => env('GOOGLE_REFRESH_TOKEN'),
         'tts_credentials' => env('GOOGLE_TTS_APPLICATION_CREDENTIALS'),
         'application_credentials' => env('GOOGLE_APPLICATION_CREDENTIALS'),
+    ],
+
+    // Mirrors Get Involved contact form messages into a Google Sheet (optional).
+    'google_sheets' => [
+        'credentials' => env('GOOGLE_SHEETS_CREDENTIALS'),
+        'spreadsheet_id' => env('GOOGLE_SHEETS_SPREADSHEET_ID'),
+        'tab' => env('GOOGLE_SHEETS_TAB', 'Sheet1'),
     ],
 
     'sightengine' => [

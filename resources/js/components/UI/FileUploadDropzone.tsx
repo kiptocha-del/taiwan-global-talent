@@ -40,20 +40,20 @@ export default function FileUploadDropzone({
     return (
         <div className="w-full">
             {label && (
-                <label className="mb-2 block text-sm font-medium text-gray-700">
+                <label className="mb-2 block text-sm font-medium text-muted">
                     {label}
                 </label>
             )}
 
             {value ? (
-                <div className="flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50/50 p-3.5">
+                <div className="flex items-center justify-between rounded-xl border border-accent/30 bg-accent-soft/50 p-3.5">
                     <div className="flex items-center gap-3 overflow-hidden">
-                        <FileText className="h-5 w-5 shrink-0 text-blue-600" />
+                        <FileText className="h-5 w-5 shrink-0 text-accent"/>
                         <div className="truncate">
-                            <p className="truncate text-sm font-medium text-gray-800">
+                            <p className="truncate text-sm font-medium text-ink">
                                 {value.name}
                             </p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-muted">
                                 {(value.size / 1024 / 1024).toFixed(2)} MB
                             </p>
                         </div>
@@ -61,9 +61,9 @@ export default function FileUploadDropzone({
                     <button
                         type="button"
                         onClick={() => onChange(null)}
-                        className="rounded-lg p-1 text-gray-400 transition-colors hover:bg-rose-100 hover:text-rose-600"
+                        className="rounded-lg p-1 text-muted transition-colors hover:bg-status-danger-soft hover:text-status-danger"
                     >
-                        <X className="h-4 w-4" />
+                        <X className="h-4 w-4"/>
                     </button>
                 </div>
             ) : (
@@ -84,8 +84,8 @@ export default function FileUploadDropzone({
                     onClick={() => fileInputRef.current?.click()}
                     className={`cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-all ${
                         isDragging
-                            ? 'border-blue-500 bg-blue-50/50'
-                            : 'border-gray-200 bg-gray-50/50 hover:border-blue-400'
+                            ? 'border-accent bg-accent-soft/50'
+                            : 'border-border bg-canvas hover:border-accent'
                     }`}
                 >
                     <input
@@ -97,17 +97,17 @@ export default function FileUploadDropzone({
                             e.target.files?.[0] && handleFile(e.target.files[0])
                         }
                     />
-                    <UploadCloud className="mx-auto mb-2 h-8 w-8 text-gray-400" />
-                    <p className="text-sm font-medium text-gray-700">
+                    <UploadCloud className="mx-auto mb-2 h-8 w-8 text-muted"/>
+                    <p className="text-sm font-medium text-muted">
                         Click or Drag & Drop File Here
                     </p>
-                    <p className="mt-1 text-xs text-gray-400">
+                    <p className="mt-1 text-xs text-muted">
                         Format: {accept} (Max.{maxSizeMB}MB)
                     </p>
                 </div>
             )}
 
-            {error && <p className="mt-1.5 text-xs text-rose-600">{error}</p>}
+            {error && <p className="mt-1.5 text-xs text-status-danger">{error}</p>}
         </div>
     );
 }

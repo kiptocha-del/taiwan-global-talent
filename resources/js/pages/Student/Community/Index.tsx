@@ -50,7 +50,7 @@ export default function Index({ initialPosts }: Props) {
                                 />
                             ))
                         ) : (
-                            <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-10 text-center text-sm text-gray-500">
+                            <div className="rounded-2xl border border-dashed border-border bg-surface p-10 text-center text-sm text-muted">
                                 No discussions found. Be the first to start a
                                 conversation!
                             </div>
@@ -59,8 +59,8 @@ export default function Index({ initialPosts }: Props) {
 
                     {/* Loader Infinite Scroll */}
                     {loadingMore && (
-                        <div className="flex items-center justify-center gap-2 p-4 text-xs font-medium text-gray-400">
-                            <span className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></span>
+                        <div className="flex items-center justify-center gap-2 p-4 text-xs font-medium text-muted">
+                            <span className="h-4 w-4 animate-spin rounded-full border-2 border-border border-t-blue-600"></span>
                             <span>Loading older discussions...</span>
                         </div>
                     )}
@@ -68,14 +68,14 @@ export default function Index({ initialPosts }: Props) {
 
                 {/* Sidebar Widget Kanan */}
                 <div className="hidden space-y-4 lg:col-span-1 lg:block">
-                    <div className="space-y-3 rounded-2xl border border-gray-100 bg-white p-4 shadow-xs">
-                        <div className="flex items-center gap-2 border-b border-gray-100 pb-2 text-xs font-bold text-gray-900">
-                            <ShieldAlert className="h-4 w-4 text-blue-600" />
+                    <div className="space-y-3 rounded-2xl border border-border bg-surface p-4 shadow-xs">
+                        <div className="flex items-center gap-2 border-b border-border pb-2 text-xs font-bold text-ink">
+                            <ShieldAlert className="h-4 w-4 text-accent"/>
                             <span>Community Guidelines</span>
                         </div>
-                        <ul className="space-y-2 text-[11px] leading-relaxed text-gray-600">
+                        <ul className="space-y-2 text-[11px] leading-relaxed text-muted">
                             <li className="flex items-start gap-1.5">
-                                <span className="font-bold text-blue-600">
+                                <span className="font-bold text-accent">
                                     •
                                 </span>
                                 <span>
@@ -83,7 +83,7 @@ export default function Index({ initialPosts }: Props) {
                                 </span>
                             </li>
                             <li className="flex items-start gap-1.5">
-                                <span className="font-bold text-blue-600">
+                                <span className="font-bold text-accent">
                                     •
                                 </span>
                                 <span>

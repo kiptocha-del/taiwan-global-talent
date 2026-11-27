@@ -45,7 +45,7 @@ class CourseForm
 
                 TextInput::make('google_slides_template_id')
                     ->label('Google Slides Template ID')
-                    ->helperText('Contoh ID dari URL: https://docs.google.com/presentation/d/[TEMPLATE_ID]/edit')
+                    ->helperText(__('The ID from the URL: https://docs.google.com/presentation/d/[TEMPLATE_ID]/edit'))
                     ->placeholder('1A2b3C4d5E6f7G8h9I0J...')
                     ->columnSpanFull()
                     ->required(),

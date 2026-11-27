@@ -12,14 +12,30 @@ interface ApplyFormState {
     certificate: File | null;
 }
 
-export default function Apply() {
-    const { data, setData, post, processing, errors, reset } =
+interface ApplyProps {
+    /** Text answers from an earlier, denied application, used to pre-fill the form. */
+    existingProfile: Partial<
+        Record<
+            'full_name' | 'phone' | 'expertise' | 'learning_goal' | 'bio',
+            string | null
+        >
+    > | null;
+    hasCv: boolean;
+    rejectionReason: string | null;
+}
+
+export default function Apply({
+    existingProfile,
+    hasCv,
+    rejectionReason,
+}: ApplyProps) {
+    const { data, setData, post, processing, errors } =
         useForm<ApplyFormState>({
-            full_name: '',
-            phone: '',
-            expertise: '',
-            learning_goal: '',
-            bio: '',
+            full_name: existingProfile?.full_name ?? '',
+            phone: existingProfile?.phone ?? '',
+            expertise: existingProfile?.expertise ?? '',
+            learning_goal: existingProfile?.learning_goal ?? '',
+            bio: existingProfile?.bio ?? '',
             cv: null,
             certificate: null,
         });
@@ -27,31 +43,45 @@ export default function Apply() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        post(route('teacher.store'), {
-            forceFormData: true,
-            onSuccess: () => reset(),
-        });
+        post(route('teacher.store'), { forceFormData: true });
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-surface-muted px-4 py-12 sm:px-6 lg:px-8">
             <Head title="Teacher Application Form" />
 
-            <div className="mx-auto max-w-2xl rounded-xl bg-white p-8 shadow-md">
+            <div className="mx-auto max-w-2xl rounded-xl bg-surface p-8 shadow-md">
                 <div className="mb-8 text-center">
-                    <h2 className="text-3xl font-extrabold text-gray-900">
+                    <h2 className="text-3xl font-extrabold text-ink">
                         Teacher Application Form
                     </h2>
-                    <p className="mt-2 text-sm text-gray-600">
-                        Please fill out the form below according to your profile
-                        schema.
+                    <p className="mt-2 text-sm text-muted">
+                        Fill in your details once. Our team reviews every
+                        application before the teacher dashboard opens.
                     </p>
                 </div>
+
+                {rejectionReason && (
+                    <div
+                        role="alert"
+                        className="mb-6 rounded-md border border-status-danger/30 bg-status-danger-soft p-4"
+                    >
+                        <h3 className="text-sm font-bold text-status-danger">
+                            Your previous application was not approved
+                        </h3>
+                        <p className="mt-1 text-sm text-status-danger">
+                            {rejectionReason}
+                        </p>
+                        <p className="mt-2 text-xs text-status-danger">
+                            Correct the details below and submit again.
+                        </p>
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Full Name */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-muted">
                             Full Name
                         </label>
                         <input
@@ -60,11 +90,11 @@ export default function Apply() {
                             onChange={(e) =>
                                 setData('full_name', e.target.value)
                             }
-                            className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-md border border-border p-2 shadow-sm focus:border-accent focus:ring-accent sm:text-sm"
                             placeholder="Your full name"
                         />
                         {errors.full_name && (
-                            <p className="mt-1 text-sm text-red-600">
+                            <p className="mt-1 text-sm text-status-danger">
                                 {errors.full_name}
                             </p>
                         )}
@@ -72,18 +102,18 @@ export default function Apply() {
 
                     {/* Phone Number */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-muted">
                             Phone Number (WhatsApp)
                         </label>
                         <input
                             type="text"
                             value={data.phone}
                             onChange={(e) => setData('phone', e.target.value)}
-                            className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-md border border-border p-2 shadow-sm focus:border-accent focus:ring-accent sm:text-sm"
                             placeholder="(+886) 81234567xxx"
                         />
                         {errors.phone && (
-                            <p className="mt-1 text-sm text-red-600">
+                            <p className="mt-1 text-sm text-status-danger">
                                 {errors.phone}
                             </p>
                         )}
@@ -91,7 +121,7 @@ export default function Apply() {
 
                     {/* Expertise */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-muted">
                             Expertise
                         </label>
                         <input
@@ -100,11 +130,11 @@ export default function Apply() {
                             onChange={(e) =>
                                 setData('expertise', e.target.value)
                             }
-                            className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-md border border-border p-2 shadow-sm focus:border-accent focus:ring-accent sm:text-sm"
                             placeholder="e.g. Mathematics, English, Web Development"
                         />
                         {errors.expertise && (
-                            <p className="mt-1 text-sm text-red-600">
+                            <p className="mt-1 text-sm text-status-danger">
                                 {errors.expertise}
                             </p>
                         )}
@@ -112,7 +142,7 @@ export default function Apply() {
 
                     {/* Learning Goal */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-muted">
                             Teaching Goal
                         </label>
                         <input
@@ -121,11 +151,11 @@ export default function Apply() {
                             onChange={(e) =>
                                 setData('learning_goal', e.target.value)
                             }
-                            className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-md border border-border p-2 shadow-sm focus:border-accent focus:ring-accent sm:text-sm"
                             placeholder="e.g. Preparing students for IELTS, Basic Calculus"
                         />
                         {errors.learning_goal && (
-                            <p className="mt-1 text-sm text-red-600">
+                            <p className="mt-1 text-sm text-status-danger">
                                 {errors.learning_goal}
                             </p>
                         )}
@@ -133,18 +163,18 @@ export default function Apply() {
 
                     {/* Bio / Experience */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-muted">
                             About Me / Teaching Experience
                         </label>
                         <textarea
                             rows={4}
                             value={data.bio}
                             onChange={(e) => setData('bio', e.target.value)}
-                            className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-md border border-border p-2 shadow-sm focus:border-accent focus:ring-accent sm:text-sm"
                             placeholder="Tell us briefly about your profile and teaching experience..."
                         />
                         {errors.bio && (
-                            <p className="mt-1 text-sm text-red-600">
+                            <p className="mt-1 text-sm text-status-danger">
                                 {errors.bio}
                             </p>
                         )}
@@ -152,8 +182,10 @@ export default function Apply() {
 
                     {/* Upload CV */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                            Upload CV (PDF)
+                        <label className="block text-sm font-medium text-muted">
+                            {hasCv
+                                ? 'Replace CV (optional — your earlier upload is kept)'
+                                : 'Upload CV (PDF)'}
                         </label>
                         <input
                             type="file"
@@ -164,10 +196,10 @@ export default function Apply() {
                                     e.target.files ? e.target.files[0] : null,
                                 )
                             }
-                            className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100"
+                            className="mt-1 block w-full text-sm text-muted file:mr-4 file:rounded-md file:border-0 file:bg-accent-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-accent hover:file:bg-accent-soft"
                         />
                         {errors.cv && (
-                            <p className="mt-1 text-sm text-red-600">
+                            <p className="mt-1 text-sm text-status-danger">
                                 {errors.cv}
                             </p>
                         )}
@@ -175,7 +207,7 @@ export default function Apply() {
 
                     {/* Upload Certificate */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-muted">
                             Certificate (Optional)
                         </label>
                         <input
@@ -187,10 +219,10 @@ export default function Apply() {
                                     e.target.files ? e.target.files[0] : null,
                                 )
                             }
-                            className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100"
+                            className="mt-1 block w-full text-sm text-muted file:mr-4 file:rounded-md file:border-0 file:bg-accent-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-accent hover:file:bg-accent-soft"
                         />
                         {errors.certificate && (
-                            <p className="mt-1 text-sm text-red-600">
+                            <p className="mt-1 text-sm text-status-danger">
                                 {errors.certificate}
                             </p>
                         )}
@@ -201,7 +233,7 @@ export default function Apply() {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50"
+                            className="flex w-full justify-center rounded-md border border-transparent bg-accent px-4 py-2 text-sm font-medium text-on-brand shadow-sm hover:bg-accent/90 focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none disabled:opacity-50"
                         >
                             {processing ? 'Submitting...' : 'Submit'}
                         </button>

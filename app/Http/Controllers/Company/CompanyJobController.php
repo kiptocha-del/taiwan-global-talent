@@ -22,7 +22,7 @@ class CompanyJobController extends Controller
             $company->banner_url = $company->banner_path ? $disk->url($company->banner_path) : null;
         }
 
-        // Ambil lowongan milik perusahaan penggunanya
+        // Job postings owned by the user's company
         $jobs = CompanyJob::where('company_profile_id', $company?->id)
             ->withCount('applications as applicants_count')
             ->orderBy('created_at', 'desc')
@@ -39,7 +39,7 @@ class CompanyJobController extends Controller
         $user = auth()->user()->load('companyProfile');
         $company = $user->companyProfile;
 
-        if (!$company || $company->status !== 'approved') {
+        if (! $company || $company->status !== 'approved') {
             return redirect()->route('company.jobs.index')
                 ->withErrors(['message' => 'Your company profile must be verified to create job postings.']);
         }
@@ -53,7 +53,7 @@ class CompanyJobController extends Controller
     {
         $company = auth()->user()->companyProfile;
 
-        if (!$company || $company->status !== 'approved') {
+        if (! $company || $company->status !== 'approved') {
             return back()->withErrors(['message' => 'Your company must be verified to post jobs.']);
         }
 
@@ -68,9 +68,9 @@ class CompanyJobController extends Controller
             'status' => 'required|in:published,draft,closed',
         ]);
 
-        // Auto-generate Slug yang unik
+        // Generate a unique slug
         $baseSlug = Str::slug($validated['title']);
-        $slug = $baseSlug . '-' . Str::random(5);
+        $slug = $baseSlug.'-'.Str::random(5);
 
         CompanyJob::create([
             'company_profile_id' => $company->id,
@@ -120,10 +120,19 @@ class CompanyJobController extends Controller
         return redirect()->route('company.jobs.index')->with('success', 'Job posting updated successfully!');
     }
 
+    public function destroy(CompanyJob $job)
+    {
+        $this->authorizeCompany($job);
+
+        $job->delete();
+
+        return redirect()->route('company.jobs.index')->with('success', 'Job posting deleted successfully!');
+    }
+
     private function authorizeCompany(CompanyJob $job)
     {
         $company = auth()->user()->companyProfile;
-        if (!$company || $job->company_profile_id !== $company->id) {
+        if (! $company || $job->company_profile_id !== $company->id) {
             abort(403, 'Unauthorized action.');
         }
     }

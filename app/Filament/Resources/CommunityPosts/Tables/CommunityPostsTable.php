@@ -2,24 +2,24 @@
 
 namespace App\Filament\Resources\CommunityPosts\Tables;
 
+use App\Models\CommunityPost;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
-use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
-use Filament\Actions\Action;
-use App\Models\CommunityPost;
+use Filament\Tables\Table;
 
 class CommunityPostsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-           ->columns([
+            ->columns([
                 TextColumn::make('user.name')
                     ->label('Penulis')
                     ->searchable()
@@ -45,7 +45,7 @@ class CommunityPostsTable
                 TextColumn::make('comments_count')
                     ->numeric()
                     ->sortable()
-                    ->label('Komentar'),
+                    ->label(__('Comments')),
 
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -64,7 +64,7 @@ class CommunityPostsTable
                 Action::make('togglePin')
                     ->label(fn (CommunityPost $record) => $record->is_pinned ? 'Unpin' : 'Pin')
                     ->icon('heroicon-o-bookmark')
-                    ->action(fn (CommunityPost $record) => $record->update(['is_pinned' => !$record->is_pinned]))
+                    ->action(fn (CommunityPost $record) => $record->update(['is_pinned' => ! $record->is_pinned]))
                     ->color('warning'),
                 EditAction::make(),
                 DeleteAction::make(),

@@ -47,15 +47,27 @@ return [
             'report' => false,
         ],
 
-        's3' => [
+        // All uploads (lesson media, logos, certificates) go through the "s3"
+        // disk, which points at Cloudflare R2 in production. When no bucket is
+        // configured, such as a fresh local checkout, the same disk name is
+        // served from local public storage so pages that build file URLs
+        // still render. Run `php artisan storage:link` once for that mode.
+        's3' => env('AWS_BUCKET') ? [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
+            'region' => env('AWS_DEFAULT_REGION', 'auto'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
+            'report' => false,
+        ] : [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads'),
+            'url' => rtrim((string) env('APP_URL', 'http://localhost'), '/').'/storage/uploads',
+            'visibility' => 'public',
             'throw' => false,
             'report' => false,
         ],

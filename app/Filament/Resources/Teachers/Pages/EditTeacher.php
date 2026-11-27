@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Teachers\Pages;
 use App\Filament\Resources\Teachers\TeacherResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class EditTeacher extends EditRecord
 {
@@ -33,12 +34,13 @@ class EditTeacher extends EditRecord
             $data['learning_goal'] = $profile->learning_goal;
             $data['bio'] = $profile->bio;
             $data['status'] = $profile->status;
+            $data['rejection_reason'] = $profile->rejection_reason;
         }
 
         return $data;
     }
 
-    protected function handleRecordUpdate(\Illuminate\Database\Eloquent\Model $record, array $data): \Illuminate\Database\Eloquent\Model
+    protected function handleRecordUpdate(Model $record, array $data): Model
     {
         $record->update([
             'name' => $data['full_name'] ?? $record->name,
@@ -54,6 +56,7 @@ class EditTeacher extends EditRecord
                 'learning_goal' => $data['learning_goal'] ?? null,
                 'bio' => $data['bio'] ?? null,
                 'status' => $data['status'] ?? 'pending',
+                'rejection_reason' => $data['rejection_reason'] ?? null,
             ]
         );
 

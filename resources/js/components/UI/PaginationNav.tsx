@@ -29,18 +29,19 @@ export default function PaginationNav({ links }: PaginationProps) {
                 let content: React.ReactNode = link.label;
 
                 if (isPrev) {
-                    content = <ChevronLeft className="h-4 w-4" />;
+                    content = <ChevronLeft className="h-4 w-4"/>;
                 }
 
                 if (isNext) {
-                    content = <ChevronRight className="h-4 w-4" />;
+                    content = <ChevronRight className="h-4 w-4"/>;
                 }
 
                 if (!link.url) {
                     return (
                         <span
                             key={idx}
-                            className="cursor-not-allowed rounded-lg bg-gray-50 px-3 py-2 text-xs font-medium text-gray-300"
+                            aria-disabled="true"
+                            className="cursor-not-allowed rounded-control bg-surface-muted px-3 py-2 text-xs font-medium text-muted opacity-60"
                         >
                             {content}
                         </span>
@@ -51,10 +52,11 @@ export default function PaginationNav({ links }: PaginationProps) {
                     <Link
                         key={idx}
                         href={link.url}
-                        className={`rounded-lg px-3 py-2 text-xs font-medium transition-colors ${
+                        aria-current={link.active ? 'page' : undefined}
+                        className={`rounded-control px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                             link.active
-                                ? 'bg-blue-600 font-semibold text-white'
-                                : 'border border-gray-200 bg-white text-gray-600 hover:bg-gray-100'
+                                ? 'bg-brand-strong font-semibold text-on-brand'
+                                : 'border border-border bg-surface text-muted hover:bg-surface-muted'
                         }`}
                         dangerouslySetInnerHTML={
                             !isPrev && !isNext

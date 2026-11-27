@@ -5,6 +5,7 @@ import DownloadProgressBar from '@/components/UI/DownloadProgressBar';
 import EmptyState from '@/components/UI/EmptyState';
 import PageHeader from '@/components/UI/PageHeader';
 import StatusBadge from '@/components/UI/StatusBadge';
+import { useTranslation } from '@/context/LanguageContext';
 import Layout from '../../Layout';
 
 interface Category {
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export default function CertificateIndex({ modules = [] }: Props) {
+    const { t } = useTranslation();
     const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
     const [activeCourseTitle, setActiveCourseTitle] = useState<string>('');
 
@@ -53,7 +55,7 @@ export default function CertificateIndex({ modules = [] }: Props) {
 
             const downloadLink = document.createElement('a');
             downloadLink.href = downloadUrl;
-            downloadLink.download = `Sertifikat-${moduleTitle}.pdf`;
+            downloadLink.download = t('certificate.fileName', { title: moduleTitle });
             document.body.appendChild(downloadLink);
             downloadLink.click();
 
@@ -84,8 +86,8 @@ export default function CertificateIndex({ modules = [] }: Props) {
                 />
 
                 {/* Course List */}
-                <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xs dark:border-slate-800 dark:bg-slate-900">
-                    <div className="divide-y divide-gray-100 dark:divide-slate-800">
+                <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-xs">
+                    <div className="divide-y divide-border">
                         {modules.length === 0 ? (
                             <div className="p-4">
                                 <EmptyState
@@ -98,30 +100,30 @@ export default function CertificateIndex({ modules = [] }: Props) {
                             modules.map((module: any) => (
                                 <div
                                     key={module.id}
-                                    className="flex flex-col justify-between gap-6 p-6 transition-colors hover:bg-gray-50/50 md:flex-row md:items-center dark:hover:bg-slate-800/50"
+                                    className="flex flex-col justify-between gap-6 p-6 transition-colors hover:bg-canvas md:flex-row md:items-center"
                                 >
                                     <div className="flex-1 space-y-1">
                                         <div className="flex items-center gap-2">
-                                            <span className="rounded-md bg-blue-50 px-2 py-0.5 text-xs font-bold text-blue-600 uppercase dark:bg-blue-950 dark:text-blue-400">
+                                            <span className="rounded-md bg-accent-soft px-2 py-0.5 text-xs font-bold text-accent uppercase">
                                                 {module.level || 'General'}
                                             </span>
                                             <StatusBadge
                                                 status={module.status}
                                             />
                                         </div>
-                                        <h4 className="text-base font-bold text-gray-900 dark:text-white">
+                                        <h4 className="text-base font-bold text-ink">
                                             {module.title}
                                         </h4>
                                     </div>
 
                                     <div className="w-full space-y-1 md:w-48">
-                                        <div className="mb-1 flex justify-between text-xs font-medium text-gray-500 dark:text-slate-400">
+                                        <div className="mb-1 flex justify-between text-xs font-medium text-muted">
                                             <span>Progress</span>
                                             <span>{module.progress}%</span>
                                         </div>
-                                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-slate-800">
+                                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-muted">
                                             <div
-                                                className="h-full rounded-full bg-blue-600 transition-all duration-300"
+                                                className="h-full rounded-full bg-accent transition-all duration-300"
                                                 style={{
                                                     width: `${module.progress}%`,
                                                 }}
@@ -147,7 +149,7 @@ export default function CertificateIndex({ modules = [] }: Props) {
                                                         module.title,
                                                     )
                                                 }
-                                                className="w-full bg-emerald-600 shadow-emerald-600/20 hover:bg-emerald-700 md:w-auto"
+                                                className="w-full bg-status-positive shadow-emerald-600/20 hover:bg-status-positive md:w-auto"
                                             >
                                                 Download Certificate
                                             </Button>

@@ -12,7 +12,7 @@ export default function StudentFields({
     errors,
 }: StudentFieldsProps) {
     return (
-        <div className="animate-in fade-in grid grid-cols-1 gap-4 rounded-xl border border-gray-100 bg-gray-50/60 p-4 duration-150 md:grid-cols-2">
+        <div className="animate-in fade-in grid grid-cols-1 gap-4 rounded-xl border border-border bg-canvas p-4 duration-150 md:grid-cols-2">
             <div>
                 <InputText
                     label="University / School"
@@ -21,7 +21,7 @@ export default function StudentFields({
                     onChange={(e: any) => setData('university', e.target.value)}
                 />
                 {errors.university && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p className="mt-1 text-xs text-status-danger">
                         {errors.university}
                     </p>
                 )}
@@ -34,7 +34,7 @@ export default function StudentFields({
                     onChange={(e: any) => setData('major', e.target.value)}
                 />
                 {errors.major && (
-                    <p className="mt-1 text-xs text-red-500">{errors.major}</p>
+                    <p className="mt-1 text-xs text-status-danger">{errors.major}</p>
                 )}
             </div>
             <div>

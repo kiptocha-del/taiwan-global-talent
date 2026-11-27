@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import student from '@/routes/student';
 
 interface CourseCategory {
     id: number;
@@ -19,29 +20,29 @@ export default function Navbar({
     onItemClick,
 }: NavbarProps) {
     const navItems = [
-        { href: '/student/dashboard', label: 'Overview', zh: '概覽' },
-        { href: '/student/courses', label: 'Courses', zh: '證書' },
-        { href: '/student/community', label: 'Community', zh: '社群' },
-        { href: '/student/jobs', label: 'Job Portal', zh: '職缺' },
+        { href: student.dashboard.url(), label: 'Overview', zh: '概覽' },
+        { href: student.courses.index.url(), label: 'Courses', zh: '證書' },
+        { href: student.community.index.url(), label: 'Community', zh: '社群' },
+        { href: student.jobs.index.url(), label: 'Job Portal', zh: '職缺' },
     ];
 
     const getNavClass = (path: string) => {
         const active = currentUrl.startsWith(path);
 
         if (isMobile) {
-            // Tampilan Vertikal untuk Mobile Hamburger Menu
+            // Vertical layout for the mobile hamburger menu
             return `flex items-center justify-between w-full rounded-xl px-4 py-3 text-sm font-semibold transition ${
                 active
-                    ? 'bg-[#24458F] text-white shadow-sm'
-                    : 'text-[#24458F]/70 hover:bg-white hover:text-[#24458F]'
+                    ? 'bg-brand-strong text-on-brand shadow-sm'
+                    : 'text-muted hover:bg-surface-muted hover:text-ink'
             }`;
         }
 
-        // Tampilan Horizontal untuk Desktop
+        // Horizontal layout for desktop
         return `inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold transition whitespace-nowrap ${
             active
-                ? 'bg-[#24458F] text-white shadow-sm'
-                : 'text-[#24458F]/65 hover:bg-white hover:text-[#24458F]'
+                ? 'bg-brand-strong text-on-brand shadow-sm'
+                : 'text-muted hover:bg-surface-muted hover:text-ink'
         }`;
     };
 
@@ -62,7 +63,7 @@ export default function Navbar({
                     <span
                         className={`text-[11px] font-normal ${
                             isMobile && currentUrl.startsWith(item.href)
-                                ? 'text-[#CFE8FF]'
+                                ? 'text-accent-soft'
                                 : 'opacity-70'
                         }`}
                     >

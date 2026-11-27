@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\CourseCategories\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
@@ -28,7 +28,7 @@ class CourseCategoryForm
 
             TextInput::make('description')->required(),
             TextInput::make('instructor')->required(),
-            TextInput::make('duration')->placeholder('Contoh: 10 Jam'),
+            TextInput::make('duration')->placeholder(__('e.g. 10 hours')),
             TextInput::make('price')->numeric()->prefix('TWD'),
             Select::make('icon')
                 ->options([

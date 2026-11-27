@@ -4,57 +4,72 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\GenerateCertificateJob;
-use App\Models\Module;
+use App\Models\Enrollment;
 use App\Models\Lesson;
+use App\Models\Module;
+use App\Models\Progress;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class LessonProgressController extends Controller
 {
-    public function completeLesson(Request $request, Module $module, Lesson $lesson)
+    /**
+     * Mark a lesson as completed for the signed-in student.
+     *
+     * Each lesson is recorded once in the progress table, so repeating a lesson
+     * never moves the module counter. The enrollment counter is derived from the
+     * distinct completed lessons rather than incremented.
+     */
+    public function completeLesson(Request $request, Module $module, Lesson $lesson): RedirectResponse
     {
-        $user = Auth::user();
+        abort_unless($lesson->module_id === $module->id, 404);
 
-        $enrollment = DB::table('enrollments')
+        $user = $request->user();
+
+        $enrollment = Enrollment::query()
             ->where('user_id', $user->id)
             ->where('module_id', $module->id)
             ->first();
 
-        if (!$enrollment) {
-            return redirect()->back()->withErrors(['message' => 'Anda belum terdaftar di kelas ini']);
+        if (! $enrollment) {
+            return redirect()->back()->withErrors(['message' => 'You are not enrolled in this course.']);
         }
 
-        $totalLessons = $module->lessons()->count();
-        $newCount = min($enrollment->completed_lessons_count + 1, $totalLessons);
-        $isCompletedNow = ($newCount >= $totalLessons);
+        $justCompletedModule = DB::transaction(function () use ($user, $module, $lesson, $enrollment) {
+            Progress::query()->updateOrCreate(
+                ['user_id' => $user->id, 'lesson_id' => $lesson->id],
+                ['is_completed' => true],
+            );
 
-        DB::transaction(function () use ($enrollment, $newCount, $isCompletedNow) {
-            $updateData = [
-                'completed_lessons_count' => $newCount,
-                'updated_at' => now(),
-            ];
+            $totalLessons = $module->lessons()->count();
+            $completedLessons = Progress::query()
+                ->where('user_id', $user->id)
+                ->where('is_completed', true)
+                ->whereIn('lesson_id', $module->lessons()->select('id'))
+                ->count();
 
-            if (!$enrollment->is_completed && $isCompletedNow) {
-                $updateData['is_completed'] = true;
-                $updateData['completed_at'] = now();
-            }
+            $isCompletedNow = $totalLessons > 0 && $completedLessons >= $totalLessons;
+            $justCompleted = $isCompletedNow && ! $enrollment->is_completed;
 
-            DB::table('enrollments')->where('id', $enrollment->id)->update($updateData);
+            $enrollment->forceFill([
+                'completed_lessons_count' => $completedLessons,
+                'is_completed' => $isCompletedNow,
+                'completed_at' => $justCompleted ? now() : $enrollment->completed_at,
+            ])->save();
+
+            return $justCompleted;
         });
 
-        // 💡 PERUBAHAN PRODUCTION: Dispatch Background Job
-        if (!$enrollment->is_completed && $isCompletedNow) {
-            
+        if ($justCompletedModule) {
             GenerateCertificateJob::dispatch($user, $module);
 
-            // Karena proses butuh waktu, frontend tidak akan langsung mendownload
-            return redirect()->back()->with([
-                'success' => 'Selamat! Anda telah lulus. Sertifikat Anda sedang dibuat, silakan cek dashboard/profil dalam beberapa menit.',
-            ]);
+            return redirect()->back()->with(
+                'success',
+                'Congratulations, you have completed this course. Your certificate is being prepared and will appear on your Certificates page shortly.',
+            );
         }
 
-        return redirect()->back()->with('success', 'Progress updated.');
+        return redirect()->back()->with('success', 'Progress saved.');
     }
 }

@@ -5,17 +5,17 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasFactory, HasRoles, Notifiable;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     public function canAccessPanel(Panel $panel): bool
     {
@@ -23,7 +23,7 @@ class User extends Authenticatable implements FilamentUser
     }
 
     protected $fillable = [
-        'name', 'email', 'password', 'google_id', 'avatar', 'role_id',
+        'name', 'email', 'password', 'google_id', 'avatar',
     ];
 
     protected $hidden = [
@@ -44,11 +44,6 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Module::class, 'enrollments')
             ->withPivot('completed_lessons_count', 'is_completed', 'completed_at')
             ->withTimestamps();
-    }
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
     }
 
     // Pendekatan One-to-One Terpisah
@@ -84,7 +79,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasOne(AdminProfile::class);
     }
 
-    // Helper untuk mendapatkan profil sesuai role tanpa N+1
+    // Profile for the user's role without an N+1 query
     public function getProfile()
     {
         $roleSlug = $this->roles->first()?->name ?? 'student';
@@ -107,7 +102,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->name;
     }
 
-    // 2. Subtitle Otomatis (Industri Perusahaan / Universitas)
+    // 2. Automatic subtitle (company industry / university)
     public function getDisplaySubtitleAttribute(): string
     {
         if ($this->relationLoaded('companyProfile') && $this->companyProfile) {
@@ -117,7 +112,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->university ?? 'Taiwan Alumni';
     }
 
-    // 3. Avatar URL Otomatis (Logo Cloudflare R2 / Avatar User)
+    // 3. Automatic avatar URL (company logo on Cloudflare R2, or the user avatar)
     public function getDisplayAvatarAttribute(): ?string
     {
         if ($this->relationLoaded('companyProfile') && $this->companyProfile?->logo_path) {
@@ -132,27 +127,6 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Enrollment::class);
     }
 
-    // Helpers untuk role checking
-    public function isAdmin(): bool
-    {
-        return $this->role?->slug === 'admin';
-    }
-
-    public function isTeacher(): bool
-    {
-        return $this->role?->slug === 'teacher';
-    }
-
-    public function isCompany(): bool
-    {
-        return $this->role?->slug === 'company';
-    }
-
-    public function isStudent(): bool
-    {
-        return $this->role?->slug === 'student';
-    }
-
     public function progress()
     {
         return $this->hasMany(Progress::class);
@@ -160,7 +134,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function getDashboardUrl(): string
     {
-        return match ($this->role?->slug) {
+        return match ($this->getRoleNames()->first()) {
             'admin' => '/admin/dashboard',
             'teacher' => '/teacher/dashboard',
             'company' => '/company/dashboard',

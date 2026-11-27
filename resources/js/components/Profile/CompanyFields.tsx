@@ -12,7 +12,7 @@ export default function CompanyFields({
     errors,
 }: CompanyFieldsProps) {
     return (
-        <div className="animate-in fade-in space-y-4 rounded-xl border border-gray-100 bg-gray-50/60 p-4 duration-150">
+        <div className="animate-in fade-in space-y-4 rounded-xl border border-border bg-canvas p-4 duration-150">
             {/* Corporate Identity */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
@@ -25,7 +25,7 @@ export default function CompanyFields({
                         }
                     />
                     {errors.company_legal_name && (
-                        <p className="mt-1 text-xs text-red-500">
+                        <p className="mt-1 text-xs text-status-danger">
                             {errors.company_legal_name}
                         </p>
                     )}
@@ -61,8 +61,8 @@ export default function CompanyFields({
             </div>
 
             {/* PIC Information Section */}
-            <div className="border-t border-gray-200/60 pt-3">
-                <span className="mb-3 block text-[10px] font-bold tracking-wider text-gray-400 uppercase">
+            <div className="border-t border-border/60 pt-3">
+                <span className="mb-3 block text-[10px] font-bold tracking-wider text-muted uppercase">
                     Authorized Person In Charge (PIC)
                 </span>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">

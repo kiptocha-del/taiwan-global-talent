@@ -31,12 +31,12 @@ export default function JobCard({
     actions,
 }: JobCardProps) {
     return (
-        <div className="flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-5 shadow-xs transition-all hover:border-blue-300 hover:shadow-md">
+        <div className="flex flex-col justify-between rounded-2xl border border-border bg-surface p-5 shadow-xs transition-all hover:border-accent/30 hover:shadow-md">
             <div>
                 <div className="mb-3 flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
                         {showCompany && (
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gray-100 font-bold text-gray-600">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-surface-muted font-bold text-muted">
                                 {job.company_logo ? (
                                     <img
                                         src={job.company_logo}
@@ -51,12 +51,12 @@ export default function JobCard({
                         <div>
                             <Link
                                 href={detailUrl}
-                                className="line-clamp-1 font-semibold text-gray-900 transition-colors hover:text-blue-600"
+                                className="line-clamp-1 font-semibold text-ink transition-colors hover:text-accent"
                             >
                                 {job.title}
                             </Link>
                             {showCompany && job.company_name && (
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-muted">
                                     {job.company_name}
                                 </p>
                             )}
@@ -66,18 +66,18 @@ export default function JobCard({
                 </div>
 
                 {/* Badges Info */}
-                <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-gray-600">
-                    <span className="inline-flex items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 px-2.5 py-1">
-                        <Briefcase className="h-3.5 w-3.5 text-gray-400" />{' '}
+                <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted">
+                    <span className="inline-flex items-center gap-1 rounded-lg border border-border bg-canvas px-2.5 py-1">
+                        <Briefcase className="h-3.5 w-3.5 text-muted"/>{''}
                         {job.type}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-lg border border-gray-100 bg-gray-50 px-2.5 py-1">
-                        <MapPin className="h-3.5 w-3.5 text-gray-400" />{' '}
+                    <span className="inline-flex items-center gap-1 rounded-lg border border-border bg-canvas px-2.5 py-1">
+                        <MapPin className="h-3.5 w-3.5 text-muted"/>{''}
                         {job.location_type} {job.city ? `(${job.city})` : ''}
                     </span>
                     {job.salary_range && (
-                        <span className="inline-flex items-center gap-1 rounded-lg border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-emerald-700">
-                            <DollarSign className="h-3.5 w-3.5" />{' '}
+                        <span className="inline-flex items-center gap-1 rounded-lg border border-status-positive/30 bg-status-positive-soft px-2.5 py-1 text-status-positive">
+                            <DollarSign className="h-3.5 w-3.5"/>{''}
                             {job.salary_range}
                         </span>
                     )}
@@ -85,17 +85,17 @@ export default function JobCard({
             </div>
 
             {/* Footer Stats & Actions */}
-            <div className="flex items-center justify-between border-t border-gray-100 pt-3 text-xs text-gray-400">
+            <div className="flex items-center justify-between border-t border-border pt-3 text-xs text-muted">
                 <div className="flex items-center gap-4">
                     {job.applicants_count !== undefined && (
                         <span className="flex items-center gap-1">
-                            <Users className="h-3.5 w-3.5" />{' '}
+                            <Users className="h-3.5 w-3.5"/>{''}
                             {job.applicants_count} Applicants
                         </span>
                     )}
                     {job.views_count !== undefined && (
                         <span className="flex items-center gap-1">
-                            <Eye className="h-3.5 w-3.5" /> {job.views_count}{' '}
+                            <Eye className="h-3.5 w-3.5"/> {job.views_count}{''}
                             Viewer
                         </span>
                     )}
@@ -106,7 +106,7 @@ export default function JobCard({
                 ) : (
                     <Link
                         href={detailUrl}
-                        className="font-medium text-blue-600 hover:underline"
+                        className="font-medium text-accent hover:underline"
                     >
                         View Detail &rarr;
                     </Link>

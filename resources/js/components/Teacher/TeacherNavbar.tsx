@@ -10,6 +10,9 @@ import {
     X,
 } from 'lucide-react';
 import { useState } from 'react';
+import ThemeToggle from '@/components/UI/ThemeToggle';
+import { logout } from '@/routes';
+import teacherRoutes from '@/routes/teacher';
 
 export default function TeacherNavbar({ teacher }: { teacher?: any }) {
     const { url } = usePage();
@@ -18,28 +21,40 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
 
     const navItems = [
         {
-            href: '/teacher/dashboard',
+            href: teacherRoutes.dashboard.url(),
             label: 'Dashboard',
             icon: LayoutDashboard,
         },
-        { href: '/teacher/courses', label: 'Courses', icon: BookOpen },
-        { href: '/teacher/modules', label: 'Modules', icon: Layers },
-        { href: '/teacher/community', label: 'Community', icon: Users },
+        {
+            href: teacherRoutes.courses.index.url(),
+            label: 'Courses',
+            icon: BookOpen,
+        },
+        {
+            href: teacherRoutes.modules.index.url(),
+            label: 'Modules',
+            icon: Layers,
+        },
+        {
+            href: teacherRoutes.community.index.url(),
+            label: 'Community',
+            icon: Users,
+        },
     ];
 
     return (
-        <nav className="sticky top-0 z-30 border-b border-gray-200 bg-white shadow-xs">
+        <nav className="sticky top-0 z-30 border-b border-border bg-surface text-ink shadow-sm">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     <div className="flex items-center gap-8">
                         <Link
-                            href="/teacher/dashboard"
+                            href={teacherRoutes.dashboard.url()}
                             className="flex items-center gap-2"
                         >
-                            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-sm font-bold text-white">
+                            <div className="flex size-9 items-center justify-center rounded-control bg-brand-strong text-sm font-bold text-on-brand">
                                 EDU
                             </div>
-                            <span className="text-base font-bold text-gray-900">
+                            <span className="text-base font-bold text-brand-strong">
                                 Teacher Studio
                             </span>
                         </Link>
@@ -55,11 +70,11 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
                                         href={item.href}
                                         className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold transition ${
                                             active
-                                                ? 'bg-indigo-50 text-indigo-600'
-                                                : 'text-gray-600 hover:bg-gray-50'
+                                                ? 'bg-brand-strong text-on-brand'
+                                                : 'text-muted hover:bg-surface-muted hover:text-ink'
                                         }`}
                                     >
-                                        <Icon className="h-4 w-4" />
+                                        <Icon className="h-4 w-4"/>
                                         <span>{item.label}</span>
                                     </Link>
                                 );
@@ -68,31 +83,32 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
                     </div>
 
                     <div className="flex items-center gap-3">
+                        <ThemeToggle />
                         <div className="relative">
                             <button
                                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                                className="flex items-center gap-2 rounded-xl p-1.5 hover:bg-gray-50"
+                                className="flex items-center gap-2 rounded-control p-1.5 text-muted hover:bg-surface-muted"
                             >
-                                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-100 text-xs font-bold text-indigo-700">
+                                <div className="flex size-8 items-center justify-center rounded-control bg-accent-soft text-xs font-bold text-accent">
                                     {teacher?.name
                                         ? teacher.name.charAt(0).toUpperCase()
                                         : 'T'}
                                 </div>
-                                <span className="hidden text-xs font-bold text-gray-800 sm:block">
+                                <span className="hidden text-xs font-bold text-ink sm:block">
                                     {teacher?.name}
                                 </span>
-                                <ChevronDown className="h-4 w-4 text-gray-400" />
+                                <ChevronDown className="size-4 text-muted"/>
                             </button>
 
                             {dropdownOpen && (
-                                <div className="absolute right-0 z-50 mt-2 w-48 rounded-xl border border-gray-100 bg-white py-1 shadow-xl">
+                                <div className="absolute right-0 z-50 mt-2 w-48 rounded-card border border-border bg-surface py-1 text-ink shadow-panel">
                                     <Link
-                                        href="/logout"
+                                        href={logout.url()}
                                         method="post"
                                         as="button"
-                                        className="flex w-full items-center gap-2 px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50"
+                                        className="flex w-full items-center gap-2 px-4 py-2 text-xs font-medium text-status-danger hover:bg-status-danger-soft"
                                     >
-                                        <LogOut className="h-3.5 w-3.5" /> Log
+                                        <LogOut className="h-3.5 w-3.5"/> Log
                                         Out
                                     </Link>
                                 </div>
@@ -101,27 +117,27 @@ export default function TeacherNavbar({ teacher }: { teacher?: any }) {
 
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="p-2 text-gray-600 md:hidden"
+                            className="rounded-control p-2 text-muted hover:bg-surface-muted md:hidden"
                         >
                             {mobileMenuOpen ? (
-                                <X className="h-5 w-5" />
+                                <X className="h-5 w-5"/>
                             ) : (
-                                <Menu className="h-5 w-5" />
+                                <Menu className="h-5 w-5"/>
                             )}
                         </button>
                     </div>
                 </div>
 
                 {mobileMenuOpen && (
-                    <div className="space-y-1 border-t border-gray-100 py-3 md:hidden">
+                    <div className="space-y-1 border-t border-border py-3 md:hidden">
                         {navItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="flex items-center gap-3 rounded-xl px-4 py-2.5 text-xs font-semibold hover:bg-gray-100"
+                                className="flex items-center gap-3 rounded-control px-4 py-2.5 text-xs font-semibold text-muted hover:bg-surface-muted hover:text-ink"
                             >
-                                <item.icon className="h-4 w-4" />
+                                <item.icon className="h-4 w-4"/>
                                 <span>{item.label}</span>
                             </Link>
                         ))}

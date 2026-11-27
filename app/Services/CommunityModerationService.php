@@ -24,11 +24,11 @@ class CommunityModerationService
     ];
 
     /**
-     * Memvalidasi teks dan media sebelum postingan disimpan.
+     * Validates text and media before a post is saved.
      */
     public static function validate(string $content, ?UploadedFile $media = null): void
     {
-        // 1. Pengecekan Kata Kunci Multilingual Lokal (Instant)
+        // 1. Local multilingual keyword check (instant)
         if (! empty(trim($content))) {
             self::checkLocalBannedKeywords($content);
         }
@@ -37,24 +37,24 @@ class CommunityModerationService
         $apiSecret = config('services.sightengine.api_secret');
 
         if (! $apiUser || ! $apiSecret) {
-            Log::warning('Sightengine API credentials tidak ditemukan.');
+            Log::warning('Sightengine API credentials are not configured.');
 
             return;
         }
 
-        // 2. Moderasi Teks Multilingual via Sightengine
+        // 2. Multilingual text moderation via Sightengine
         if (! empty(trim($content))) {
             self::checkTextContent($content, $apiUser, $apiSecret);
         }
 
-        // 3. Moderasi Gambar/Video via Sightengine
+        // 3. Image/video moderation via Sightengine
         if ($media) {
             self::checkMediaContent($media, $apiUser, $apiSecret);
         }
     }
 
     /**
-     * Pengecekan kata kunci lokal multilingual
+     * Local multilingual banned keyword check
      */
     protected static function checkLocalBannedKeywords(string $text): void
     {
@@ -63,19 +63,19 @@ class CommunityModerationService
         foreach (self::$bannedKeywords as $keyword) {
             if (str_contains($normalizedText, mb_strtolower($keyword))) {
                 throw ValidationException::withMessages([
-                    'content' => "Postingan diblokir: Mengandung kata/konten terlarang ('{$keyword}').",
+                    'content' => __("Your post was blocked because it contains banned content (':keyword').", ['keyword' => $keyword]),
                 ]);
             }
         }
     }
 
     /**
-     * Moderasi Teks Multilingual Sightengine API
+     * Multilingual text moderation through the Sightengine API
      */
     protected static function checkTextContent(string $text, string $apiUser, string $apiSecret): void
     {
         try {
-            // Pengiriman tanpa isolasi bahasa (Mendukung ID, EN, Traditional Chinese zh-Hant, dll)
+            // No language filter so Indonesian, English, Traditional Chinese and others are all checked
             $response = Http::timeout(8)->get('https://api.sightengine.com/1.0/text/check.json', [
                 'text' => $text,
                 'mode' => 'rules',
@@ -88,20 +88,20 @@ class CommunityModerationService
                 $data = $response->json();
 
                 if (isset($data['status']) && $data['status'] === 'success') {
-                    // Cek matches profanity / kata kasar
+                    // Profanity matches
                     if (! empty($data['profanity']['matches'] ?? [])) {
                         throw ValidationException::withMessages([
-                            'content' => 'Postingan Anda terdeteksi mengandung kata-kata yang tidak pantas.',
+                            'content' => __('Your post appears to contain inappropriate language.'),
                         ]);
                     }
 
-                    // Cek matches link terlarang (Scam, Gambling, Adult)
+                    // Prohibited link matches (scam, gambling, adult)
                     if (! empty($data['link']['matches'] ?? [])) {
                         foreach ($data['link']['matches'] as $linkMatch) {
                             $type = $linkMatch['type'] ?? '';
                             if (in_array($type, ['scam', 'gambling', 'adult'])) {
                                 throw ValidationException::withMessages([
-                                    'content' => 'Postingan Anda terdeteksi mengandung tautan terlarang (Scam/Judi/18+).',
+                                    'content' => __('Your post appears to contain a prohibited link (scam, gambling or adult content).'),
                                 ]);
                             }
                         }
@@ -109,14 +109,14 @@ class CommunityModerationService
                 }
             }
         } catch (ValidationException $e) {
-            throw $e; // Lempar ke Inertia/Frontend sebagai 422
+            throw $e; // Surfaces to Inertia as a 422
         } catch (\Exception $e) {
             Log::error('Sightengine Text Error: '.$e->getMessage());
         }
     }
 
     /**
-     * Moderasi Media (Gambar/Video) Sightengine dengan Tingkat Ketepatan Tinggi (Strict 18+ Filter)
+     * Image/video moderation through Sightengine with a strict adult-content filter
      */
     protected static function checkMediaContent(UploadedFile $media, string $apiUser, string $apiSecret): void
     {
@@ -135,9 +135,9 @@ class CommunityModerationService
                 $data = $response->json();
 
                 if (isset($data['status']) && $data['status'] === 'success') {
-                    $nudityRaw = $data['nudity']['raw'] ?? 0;             
-                    $nudityPartial = $data['nudity']['partial'] ?? 0;     
-                    $nudityErotica = $data['nudity']['erotica'] ?? 0;     
+                    $nudityRaw = $data['nudity']['raw'] ?? 0;
+                    $nudityPartial = $data['nudity']['partial'] ?? 0;
+                    $nudityErotica = $data['nudity']['erotica'] ?? 0;
                     $weapon = $data['weapon'] ?? 0;
                     $gore = $data['gore'] ?? 0;
                     $scamProb = $data['scam']['prob'] ?? 0;

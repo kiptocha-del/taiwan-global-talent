@@ -10,93 +10,93 @@ export default function CompanyInfoSection({ company }: CompanyInfoSectionProps)
             {/* Left Column: Legal & Overview */}
             <div className="space-y-6 lg:col-span-2">
                 {/* Legal & Overview Card */}
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                    <div className="flex items-center gap-2 border-b border-slate-100 pb-4 dark:border-slate-800">
-                        <FileText className="h-5 w-5 text-indigo-600" />
-                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+                    <div className="flex items-center gap-2 border-b border-border pb-4">
+                        <FileText className="h-5 w-5 text-accent"/>
+                        <h3 className="text-sm font-bold text-ink">
                             Overview & Legal Information
                         </h3>
                     </div>
 
                     <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400 uppercase">
+                            <span className="text-[11px] font-medium text-muted uppercase">
                                 Legal Entity Name
                             </span>
-                            <p className="mt-0.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <p className="mt-0.5 text-xs font-semibold text-ink">
                                 {company.company_legal_name}
                             </p>
                         </div>
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400 uppercase">
+                            <span className="text-[11px] font-medium text-muted uppercase">
                                 Tax ID / NIB
                             </span>
-                            <p className="mt-0.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <p className="mt-0.5 text-xs font-semibold text-ink">
                                 {company.tax_id || '-'}
                             </p>
                         </div>
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400 uppercase">
+                            <span className="text-[11px] font-medium text-muted uppercase">
                                 Company Size
                             </span>
-                            <p className="mt-0.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <p className="mt-0.5 text-xs font-semibold text-ink">
                                 {company.company_size} Employees
                             </p>
                         </div>
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400 uppercase">
+                            <span className="text-[11px] font-medium text-muted uppercase">
                                 Founded Year
                             </span>
-                            <p className="mt-0.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <p className="mt-0.5 text-xs font-semibold text-ink">
                                 {company.founded_year || '-'}
                             </p>
                         </div>
                     </div>
 
                     {/* Bio & Description */}
-                    <div className="mt-6 border-t border-slate-100 pt-4 dark:border-slate-800">
-                        <span className="text-[11px] font-medium text-slate-400 uppercase">
+                    <div className="mt-6 border-t border-border pt-4">
+                        <span className="text-[11px] font-medium text-muted uppercase">
                             Tagline / Bio
                         </span>
-                        <p className="mt-1 text-xs text-slate-600 italic dark:text-slate-300">
+                        <p className="mt-1 text-xs text-muted italic">
                             "{company.bio || 'No tagline set.'}"
                         </p>
                     </div>
 
                     <div className="mt-4">
-                        <span className="text-[11px] font-medium text-slate-400 uppercase">
+                        <span className="text-[11px] font-medium text-muted uppercase">
                             Company Overview
                         </span>
-                        <p className="mt-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+                        <p className="mt-1 text-xs leading-relaxed text-muted">
                             {company.description || 'No detailed description provided.'}
                         </p>
                     </div>
                 </div>
 
                 {/* PIC Card */}
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                    <div className="flex items-center gap-2 border-b border-slate-100 pb-4 dark:border-slate-800">
-                        <User className="h-5 w-5 text-indigo-600" />
-                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+                    <div className="flex items-center gap-2 border-b border-border pb-4">
+                        <User className="h-5 w-5 text-accent"/>
+                        <h3 className="text-sm font-bold text-ink">
                             Person In Charge (PIC)
                         </h3>
                     </div>
                     <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400">Name</span>
-                            <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <span className="text-[11px] font-medium text-muted">Name</span>
+                            <p className="text-xs font-semibold text-ink">
                                 {company.pic_name}
                             </p>
                         </div>
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400">Position</span>
-                            <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <span className="text-[11px] font-medium text-muted">Position</span>
+                            <p className="text-xs font-semibold text-ink">
                                 {company.pic_position}
                             </p>
                         </div>
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400">Phone</span>
-                            <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <span className="text-[11px] font-medium text-muted">Phone</span>
+                            <p className="text-xs font-semibold text-ink">
                                 {company.pic_phone}
                             </p>
                         </div>
@@ -106,23 +106,23 @@ export default function CompanyInfoSection({ company }: CompanyInfoSectionProps)
 
             {/* Right Column: Contact & Location */}
             <div className="space-y-6">
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                    <div className="flex items-center gap-2 border-b border-slate-100 pb-4 dark:border-slate-800">
-                        <Mail className="h-5 w-5 text-indigo-600" />
-                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+                    <div className="flex items-center gap-2 border-b border-border pb-4">
+                        <Mail className="h-5 w-5 text-accent"/>
+                        <h3 className="text-sm font-bold text-ink">
                             Official Contact
                         </h3>
                     </div>
                     <div className="mt-4 space-y-3">
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400">Official Email</span>
-                            <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                            <span className="text-[11px] font-medium text-muted">Official Email</span>
+                            <p className="text-xs font-semibold text-ink">
                                 {company.official_email || '-'}
                             </p>
                         </div>
                         <div>
-                            <span className="text-[11px] font-medium text-slate-400">HQ Address</span>
-                            <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300">
+                            <span className="text-[11px] font-medium text-muted">HQ Address</span>
+                            <p className="mt-0.5 text-xs text-muted">
                                 {company.hq_address || '-'}
                             </p>
                         </div>

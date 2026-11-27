@@ -21,7 +21,7 @@ class CompanyApplicantController extends Controller
             $company->banner_url = $company->banner_path ? $disk->url($company->banner_path) : null;
         }
 
-        // Filter pendaftar berdasarkan lowongan perusahaan pengguna
+        // Only applicants for this company's own job postings
         $query = JobApplication::whereHas('job', function ($q) use ($company) {
             $q->where('company_profile_id', $company?->id);
         })->with(['job', 'user']);
@@ -39,7 +39,7 @@ class CompanyApplicantController extends Controller
                 'candidate_email' => $app->candidate_email,
                 'candidate_phone' => $app->candidate_phone,
                 'candidate_avatar' => $app->user?->avatar ?? null,
-                'resume_url' => $app->resume_url, // URL langsung dari Cloudflare R2
+                'resume_url' => $app->resume_url, // Direct Cloudflare R2 URL
                 'status' => $app->status,
                 'applied_at' => $app->created_at->toIso8601String(),
             ];
@@ -53,6 +53,12 @@ class CompanyApplicantController extends Controller
 
     public function updateStatus(Request $request, JobApplication $application)
     {
+        $company = $request->user()->companyProfile;
+
+        if (! $company || $application->job?->company_profile_id !== $company->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
             'status' => 'required|in:pending,reviewed,interviewed,hired,rejected',
         ]);

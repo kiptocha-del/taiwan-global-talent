@@ -16,7 +16,7 @@ class StudentJobController extends Controller
             ->where('status', 'published');
 
         if ($request->search) {
-            $query->where('title', 'like', '%' . $request->search . '%');
+            $query->where('title', 'like', '%'.$request->search.'%');
         }
 
         if ($request->type && $request->type !== 'all') {
@@ -55,7 +55,7 @@ class StudentJobController extends Controller
 
         return Inertia::render('Student/Jobs/Show', [
             'job' => $job,
-            'hasApplied' => !is_null($userApplication),
+            'hasApplied' => ! is_null($userApplication),
             'application' => $userApplication,
         ]);
     }
@@ -68,7 +68,7 @@ class StudentJobController extends Controller
 
         $user = auth()->user();
 
-        // Cek apakah sudah pernah melamar
+        // Has the student already applied?
         $existing = JobApplication::where('company_job_id', $job->id)
             ->where('user_id', $user->id)
             ->first();

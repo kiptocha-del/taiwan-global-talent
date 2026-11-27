@@ -2,6 +2,7 @@ import { usePage } from '@inertiajs/react';
 import { Menu, X } from 'lucide-react';
 import React, { useState } from 'react';
 import ProfileDropdown from '@/components/UI/ProfileDropdown';
+import ThemeToggle from '@/components/UI/ThemeToggle';
 import { useAuth } from '@/hooks/useAuth';
 import HeaderLogo from '../../components/Student/HeaderLogo';
 import Navbar from '../../components/Student/Navbar';
@@ -18,8 +19,8 @@ export default function Layout({ children }: Props) {
     const categories = props.auth?.user?.course_categories ?? [];
 
     return (
-        <div className="min-h-screen bg-[#FFF8ED] font-sans text-[#24458F] antialiased dark:bg-slate-950 dark:text-slate-100">
-            <header className="sticky top-0 z-40 border-b border-[#24458F]/8 bg-[#FFF8ED]/92 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/92">
+        <div className="min-h-screen bg-canvas font-sans text-ink antialiased">
+            <header className="sticky top-0 z-40 border-b border-border bg-surface/95 text-ink shadow-sm backdrop-blur-xl">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 items-center justify-between md:h-20">
                         <div className="flex shrink-0 items-center">
@@ -31,6 +32,7 @@ export default function Layout({ children }: Props) {
                         </div>
 
                         <div className="flex items-center gap-2 sm:gap-3">
+                            <ThemeToggle />
                             <ProfileDropdown user={user} />
 
                             <button
@@ -38,21 +40,21 @@ export default function Layout({ children }: Props) {
                                 onClick={() =>
                                     setIsMobileMenuOpen(!isMobileMenuOpen)
                                 }
-                                className="inline-flex cursor-pointer items-center justify-center rounded-xl p-2 text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 focus:outline-none md:hidden dark:text-slate-300 dark:hover:bg-slate-800"
+                                className="inline-flex cursor-pointer items-center justify-center rounded-control p-2 text-muted transition hover:bg-surface-muted hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden"
                                 aria-expanded={isMobileMenuOpen}
                                 aria-label="Toggle main menu"
                             >
                                 {isMobileMenuOpen ? (
-                                    <X className="h-6 w-6" />
+                                    <X className="h-6 w-6"/>
                                 ) : (
-                                    <Menu className="h-6 w-6" />
+                                    <Menu className="h-6 w-6"/>
                                 )}
                             </button>
                         </div>
                     </div>
 
                     {isMobileMenuOpen && (
-                        <div className="animate-in slide-in-from-top-2 border-t border-gray-100 py-3 duration-200 md:hidden dark:border-slate-800">
+                        <div className="animate-in slide-in-from-top-2 border-t border-border py-3 duration-200 md:hidden">
                             <Navbar
                                 currentUrl={url}
                                 categories={categories}

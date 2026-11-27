@@ -9,12 +9,13 @@ import Button from '@/components/UI/Button';
 import { getYouTubeEmbedUrl, playAudio } from '@/utils/media.helper';
 import Layout from '../Layout';
 
-export default function Show({ module, currentCategory }: any) {
+export default function Show({ module, currentCategory, enrollment }: any) {
     const [activeLesson, setActiveLesson] = useState<any>(
         module?.lessons?.[0] || null,
     );
     const [loading, setLoading] = useState(false);
     const isMandarin = currentCategory?.id === 1;
+    const completedLessonIds: number[] = enrollment?.completed_lesson_ids ?? [];
 
     const handleCompleteLesson = () => {
         if (!activeLesson || loading) {
@@ -29,10 +30,7 @@ export default function Show({ module, currentCategory }: any) {
             {
                 onSuccess: (page: any) => {
                     const flashData = page.props.flash || {};
-                    alert(
-                        flashData.success ||
-                            'Progres materi Anda berhasil disimpan.',
-                    );
+                    alert(flashData.success || 'Progress saved.');
 
                     const currentIdx = module.lessons.findIndex(
                         (l: any) => l.id === activeLesson.id,
@@ -44,15 +42,12 @@ export default function Show({ module, currentCategory }: any) {
                     ) {
                         setActiveLesson(module.lessons[currentIdx + 1]);
                     } else {
-                        alert(
-                            'Selamat! Anda telah menyelesaikan kelas ini. Silakan unduh sertifikat Anda di halaman Sertifikat.',
-                        );
                         router.get('/student/courses/certificate');
                     }
                 },
                 onError: (errors) => {
                     console.error(errors);
-                    alert('Gagal memperbarui data progres materi.');
+                    alert('We could not save your progress. Please try again.');
                 },
                 onFinish: () => setLoading(false),
                 preserveScroll: true,
@@ -64,18 +59,18 @@ export default function Show({ module, currentCategory }: any) {
         <Layout>
             <div className="space-y-6">
                 {/* Top Header */}
-                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                <div className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-4 shadow-xs">
                     <Link
                         href={`/student/courses/${currentCategory?.slug}`}
-                        className="rounded-xl border border-gray-200 p-2 text-gray-600 transition-colors hover:bg-gray-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                        className="rounded-xl border border-border p-2 text-muted transition-colors hover:bg-canvas"
                     >
                         <ArrowLeft size={16} />
                     </Link>
                     <div>
-                        <h2 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
+                        <h2 className="text-base font-bold tracking-tight text-ink">
                             {module?.title}
                         </h2>
-                        <p className="text-xs text-gray-400 dark:text-slate-400">
+                        <p className="text-xs text-muted">
                             {currentCategory?.name} Program
                         </p>
                     </div>
@@ -88,6 +83,7 @@ export default function Show({ module, currentCategory }: any) {
                         <LessonSyllabus
                             lessons={module?.lessons || []}
                             activeLessonId={activeLesson?.id || null}
+                            completedLessonIds={completedLessonIds}
                             onSelectLesson={(lesson) => setActiveLesson(lesson)}
                         />
                     </div>
@@ -115,7 +111,7 @@ export default function Show({ module, currentCategory }: any) {
                                 />
 
                                 {/* 4. Complete Module Button */}
-                                <div className="flex justify-end rounded-2xl border border-gray-100 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                                <div className="flex justify-end rounded-2xl border border-border bg-surface p-4 shadow-xs">
                                     <Button
                                         type="button"
                                         variant="primary"

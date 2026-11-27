@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources\Companies\Schemas;
 
+use App\Models\CompanyProfile;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Storage;
@@ -18,195 +19,175 @@ class CompanyForm
 {
     public static function configure(Schema $schema): Schema
     {
-        return $schema->schema([
+        return $schema->components([
 
-            // BARIS 1: LEGAL & VERIFICATION
-            Section::make('1. Legal & Verification')
+            Section::make('Account')
+                ->description('The organization signs in with Google using this email address.')
+                ->columns(2)
+                ->schema([
+                    TextInput::make('name')
+                        ->label('Account Name')
+                        ->required()
+                        ->maxLength(255),
+
+                    TextInput::make('email')
+                        ->label('Google Account Email')
+                        ->email()
+                        ->required()
+                        ->unique(ignoreRecord: true)
+                        ->maxLength(255),
+                ]),
+
+            // One relationship wrapper so the whole profile is saved in a single insert.
+            Group::make()
                 ->relationship('companyProfile')
                 ->schema([
-                    Grid::make(2)
-                        ->schema([
 
+                    Section::make('1. Legal & Verification')
+                        ->columns(2)
+                        ->schema([
                             TextInput::make('company_legal_name')
                                 ->label('Company Name (Legal)')
-                                ->required(),
+                                ->required()
+                                ->maxLength(255),
 
                             TextInput::make('tax_id')
-                                ->label('Tax ID / NIB'),
+                                ->label('Tax ID / NIB')
+                                ->unique(ignoreRecord: true)
+                                ->maxLength(100),
 
                             Select::make('status')
                                 ->label('Verification Status')
                                 ->options([
-                                    'pending' => '⏳ Pending Review',
-                                    'approved' => '✅ Approved',
-                                    'rejected' => '❌ Rejected',
-                                    'suspended' => '🚫 Suspended',
+                                    CompanyProfile::STATUS_PENDING => 'Pending Review',
+                                    CompanyProfile::STATUS_APPROVED => 'Approved',
+                                    CompanyProfile::STATUS_REJECTED => 'Rejected',
+                                    CompanyProfile::STATUS_SUSPENDED => 'Suspended',
                                 ])
+                                ->default(CompanyProfile::STATUS_APPROVED)
                                 ->required()
                                 ->native(false)
                                 ->live(),
 
                             Textarea::make('rejection_reason')
                                 ->label('Rejection Reason')
-                                ->visible(fn ($get) => $get('status') === 'rejected')
-                                ->required(fn ($get) => $get('status') === 'rejected')
+                                ->helperText('Shown to the applicant on their status page.')
+                                ->visible(fn ($get) => $get('status') === CompanyProfile::STATUS_REJECTED)
+                                ->required(fn ($get) => $get('status') === CompanyProfile::STATUS_REJECTED)
                                 ->rows(2),
                         ]),
-                ]),
 
-            Section::make('2. Public Profile (Branding)')
-                ->relationship('companyProfile')
-                ->schema([
-
-                    Grid::make(2)
+                    Section::make('2. Public Profile (Branding)')
+                        ->columns(2)
                         ->schema([
-
                             TextInput::make('company_display_name')
                                 ->label('Public Brand Name')
-                                ->required(),
+                                ->required()
+                                ->maxLength(255)
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function ($state, $get, $set): void {
+                                    if (blank($get('slug'))) {
+                                        $set('slug', Str::slug((string) $state));
+                                    }
+                                }),
 
                             TextInput::make('slug')
                                 ->label('URL Slug')
-                                ->required(),
+                                ->required()
+                                ->unique(ignoreRecord: true)
+                                ->maxLength(255),
+
+                            Select::make('organization_type')
+                                ->label('Organization Type')
+                                ->options(CompanyProfile::ORGANIZATION_TYPES)
+                                ->default('employer')
+                                ->required()
+                                ->native(false),
 
                             TextInput::make('industry')
                                 ->label('Industry Sector')
-                                ->required(),
+                                ->required()
+                                ->maxLength(255),
 
                             TextInput::make('website_url')
                                 ->label('Official Website')
-                                ->url(),
+                                ->url()
+                                ->maxLength(255),
 
                             TextInput::make('company_size')
                                 ->label('Company Size'),
 
                             TextInput::make('founded_year')
-                                ->label('Founded Year'),
+                                ->label('Founded Year')
+                                ->numeric()
+                                ->minValue(1800)
+                                ->maxValue((int) date('Y')),
 
                             TextInput::make('bio')
-                                ->label('Tagline'),
+                                ->label('Tagline')
+                                ->maxLength(255),
 
-                            TextInput::make('description')
-                                ->label('Description'),
+                            Textarea::make('description')
+                                ->label('Description')
+                                ->rows(3)
+                                ->columnSpanFull(),
                         ]),
-                ]),
 
-            // BARIS 3: PIC & CONTACT
-            Section::make('3. PIC & Contact Details')
-                ->relationship('companyProfile')
-                ->schema([
-                    Grid::make(2)
+                    Section::make('3. PIC & Contact Details')
+                        ->columns(2)
                         ->schema([
-                            TextInput::make('pic_name')->label('PIC Full Name')->required(),
-                            TextInput::make('pic_phone')->label('Phone Number')->required(),
-                            TextInput::make('pic_position')->label('Position')->required(),
-                            TextInput::make('official_email')->label('Corporate Email')->email(),
-                            TextInput::make('city')->label('City HQ'),
-                            TextInput::make('country')->label('Country')->default('Taiwan'),
-                            Textarea::make('hq_address')->label('Full Address')->rows(2),
+                            TextInput::make('pic_name')->label('PIC Full Name')->required()->maxLength(255),
+                            TextInput::make('pic_phone')->label('Phone Number')->required()->maxLength(50),
+                            TextInput::make('pic_position')->label('Position')->required()->maxLength(255),
+                            TextInput::make('official_email')->label('Corporate Email')->email()->maxLength(255),
+                            TextInput::make('city')->label('City HQ')->maxLength(255),
+                            TextInput::make('country')->label('Country')->default('Taiwan')->required()->maxLength(255),
+                            Textarea::make('hq_address')->label('Full Address')->rows(2)->columnSpanFull(),
                         ]),
-                ]),
 
-            Section::make('4. Image Details')
-                ->relationship('companyProfile')
-                ->collapsed()
-                ->schema([
-                    Grid::make(2)
+                    Section::make('4. Logo & Documents')
+                        ->description('An approved organization with a logo appears in the partner section of the home page.')
+                        ->columns(2)
                         ->schema([
-
                             FileUpload::make('logo_path')
                                 ->label('Company Logo')
                                 ->image()
+                                ->disk('s3')
                                 ->directory('company-logos')
+                                ->maxSize(5120)
+                                ->automaticallyResizeImagesMode('contain')
+                                ->automaticallyResizeImagesToWidth('400')
+                                ->automaticallyResizeImagesToHeight('400')
+                                ->automaticallyUpscaleImagesWhenResizing(false)
                                 ->imagePreviewHeight('200'),
-
-                            Placeholder::make('logo_preview')
-                                ->label('Company Logo Preview')
-                                ->content(function ($get, $record) {
-
-                                    $path = $get('logo_path') ?? $record?->logo_path;
-
-                                    if (! $path) {
-                                        return 'No logo uploaded.';
-                                    }
-
-                                    $url = Storage::disk('s3')->url($path);
-
-                                    return new HtmlString("
-                                        <img src='{$url}'
-                                            style='max-height:200px;border-radius:10px;border:1px solid #ddd;' />
-                                    ");
-                                }),
-
-                            /**
-                             * BUSINESS REGISTRATION (PDF / IMAGE)
-                             */
-                            FileUpload::make('business_registration_path')
-                                ->label('Business Registration')
-                                ->directory('companies/legals')
-                                ->acceptedFileTypes(['application/pdf', 'image/*'])
-                                ->live(),
-
-                            Placeholder::make('document_preview')
-                                ->label('Business Registration Preview')
-                                ->content(function ($get, $record) {
-
-                                    $path = $get('business_registration_path') ?? $record?->business_registration_path;
-
-                                    if (! $path) {
-                                        return 'No document uploaded.';
-                                    }
-
-                                    $url = Storage::disk('s3')->url($path);
-                                    $file = strtolower($path);
-
-                                    // PDF preview
-                                    if (Str::endsWith($file, '.pdf')) {
-                                        return new HtmlString("
-                                            <iframe src='{$url}'
-                                                style='width:100%;height:600px;border:1px solid #ddd;border-radius:10px;'>
-                                            </iframe>
-                                        ");
-                                    }
-
-                                    // image preview
-                                    if (preg_match('/\.(jpg|jpeg|png|webp|gif)$/', $file)) {
-                                        return new HtmlString("
-                                            <img src='{$url}'
-                                                style='max-width:500px;border-radius:10px;border:1px solid #ddd;' />
-                                        ");
-                                    }
-
-                                    return new HtmlString("
-                                        <a href='{$url}' target='_blank'
-                                           style='color:#2563eb;text-decoration:underline;'>
-                                            Open Document
-                                        </a>
-                                    ");
-                                }),
 
                             FileUpload::make('banner_path')
                                 ->label('Company Banner')
                                 ->image()
+                                ->disk('s3')
                                 ->directory('company-banners')
+                                ->maxSize(5120)
                                 ->imagePreviewHeight('200'),
 
-                            Placeholder::make('banner_preview')
-                                ->label('Company Banner Preview')
-                                ->content(function ($get, $record) {
+                            FileUpload::make('business_registration_path')
+                                ->label('Business Registration')
+                                ->disk('s3')
+                                ->directory('companies/legals')
+                                ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png'])
+                                ->maxSize(10240),
 
-                                    $path = $get('banner_path') ?? $record?->banner_path;
-
-                                    if (! $path) {
-                                        return 'No banner uploaded.';
+                            Placeholder::make('document_preview')
+                                ->label('Submitted Business Registration')
+                                ->content(function (?CompanyProfile $record): HtmlString|string {
+                                    if (! $record?->business_registration_path) {
+                                        return 'No document uploaded.';
                                     }
 
-                                    $url = Storage::disk('s3')->url($path);
+                                    $url = e(Storage::disk('s3')->url($record->business_registration_path));
 
-                                    return new HtmlString("
-                                        <img src='{$url}'
-                                            style='width:100%;max-height:250px;object-fit:cover;border-radius:10px;border:1px solid #ddd;' />
-                                    ");
+                                    return new HtmlString(
+                                        "<a href=\"{$url}\" target=\"_blank\" rel=\"noopener\" style=\"color:#2f55e6;text-decoration:underline;\">Open the submitted document</a>"
+                                    );
                                 }),
                         ]),
                 ]),

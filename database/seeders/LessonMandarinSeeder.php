@@ -13,13 +13,13 @@ class LessonMandarinSeeder extends Seeder
 {
     public function run(): void
     {
-        // Cari user dengan role teacher, atau ambil user pertama sebagai fallback
+        // Find a teacher user, or fall back to the first user
         $teacher = User::whereHas('roles', function ($q) {
             $q->where('name', 'teacher');
         })->first() ?? User::first();
 
-        // Jika belum ada user sama sekali, buat 1 user teacher dummy
-        if (!$teacher) {
+        // If there are no users at all, create one placeholder teacher
+        if (! $teacher) {
             $teacher = User::factory()->create([
                 'name' => 'Wang Laoshi',
                 'email' => 'teacher@example.com',

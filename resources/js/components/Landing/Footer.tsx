@@ -1,17 +1,19 @@
 import { Link } from '@inertiajs/react';
 import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
-import { about, home, login } from '@/routes';
-
-const siteLinks = [
-    { label: 'About the hub', href: about.url() },
-    { label: 'Learning paths', href: `${home.url()}#programs` },
-    { label: 'Featured courses', href: `${home.url()}#courses` },
-    { label: 'Community stories', href: `${home.url()}#stories` },
-];
+import { useTranslation } from '@/context/LanguageContext';
+import { about, courses, getInvolved, home, login } from '@/routes';
 
 export default function Footer() {
+    const { t } = useTranslation();
+    const siteLinks = [
+        { label: t('nav.home'), href: home.url() },
+        { label: t('nav.courses'), href: courses.url() },
+        { label: t('nav.about'), href: about.url() },
+        { label: t('nav.getInvolved'), href: getInvolved.url() },
+    ];
+
     return (
-        <footer className="border-t border-[#24458F]/10 bg-[#FFF8ED] px-5 pt-16 pb-8">
+        <footer className="border-t border-border bg-canvas px-5 pt-16 pb-8">
             <div className="mx-auto max-w-7xl">
                 <div className="grid gap-12 lg:grid-cols-[1.2fr_0.65fr_0.8fr]">
                     <div>
@@ -25,44 +27,42 @@ export default function Footer() {
                                 className="h-16 w-16 object-contain"
                             />
                             <span>
-                                <span className="block font-display text-xl font-black text-[#24458F]">
+                                <span className="block font-display text-xl font-black text-ink">
                                     Taiwan Global Talent Hub
                                 </span>
-                                <span className="mt-1 block text-xs font-bold text-[#24458F]/50">
-                                    Learn. Connect. Grow.
+                                <span className="mt-1 block text-xs font-bold text-muted">
+                                    {t('nav.tagline')}
                                 </span>
                             </span>
                         </Link>
-                        <p className="mt-6 max-w-lg text-sm leading-7 font-semibold text-[#24458F]/58">
-                            A welcoming starting point for Mandarin learning,
-                            Taiwan scholarship planning, community support, and
-                            career preparation.
+                        <p className="mt-6 max-w-lg text-sm leading-7 font-semibold text-muted">
+                            {t('footer.description')}
                         </p>
-                        <div className="mt-6 flex flex-col gap-3 text-sm font-bold text-[#24458F]/62 sm:flex-row sm:gap-6">
+                        <div className="mt-6 flex flex-col gap-3 text-sm font-bold text-muted sm:flex-row sm:gap-6">
                             <span className="flex items-center gap-2">
-                                <MapPin className="h-4 w-4 text-[#FF7958]" />{' '}
-                                Taiwan
+                                <MapPin className="h-4 w-4 text-accent"/>{''}
+                                {t('footer.location')}
                             </span>
                             <a
                                 href="mailto:hello@taiwanglobaltalent.org"
-                                className="flex items-center gap-2 hover:text-[#24458F]"
+                                className="flex items-center gap-2 hover:text-ink"
                             >
-                                <Mail className="h-4 w-4 text-[#FF7958]" />{' '}
+                                <Mail className="h-4 w-4 text-accent"/>{''}
                                 hello@taiwanglobaltalent.org
                             </a>
                         </div>
                     </div>
 
-                    <nav aria-label="Footer navigation">
-                        <h2 className="font-display text-sm font-black text-[#24458F]">
-                            Explore
+                    <nav aria-label={t('footer.navLabel')}>
+                        <h2 className="font-display text-sm font-black text-ink">
+                            {t('footer.explore')}
                         </h2>
                         <ul className="mt-5 space-y-3">
                             {siteLinks.map((link) => (
-                                <li key={link.label}>
+                                <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm font-semibold text-[#24458F]/58 transition hover:text-[#24458F]"
+                                        className="text-sm font-semibold text-muted transition hover:text-ink"
                                     >
                                         {link.label}
                                     </Link>
@@ -72,28 +72,29 @@ export default function Footer() {
                     </nav>
 
                     <div>
-                        <h2 className="font-display text-sm font-black text-[#24458F]">
-                            Take your next step
+                        <h2 className="font-display text-sm font-black text-ink">
+                            {t('footer.nextStep')}
                         </h2>
-                        <p className="mt-5 text-sm leading-7 font-semibold text-[#24458F]/58">
-                            Create your profile when you are ready to save
-                            courses and build your Taiwan plan.
+                        <p className="mt-5 text-sm leading-7 font-semibold text-muted">
+                            {t('footer.nextStepDesc')}
                         </p>
                         <Link
                             href={login.url()}
-                            className="mt-6 inline-flex items-center gap-2 border-b-2 border-[#FF8A65] pb-1 text-sm font-extrabold text-[#24458F]"
+                            className="mt-6 inline-flex items-center gap-2 border-b-2 border-accent pb-1 text-sm font-extrabold text-ink"
                         >
-                            Sign in or join <ArrowUpRight className="h-4 w-4" />
+                            {t('footer.signIn')}{' '}
+                            <ArrowUpRight className="h-4 w-4"/>
                         </Link>
                     </div>
                 </div>
 
-                <div className="mt-14 flex flex-col gap-3 border-t border-[#24458F]/10 pt-6 text-xs font-semibold text-[#24458F]/45 sm:flex-row sm:items-center sm:justify-between">
-                    <p>© {new Date().getFullYear()} Taiwan Global Talent Hub</p>
+                <div className="mt-14 flex flex-col gap-3 border-t border-border pt-6 text-xs font-semibold text-muted sm:flex-row sm:items-center sm:justify-between">
                     <p>
-                        Designed for learners, educators, and employers building
-                        futures in Taiwan.
+                        {t('footer.copyright', {
+                            year: new Date().getFullYear(),
+                        })}
                     </p>
+                    <p>{t('footer.designedFor')}</p>
                 </div>
             </div>
         </footer>

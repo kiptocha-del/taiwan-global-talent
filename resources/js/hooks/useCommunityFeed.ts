@@ -1,4 +1,5 @@
 import { useForm, router } from '@inertiajs/react';
+import { useEchoPublic } from '@laravel/echo-react';
 import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
 import type {
@@ -6,12 +7,6 @@ import type {
     CommunityComment,
     CommunityUser,
 } from '@/types/community';
-
-declare global {
-    interface Window {
-        Echo: any;
-    }
-}
 
 interface UseCommunityFeedProps {
     initialPosts?: {
@@ -254,77 +249,68 @@ export function useCommunityFeed({
             });
     }, [nextPageUrl, loadingMore, isFetching]);
 
-    useEffect(() => {
-        if (typeof window.Echo !== 'undefined') {
-            const channel = window.Echo.channel('community-feed');
+    // Live updates: the server broadcasts these on the public `community-feed` channel
+    // (see app/Events). The hooks subscribe on mount and leave the channel on unmount.
+    useEchoPublic<{ post: CommunityPost }>(
+        'community-feed',
+        '.CommunityPostCreated',
+        (event) => {
+            setPosts((prev) => {
+                if (prev.some((p) => p.id === event.post.id)) {
+                    return prev;
+                }
 
-            channel.listen(
-                '.CommunityPostCreated',
-                (event: { post: CommunityPost }) => {
-                    setPosts((prev) => {
-                        if (prev.some((p) => p.id === event.post.id)) {
-                            return prev;
-                        }
+                return [event.post, ...prev];
+            });
+        },
+        [],
+    );
 
-                        return [event.post, ...prev];
-                    });
-                },
+    useEchoPublic<{ postId: number; likesCount: number }>(
+        'community-feed',
+        '.CommunityPostLiked',
+        (event) => {
+            setPosts((prev) =>
+                prev.map((p) =>
+                    p.id === event.postId
+                        ? { ...p, likes_count: event.likesCount }
+                        : p,
+                ),
             );
+        },
+        [],
+    );
 
-            channel.listen(
-                '.CommunityPostLiked',
-                (event: { postId: number; likesCount: number }) => {
-                    setPosts((prev) =>
-                        prev.map((p) =>
-                            p.id === event.postId
-                                ? { ...p, likes_count: event.likesCount }
-                                : p,
-                        ),
+    useEchoPublic<{ comment: CommunityComment }>(
+        'community-feed',
+        '.CommunityCommentCreated',
+        (event) => {
+            setPosts((prev) =>
+                prev.map((p) => {
+                    if (p.id !== event.comment.community_post_id) {
+                        return p;
+                    }
+
+                    // Drop the optimistic copy of our own comment, if any, before appending the real one.
+                    const filteredComments = (p.comments ?? []).filter(
+                        (c) =>
+                            c.id !== event.comment.id &&
+                            !(
+                                c.user?.id === event.comment.user?.id &&
+                                c.content === event.comment.content
+                            ),
                     );
-                },
+
+                    return {
+                        ...p,
+                        comments_count: p.comments_count + 1,
+                        comments: [...filteredComments, event.comment],
+                    };
+                }),
             );
-
-            channel.listen(
-                '.CommunityCommentCreated',
-                (event: { comment: CommunityComment }) => {
-                    setPosts((prev) =>
-                        prev.map((p) => {
-                            if (p.id === event.comment.community_post_id) {
-                                const filteredComments = (
-                                    p.comments ?? []
-                                ).filter(
-                                    (c) =>
-                                        c.id !== event.comment.id &&
-                                        !(
-                                            c.user?.id ===
-                                                event.comment.user?.id &&
-                                            c.content === event.comment.content
-                                        ),
-                                );
-
-                                return {
-                                    ...p,
-                                    comments_count: p.comments_count + 1,
-                                    comments: [
-                                        ...filteredComments,
-                                        event.comment,
-                                    ],
-                                };
-                            }
-
-                            return p;
-                        }),
-                    );
-                },
-            );
-        }
-
-        return () => {
-            if (typeof window.Echo !== 'undefined') {
-                window.Echo.leaveChannel('community-feed');
-            }
-        };
-    }, []);
+        },
+        [],
+    );
 
     useEffect(() => {
         const handleScroll = () => {

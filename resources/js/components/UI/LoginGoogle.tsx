@@ -3,9 +3,9 @@ import { Link } from "@inertiajs/react";
 export default function Login() {
 
     return (
-        <Link href="/login" className="flex items-center justify-center bg-gray-50">
+        <Link href="/login"className="flex items-center justify-center bg-canvas">
             <button
-                className="hover:bg-gray-05 flex items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all duration-200 hover:shadow-md cursor-pointer active:bg-gray-200"
+                className="hover:bg-canvas flex items-center justify-center gap-3 rounded-lg border border-border bg-surface px-5 py-2.5 text-sm font-medium text-muted shadow-sm transition-all duration-200 hover:shadow-md cursor-pointer active:bg-surface-muted"
             >
                 <svg
                     className="h-5 w-5"

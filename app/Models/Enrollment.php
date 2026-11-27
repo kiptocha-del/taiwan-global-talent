@@ -11,7 +11,7 @@ class Enrollment extends Model
     use HasFactory;
 
     /**
-     * Atribut yang dapat diisi secara massal (Mass Assignable).
+     * Mass assignable attributes.
      */
     protected $fillable = [
         'user_id',
@@ -19,11 +19,11 @@ class Enrollment extends Model
         'completed_lessons_count',
         'is_completed',
         'completed_at',
-        'certificate_path', // Pastikan kolom ini siap untuk skema R2/S3 sertifikatmu!
+        'certificate_path', // Path of the generated certificate on the R2/S3 disk
     ];
 
     /**
-     * Casting tipe data agar lebih konsisten di PHP/JavaScript.
+     * Attribute casts so PHP and JavaScript agree on types.
      */
     protected $casts = [
         'is_completed' => 'boolean',
@@ -40,7 +40,7 @@ class Enrollment extends Model
     }
 
     /**
-     * Relasi ke Course (Kelas yang diikuti).
+     * The module this enrollment belongs to.
      */
     public function module(): BelongsTo
     {

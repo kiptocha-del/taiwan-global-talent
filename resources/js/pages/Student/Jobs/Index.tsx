@@ -50,7 +50,7 @@ export default function StudentJobIndex({
 
     return (
         <Layout>
-            <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+            <div className="min-h-screen bg-canvas text-ink">
                 <Head title="Career Exploration & Job Openings" />
 
                 <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
@@ -74,7 +74,7 @@ export default function StudentJobIndex({
                                 onChange={(e) =>
                                     handleTypeChange(e.target.value)
                                 }
-                                className="w-full cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900"
+                                className="w-full cursor-pointer rounded-xl border border-border bg-surface px-3 py-2.5 text-xs focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none"
                             >
                                 <option value="">All Employment Types</option>
                                 <option value="Full-time">Full-time</option>
@@ -99,7 +99,7 @@ export default function StudentJobIndex({
                                         { preserveState: true, replace: true },
                                     );
                                 }}
-                                className="w-full cursor-pointer rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900"
+                                className="w-full cursor-pointer rounded-xl border border-border bg-surface px-3 py-2.5 text-xs focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none"
                             >
                                 <option value="">All Work Systems</option>
                                 <option value="On-site">On-site</option>

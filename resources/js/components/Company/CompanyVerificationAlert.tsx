@@ -16,26 +16,26 @@ export default function CompanyVerificationAlert({
 
     if (status === 'rejected') {
         return (
-            <div className="rounded-2xl border border-rose-200 bg-rose-50/80 p-5 shadow-sm dark:border-rose-900/50 dark:bg-rose-950/20">
+            <div className="rounded-2xl border border-status-danger/30 bg-status-danger-soft/80 p-5 shadow-sm">
                 <div className="flex items-start gap-4">
-                    <div className="rounded-xl bg-rose-100 p-2.5 text-rose-600 dark:bg-rose-900/50 dark:text-rose-400">
-                        <XCircle className="h-6 w-6" />
+                    <div className="rounded-xl bg-status-danger-soft p-2.5 text-status-danger">
+                        <XCircle className="h-6 w-6"/>
                     </div>
                     <div className="flex-1">
-                        <h3 className="text-sm font-bold text-rose-900 dark:text-rose-300">
+                        <h3 className="text-sm font-bold text-status-danger">
                             Verification Application Rejected
                         </h3>
-                        <p className="mt-1 text-xs text-rose-700 dark:text-rose-400">
+                        <p className="mt-1 text-xs text-status-danger">
                             {reason ||
                                 'Your submitted business documents did not meet our verification criteria.'}
                         </p>
                         <div className="mt-3">
                             <Link
                                 href="/company/apply"
-                                className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 underline hover:text-rose-800 dark:text-rose-300"
+                                className="inline-flex items-center gap-1.5 text-xs font-bold text-status-danger underline hover:text-status-danger"
                             >
                                 Re-submit Application{' '}
-                                <ArrowRight className="h-3.5 w-3.5" />
+                                <ArrowRight className="h-3.5 w-3.5"/>
                             </Link>
                         </div>
                     </div>
@@ -45,16 +45,16 @@ export default function CompanyVerificationAlert({
     }
 
     return (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50/80 p-5 shadow-sm dark:border-amber-900/50 dark:bg-amber-950/20">
+        <div className="rounded-2xl border border-status-warning/30 bg-status-warning-soft/80 p-5 shadow-sm">
             <div className="flex items-start gap-4">
-                <div className="rounded-xl bg-amber-100 p-2.5 text-amber-700 dark:bg-amber-900/50 dark:text-amber-400">
-                    <Clock className="h-6 w-6" />
+                <div className="rounded-xl bg-status-warning-soft p-2.5 text-status-warning">
+                    <Clock className="h-6 w-6"/>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold text-amber-900 dark:text-amber-300">
+                    <h3 className="text-sm font-bold text-status-warning">
                         Verification Under Review
                     </h3>
-                    <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">
+                    <p className="mt-1 text-xs text-status-warning">
                         Our administrative team is currently reviewing your
                         company legal documents. Job postings will be unlocked
                         once approved.

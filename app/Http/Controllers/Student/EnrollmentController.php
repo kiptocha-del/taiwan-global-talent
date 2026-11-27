@@ -3,31 +3,29 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Models\Module;
 use App\Models\Enrollment;
+use App\Models\Module;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class EnrollmentController extends Controller
 {
-    public function enroll(Request $request, Module $module)
+    public function enroll(Request $request, Module $module): RedirectResponse
     {
-        if (!$module->exists) {
-            return redirect()->back()->with('error', 'Modul tidak ditemukan.');
+        if (! $module->exists) {
+            return redirect()->back()->with('error', __('Module not found.'));
         }
 
-        $user = Auth::user();
+        $user = $request->user();
 
-        // 1. Cek apakah siswa sudah terdaftar sebelumnya via Eloquent
         $isEnrolled = Enrollment::where('user_id', $user->id)
             ->where('module_id', $module->id)
             ->exists();
 
         if ($isEnrolled) {
-            return redirect()->back()->with('message', 'Anda sudah terdaftar di modul ini.');
+            return redirect()->back()->with('message', __('You are already enrolled in this module.'));
         }
 
-        // 2. Buat pendaftaran baru menggunakan Model Enrollment
         Enrollment::create([
             'user_id' => $user->id,
             'module_id' => $module->id,
@@ -35,7 +33,6 @@ class EnrollmentController extends Controller
             'is_completed' => false,
         ]);
 
-        // 3. Kembalikan ke halaman sebelumnya dengan pesan sukses
-        return redirect()->back()->with('success', 'Berhasil mendaftar! Selamat belajar.');
+        return redirect()->back()->with('success', __('Enrolled successfully. Happy learning!'));
     }
 }
